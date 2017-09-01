@@ -19,7 +19,7 @@
          <table id="twoTable" border="1">
                             <tr>
                                 <td class="firstColumn">№<br>п/п</td>
-                                <td>Дата</td>
+                                <td>Дата/час</td>
                                 <td>№ карти виїзду</td>
                                 <td>ПІП хворого</td>
                                 <td>Звідки забрано</td>

@@ -8,10 +8,10 @@
     <div id="templatmeo_menu">
     	<ul>
         	<li><a href="{{action('FrontController@show', ['id'=>'Report2'])}}" class="home"><span></span></a></li>
-            <li><a href="#about" class="about"><span></span></a></li>
-            <li><a href="#portfolio" class="portfolio"><span></span></a></li>
-            <li><a href="#services" class="services"><span></span></a></li>
-            <li><a href="#contact" class="contact"><span></span></a></li>
+            <li><a href="{{action('FrontController@show', ['id'=>'Report3'])}}" class="about"><span></span></a></li>
+            <li><a href="{{action('FrontController@show', ['id'=>'Report4'])}}" class="portfolio"><span></span></a></li>
+            <li><a href="{{action('FrontController@show', ['id'=>'fatal'])}}" class="services"><span></span></a></li>
+            <li><a href="{{action('FrontController@show', ['id'=>'Report6'])}}" class="contact"><span></span></a></li>
 		</ul>
         <br>
         <hr>

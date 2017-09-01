@@ -21,6 +21,7 @@ Route::get('/', 'FrontController@index');
 Route::get('/create', 'FrontController@create');
 Route::get('/show/{id}', 'FrontController@show');
 Route::post('/QuickFind', 'FrontController@QuickFind');
+Route::get('/myShow/', 'FrontController@myShow');
 
 Route::get('/report/create1', 'ReportController@create1');
 Route::get('/report/create2', 'ReportController@create2');

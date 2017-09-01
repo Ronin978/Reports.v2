@@ -54,7 +54,8 @@ class ReportController extends Controller
     public function create5(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create5', ['date'=>$date]);
+        $title = 'Смертність в присутності бригади (успішна реанімація)';
+        return view('report.create5', ['date'=>$date, 'title'=>$title]);
     }
 
     public function create6(Request $request)

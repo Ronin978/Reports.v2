@@ -9,7 +9,7 @@
     <form id="firstForm" method="POST" action="{{action('ReportController@store5')}}">
 
         <div id="templatmeo_menu">
-            <p align="center">Смертність в присутності бригади (успішна реанімація) {{$date}}</p>
+            <p align="center"> {{"$title"."   $date"}}</p>
             <input type="hidden" name="pidtype" value="fatal">
             <input id="date" type="hidden" name="date" value="{{$date}}">
         </div>

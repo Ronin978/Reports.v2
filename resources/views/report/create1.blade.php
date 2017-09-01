@@ -107,6 +107,7 @@
                     
                    <form id="twoform" method="GET" action="{{action('ReportController@create2')}}">
                         <input id="toDate" type="hidden" name="date" value="">
+                       
 
                         <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Next</div>
                     </form>

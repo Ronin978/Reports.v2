@@ -83,29 +83,99 @@ class FrontController extends Controller
         switch ($id) 
         {
             case 'Report2':
-                $obj=Report2::orderBy('date', 'DESC')->paginate(5);
+                $obj=Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Інформація по запізненнях бригад на виклики';
                 break;
             case 'Report3':
-                $obj=Report3::orderBy('date')->paginate(5);
+                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Транспортування на Луцьк (Київ)';
                 break;
             case 'Report4':
-                $obj=Report4::orderBy('date')->paginate(5);
+                $obj=Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'ГКС';
                 break;
-           //Report5 - default
             case 'Report6':
-                $obj=Report6::orderBy('date')->paginate(5);
+                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Зауваження по роботі, скарги, подяки';
                 break;
+    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+            case 'fatal':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Смертність в присутності бригади (успішна реанімація)';
+                break;
+            case 'dtp+ns':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'ДТП і «НС» (надзвичайні стани)';
+                break;
+            case 'high_travmy':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Складні травми';
+                break;
+            case 'tr_kytyzi':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Травми китиці';
+                break;
+            case 'opic':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Опіки/ Переохолодження';
+                break;
+            case 'travmat':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Травматизм (кримінальний, виробничий)';
+                break;
+            
             default:
-                $obj=Report5::where('pidtype', $id)->paginate(5);
+                $obj=array();
+                $title = 'ERROR 404/ NOT FOUND';
+
                 break;
         }
 
 
-        return view('front.show', ['ojects'=>$obj]);
+        return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'id'=>$id]);
     }
 
     public function QuickFind(Request $request)
     {
         //
+    }
+
+    public function myShow(Request $request)
+    {
+        $req = $request->all();
+        
+        $date = $req['date'];
+        $table = $req['table'];//pidtype or (and) name models
+        $title = $req['title'];
+
+        switch ($table) 
+        {
+            case 'Report2':
+                $reports = Report2::where('date', $date)->get();
+                return view('report.myShow2', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report3':
+                $reports = Report3::where('date', $date)->get();
+                return view('report.myShow3', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report4':
+                $reports = Report4::where('date', $date)->get();
+                return view('report.myShow4', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report6':
+                $reports = Report6::where('date', $date)->get();
+                return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            default:
+                $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
+                break;
+        }
+
+        
+       // dd($reports);
+        
+        
+
     }
 }
