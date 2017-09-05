@@ -68,7 +68,7 @@
                         </li>
                         <li>
                            <a href="{{action('GroupController@index')}}">Всі групи</a>
-                        </li>                       
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

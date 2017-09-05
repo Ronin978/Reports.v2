@@ -164,7 +164,7 @@ class ReportController extends Controller
                     Info::create($info);
                     //break 1;
                 case 3:
-                    $info['id_group'] = 0;
+                    $info['id_group'] = 1;
                     $info['value'] = '';
                     for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++) 
                     { 
@@ -337,6 +337,11 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@index');
+    }
+
+    public function reportsForm($date)
+    {
+        dd($date);
     }
 
 }

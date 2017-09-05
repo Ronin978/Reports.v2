@@ -16,7 +16,7 @@
         <br>
         <hr>
         <ul>
-            <li><a href="#home" class="home"><span></span></a></li>
+            <li><a href="{{action('FrontController@show', ['id'=>'Report1'])}}" class="home"><span></span></a></li>
             <li><a href="#about" class="about"><span></span></a></li>
             <li><a href="#portfolio" class="portfolio"><span></span></a></li>
             <li><a href="#services" class="services"><span></span></a></li>
@@ -122,8 +122,8 @@
             <div class="col col_13 no_margin_right">
             	<h3>Швидкий пошук</h3>
                 <blockquote>
-                    <form method="POST" action="{{action('FrontController@QuickFind')}}">
-                        <input type="text" name="find" >
+                    <form method="GET" action="{{action('FrontController@QuickFind')}}">
+                        <input type="date" name="date" >
 
                         <input type="submit" value="Знайти">
 				    </form>
