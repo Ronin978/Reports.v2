@@ -1,29 +1,32 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
+
+
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">	
 @include('flash::message')
-<div id="templatemo_wrapper">
-	<div id="templatmeo_menu">
-		<p>РАПОРТ старших лікарів змін {{$reports[0]->chergovy}} за чергування {{$date}}</p>
-	</div>
-
-	<div id="templatemo_main">
-
+	<section >	
+        <h3 align="center" >РАПОРТ старших лікарів змін {{$reports[0]->chergovy}} за чергування {{$date}}</h3>
+	
 		Екстр. - {{($inf[1])[0]}}
         <br>
         Неекстр. - {{($inf[1])[1]}}
 
-		<table class="mytable">
+		<table id="table1-1">
             <tr>
-                <td class="firstColumn"></td>
+                <td class="firstColumn1"></td>
                 <td>День</td>
                 <td>Ніч</td>
                 <td>Всього</td>
             </tr>                            
             @foreach ($types as $key => $type)
                 <tr>
-                    <td class="firstColumn">
+                    <td class="firstColumn1">
                         {{$type}}
                     </td>
                     <td>
@@ -38,7 +41,7 @@
            
         </table>
 
-		<table id="myTable" class="table mytable" >
+		<table id="table1-2" >
             <tr>
             @foreach ($sections as $key => $sect)
                 
@@ -54,7 +57,7 @@
             </tr>
         </table>
 
-        <table class="table mytable">
+        <table id="table1-3">
             <tr>
                 @foreach($gospit as $key => $gosp)
                     <td>
@@ -66,9 +69,10 @@
             
         </table>
 
-        <p>Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></p>
+       
 
-        <table class="table mytable">
+        <table id="table1-4">
+            <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
@@ -83,8 +87,13 @@
                 @endforeach
             </tr>                         
         </table>
-
-	</div>
-	
+    </secttion>
 </div>
+</div>
+</div>
+</div>
+</div>
+	
+	
+
 @endsection

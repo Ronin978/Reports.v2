@@ -1,155 +1,242 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 @include('flash::message')
+   
+<!-- Features -->
+<div id="features-wrapper">
+<div id="features">
+<div class="container">
+<div class="row">
+    <div class="2u 12u(mobile)">
 
-<div id="templatemo_wrapper">
-    
-    <div id="templatmeo_menu">
-    	<ul>
-        	<li><a href="{{action('FrontController@show', ['id'=>'Report2'])}}" class="home"><span></span></a></li>
-            <li><a href="{{action('FrontController@show', ['id'=>'Report3'])}}" class="about"><span></span></a></li>
-            <li><a href="{{action('FrontController@show', ['id'=>'Report4'])}}" class="portfolio"><span></span></a></li>
-            <li><a href="{{action('FrontController@show', ['id'=>'fatal'])}}" class="services"><span></span></a></li>
-            <li><a href="{{action('FrontController@show', ['id'=>'Report6'])}}" class="contact"><span></span></a></li>
-		</ul>
-        <br>
-        <hr>
-        <ul>
-            <li><a href="{{action('FrontController@show', ['id'=>'Report1'])}}" class="home"><span></span></a></li>
-            <li><a href="#about" class="about"><span></span></a></li>
-            <li><a href="#portfolio" class="portfolio"><span></span></a></li>
-            <li><a href="#services" class="services"><span></span></a></li>
-            <li><a href="#contact" class="contact"><span></span></a></li>
-        </ul>
+        <!-- Feature #1 -->
+        <section>      
+            <a href="{{action('FrontController@show', ['id'=>'Report1'])}}" class="bordered-feature-image"><img src="images/pic01.jpg" alt="" /></a>
+            <p>
+                РАПОРТ старших лікарів змін за чергування
+            </p>
+        </section>
     </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #2 -->
+        <section>
+            <a href="{{action('FrontController@show', ['id'=>'Report2'])}}" class="bordered-feature-image"><img src="images/pic02.jpg" alt="" /></a>
+            <p>
+                Інформація по запізненнях бригад на виклики
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #3 -->
+        <section>
+           <a href="{{action('FrontController@show', ['id'=>'Report3'])}}" class="bordered-feature-image"><img src="images/pic03.jpg" alt="" /></a>
+            <p>
+                Транспортування на Луцьк (Київ)
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #4 -->
+        <section>            
+            <a href="{{action('FrontController@show', ['id'=>'Report4'])}}" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
+            <p>
+                ГКС
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #5 -->
+        <section>                
+            <a href="{{action('FrontController@show', ['id'=>'fatal'])}}" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
+            <p>
+                Смертність в присутності бригади (успішна реанімація)
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #6 -->
+        <section>            
+            <a href="{{action('FrontController@show', ['id'=>'Report6'])}}" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
+            <p>
+                Зауваження по роботі, скарги, подяки
+            </p>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #1 -->
+        <section> 
+            <a href="{{action('FrontController@show', ['id'=>'dtp+ns'])}}" class="bordered-feature-image"><img src="images/pic01.jpg" alt="" /></a>
+            <p>
+                ДТП і «НС» (надзвичайні стани)
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #2 -->
+        <section>
+            <a href="{{action('FrontController@show', ['id'=>'high_travmy'])}}" class="bordered-feature-image"><img src="images/pic02.jpg" alt="" /></a>
+            <p>
+                Складні травми
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #3 -->
+        <section>
+            <a href="{{action('FrontController@show', ['id'=>'tr_kytyzi'])}}" class="bordered-feature-image"><img src="images/pic03.jpg" alt="" /></a>
+            <p>
+                Травми китиці
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #4 -->
+        <section> 
+            <a href="{{action('FrontController@show', ['id'=>'opic'])}}" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
+            <p>
+                Опіки/ Переохолодження
+            </p>
+        </section>
+    </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #5 -->
+        <section>
+            <a href="{{action('FrontController@show', ['id'=>'travmat'])}}" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
+            <p>
+                Травматизм (кримінальний, виробничий)
+            </p>
+        </section>
+    </div>    
+</div>
+</div>
+</div>
+</div>
+
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
     
-    <div id="templatemo_main">
-    	<div id="home" class="main_box">
-        	<div class="col col_23">
-            	<img src="images/templatemo_image_01.jpg" alt="image" class="img_frame" />
-                <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
+    <div class="3u 12u(mobile)">
 
-                    Екстр. - {{$table4[0]}}
-                    <br>
-                    Неекстр. - {{$table4[1]}}
-                    
-                        <table class="mytable">
-                            <tr>
-                                <td class="firstColumn"></td>
-                                <td>День</td>
-                                <td>Ніч</td>
-                                <td>Всього</td>
-                            </tr>                            
-                            @foreach ($types as $key => $type)
-                                <tr>
-                                    <td class="firstColumn">
-                                        {{$type}}
-                                    </td>
-                                    <td>
-                                        {{ $table0[$key]->day }}
-                                    </td>                                   
-                                    <td>
-                                        {{ $table0[$key]->night }}
-                                    </td>
-                                    <td>
-                                        {{ $table0[$key]->day + $table0[$key]->night }}                               
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    
-                        <table id="myTable" class="table mytable" >
-                            <tr>
-                            @for ($key=0; $key < count($sections); $key++)
-                                
-                                <td>{{$sections[$key]}}<br>
-                                    {{$table1[$key]}}
-                                </td>
-                                @if ( ($key+1) % 7 == 0)
-                                    </tr>
-                                    <tr>
-                                @endif
-                            
-                            @endfor
-                            </tr>
-                        </table>
-                    
-                        <table class="table mytable">
-                            <tr>
-                                @for($key=0; $key < count($gospit); $key++)
-                                    <td>
-                                        {{$gospit[$key]}}
-                                    </td>
-                                @endfor
-                            </tr>
-                            <tr>
-                                @for($i=0; $i < count($gospit); $i++)
-                                    <td>
-                                        {{$table2[$i]}}
-                                    </td>
-                                @endfor
-                            </tr>
-                        </table>
-
-                        <p>Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></p>
-                        <table class="table mytable">
-                            <tr>
-                                @for ($key=0; $key < count($region); $key++)
-                                    
-                                    <td>{{$region[$key]}}<br>
-                                        {{$table3[$key]}}
-                                    </td>
-                                    @if ( ($key+1) % 9 == 0)
-                                        </tr>
-                                        <tr>
-                                    @endif
-                                
-                                @endfor
-                            </tr>                         
-                        </table>
-
-                <div class="cleaner h40"></div>
-                <h3>Our Service Lists</h3>
-                <ul class="tmo_list">
-                    <li>Nulla facilisi. Maecenas ac odio ipsum donec cursus</li>
-                    <li>Fusce risus tortor, interdum in malesuada pulvinar</li>
-                    <li>Proin facilisis ullamcorper turpis, in placerat</li>
-                    <li>Sed vel justo quis ligula blandit commodo molestie</li>
-                    <li>Ut tristique sagittis arcu, vel laoreet turpis</li>
-                </ul>
-			</div>
-            <div class="col col_13 no_margin_right">
-            	<h3>Швидкий пошук</h3>
+        <!-- Sidebar -->
+        <section>
+            <header>
+                <h3>Сформувати звіт</h3>
                 <blockquote>
                     <form method="GET" action="{{action('FrontController@QuickFind')}}">
                         <input type="date" name="date" >
 
                         <input type="submit" value="Знайти">
-				    </form>
+                    </form>
                 </blockquote>
-                
+            </header>
+        </section>
+    </div>
+    <div class="9u 12u(mobile) important(mobile)">
+    <section>
+	
+        <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
 
-                <ul class="twitter_post">
-                	<li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>
-                    <li>Aliquam odio nibh, suscipit quis venenatis vitae, fringilla at quam. <a href="#">http://bit.ly/PPIwP</a></li>
-                    <li>Proin tincidunt, arcu id pellentesque accumsan, neque dolor imperdiet ligula, quis viverra tellus nulla odio. <a href="#">http://bit.ly/I9IUY</a></li>
-                </ul>
-            </div>
-            <div class="cleaner"></div>
-            <a href="#templatemo_header" class="gototop">Go To Top</a>
-            <div class="cleaner"></div>
-		</div> <!-- END of home -->
+        Екстр. - {{$table4[0]}}
+        <br>
+        Неекстр. - {{$table4[1]}}
         
-            <div class="cleaner"></div>
-            <a href="#templatemo_header" class="gototop">Go To Top</a>
-            <div class="cleaner"></div>
-		
-    </div> <!-- END of -->
+        <table id="table1-1" >
+            <tr>
+                <td class="firstColumn"></td>
+                <td>День</td>
+                <td>Ніч</td>
+                <td>Всього</td>
+            </tr>                            
+            @foreach ($types as $key => $type)
+                <tr>
+                    <td class="firstColumn1">
+                        {{$type}}
+                    </td>
+                    <td>
+                        {{ $table0[$key]->day }}
+                    </td>                                   
+                    <td>
+                        {{ $table0[$key]->night }}
+                    </td>
+                    <td>
+                        {{ $table0[$key]->day + $table0[$key]->night }}                               
+                    </td>
+                </tr>
+            @endforeach
+        </table>
     
-    <div id="templatemo_footer">
-    	Copyright © 2048 Your Company Name<br /> Designed by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a>
-    </div> 
-</div> 
+        <table id="table1-2" >
+            <tr>
+            @for ($key=0; $key < count($sections); $key++)
+                
+                <td>{{$sections[$key]}}<br>
+                    {{$table1[$key]}}
+                </td>
+                @if ( ($key+1) % 7 == 0)
+                    </tr>
+                    <tr>
+                @endif
+            
+            @endfor
+            </tr>
+        </table>
+    
+        <table id="table1-3" >
+            <tr>
+                @for($key=0; $key < count($gospit); $key++)
+                    <td>
+                        {{$gospit[$key]}}
+                    </td>
+                @endfor
+            </tr>
+            <tr>
+                @for($i=0; $i < count($gospit); $i++)
+                    <td>
+                        {{$table2[$i]}}
+                    </td>
+                @endfor
+            </tr>
+       
+
+        
+        <table id="table1-4">
+            <tr><td colspan="9">Невідкладна допомога (ПМСД)    +</td> </tr>
+            <tr>
+                @for ($key=0; $key < count($region); $key++)
+                    
+                    <td>{{$region[$key]}}<br>
+                        {{$table3[$key]}}
+                    </td>
+                    @if ( ($key+1) % 9 == 0)
+                        </tr>
+                        <tr>
+                    @endif
+                
+                @endfor
+            </tr>                         
+        </table>
+    </section>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+
 
 @endsection

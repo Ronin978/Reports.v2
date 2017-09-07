@@ -1,17 +1,18 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">	
 @include('flash::message')
-<div id="templatemo_wrapper">
-	<div id="templatmeo_menu">
-		{{$title}}
-	</div>
-
-	<div id="templatemo_main">
-		<table id="table4" border="1">
-			<tr class="firstTr">
-				<td class="firstColumn">№<br>п/п</td>
+	<section >	
+		<h3 align="center" >{{$title}}</h3>
+		<table id="table4">
+			<tr id="firstTr">
+				<td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
@@ -19,10 +20,10 @@
                 <td>Вік</td>
                 <td>Діагноз</td>
                 <td>№ бр.,<br> керівник</td>
-                <td><div class="rotate">Тромболізис</div></td>
-                <td><div class="rotate">Стентування</div></td>
-                <td><div class="rotate">Госпіталізація<br>(лікувальний заклад)/година</div></td>
-                <td><div class="rotate">Зв’язок з лікарем консультантом</div>
+                <td class="rotate">Тромболізис</td>
+                <td class="rotate">Стентування</td>
+                <td id="maxLenght"  class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
+                <td class="rotate">Зв’язок з лікарем консультантом
                 </td>
 			</tr>
 			@foreach ($reports as $key=>$report)
@@ -66,7 +67,10 @@
 			</tr>
 			@endforeach
 		</table>
-	</div>
-	
+	</section>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection

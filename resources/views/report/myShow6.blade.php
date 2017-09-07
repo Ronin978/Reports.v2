@@ -1,14 +1,15 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">	
 @include('flash::message')
-<div id="templatemo_wrapper">
-	<div id="templatmeo_menu">
-		{{$title}}
-	</div>
-
-	<div id="templatemo_main">
+	<section >	
+		<h2 align="center" >{{$title}}</h2>
 		 <table id="twoTable" border="1">
             <tr class="firstTr">
                 <td class="firstColumn">№<br>п/п</td>
@@ -37,7 +38,10 @@
 			</tr>
 			@endforeach
 		</table>
-	</div>
-	
+	</section>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection

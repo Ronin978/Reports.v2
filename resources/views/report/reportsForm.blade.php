@@ -3,12 +3,12 @@
 @section('content')
 
 @include('flash::message')
-<div id="templatemo_wrapper">
-	<div id="templatmeo_menu">
+<div id="main_box">
+	<div id="menu">
 		<p>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</p>
 	</div>
 
-	<div id="templatemo_main">
+	<div id="content">
 
 		Екстр. - {{($inf[1])[0]}}
         <br>

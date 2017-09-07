@@ -1,23 +1,24 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">	
 @include('flash::message')
-<div id="templatemo_wrapper">
-	<div id="templatmeo_menu">
-		{{$title}}
-	</div>
-
-	<div id="templatemo_main">
-		<table id="twoTable" border="1">
-			<tr>
-				<td class="firstColumn">№<br>п/п</td>
+	<section >	
+	<h3 align="center" >{{$title}}</h3>
+		<table id="table2">
+			<tr id="firstTr">
+				<td >№<br>п/п</td>
                 <td>Відділення / пункт що має обслуговувати</td>
                 <td>№ виїзної карти /е(н)</td>
                 <td>Адреса виклику (район)</td>
                 <td>№ Бригада що обслуговувала</td>
                 <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
-                <td><div class="rotate">постдиспетч підтримка</div></td>
+                <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
                 <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
                 <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
 			</tr>
@@ -53,7 +54,10 @@
 			</tr>
 			@endforeach
 		</table>
-	</div>
-	
+	</section>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection
