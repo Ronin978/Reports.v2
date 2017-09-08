@@ -1,3 +1,21 @@
+window.onload=function()
+{
+    if (document.getElementById('maxLenght') !== null) 
+    {        
+        var maxLenght = document.getElementById('maxLenght').offsetWidth;
+
+        document.getElementById('firstTr').style.height = (maxLenght  + 10) + 'px';
+
+        var rotate = document.getElementsByClassName('rotate');
+
+        for (var i = rotate.length - 1; i >= 0; i--) {
+            rotate[i].width = '40px';
+        }
+    } 
+    
+}
+
+
 function oninput2()
 {
     var mass0 = [];
@@ -33,13 +51,13 @@ function oninput2()
 
 function AddLine2()
 {
-    var table = document.getElementById("twoTable"); 
+    var table = document.getElementById("table2"); 
     var row = table.insertRow(table.rows.length); // Добавляем строку
 
      // Формируем строку элементов управления
     var index = (table.rows.length-2);
     var cell1 = row.insertCell(0);
-    var text1 = document.createElement("p"); // Ввод text1
+    var text1 = document.createElement("div"); // Ввод text1
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
@@ -48,8 +66,8 @@ function AddLine2()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("input"); // Ввод text2
-        text.setAttribute("type", "text");
+        var text = document.createElement("textarea"); // Ввод text2
+        text.setAttribute("rows", "1");
         text.setAttribute("name", arr[i]+index);
         cell.appendChild(text);
     }
@@ -57,13 +75,13 @@ function AddLine2()
 
 function AddLine3()
 {
-    var table = document.getElementById("twoTable"); 
+    var table = document.getElementById("table3"); 
     var row = table.insertRow(table.rows.length); // Добавляем строку
 
      // Формируем строку элементов управления
     var index = (table.rows.length-2);
     var cell1 = row.insertCell(0);
-    var text1 = document.createElement("p"); // Ввод text1
+    var text1 = document.createElement("div"); // Ввод text1
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
@@ -72,8 +90,8 @@ function AddLine3()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("input"); // Ввод text2
-        text.setAttribute("type", "text");
+        var text = document.createElement("textarea"); // Ввод text2
+        text.setAttribute("rows", "1");
         text.setAttribute("name", arr[i]+index);
         cell.appendChild(text);
     }
@@ -87,7 +105,7 @@ function AddLine4()
      // Формируем строку элементов управления
     var index = (table.rows.length-2);
     var cell1 = row.insertCell(0);
-    var text1 = document.createElement("p"); // Ввод text1
+    var text1 = document.createElement("div"); // Ввод text1
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
@@ -96,8 +114,8 @@ function AddLine4()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("input"); // Ввод text2
-        text.setAttribute("type", "text");
+        var text = document.createElement("textarea"); // Ввод text2
+        text.setAttribute("rows", "1");
         text.setAttribute("name", arr[i]+index);
         cell.appendChild(text);
     }
@@ -105,13 +123,13 @@ function AddLine4()
 
 function AddLine5()
 {
-    var table = document.getElementById("twoTable"); 
+    var table = document.getElementById("table5"); 
     var row = table.insertRow(table.rows.length); // Добавляем строку
 
      // Формируем строку элементов управления
     var index = (table.rows.length-2);
     var cell1 = row.insertCell(0);
-    var text1 = document.createElement("p"); // Ввод text1
+    var text1 = document.createElement("div"); // Ввод text1
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
@@ -120,8 +138,8 @@ function AddLine5()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("input"); // Ввод text2
-        text.setAttribute("type", "text");
+        var text = document.createElement("textarea"); // Ввод text2
+        text.setAttribute("rows", "1");
         text.setAttribute("name", arr[i]+index);
         cell.appendChild(text);
     }
@@ -129,13 +147,13 @@ function AddLine5()
 
 function AddLine6()
 {
-    var table = document.getElementById("twoTable"); 
+    var table = document.getElementById("table6"); 
     var row = table.insertRow(table.rows.length); // Добавляем строку
 
      // Формируем строку элементов управления
     var index = (table.rows.length-2);
     var cell1 = row.insertCell(0);
-    var text1 = document.createElement("p"); // Ввод text1
+    var text1 = document.createElement("div"); // Ввод text1
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
@@ -143,8 +161,8 @@ function AddLine6()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("input"); // Ввод text2
-        text.setAttribute("type", "text");
+        var text = document.createElement("textarea"); // Ввод text2
+        text.setAttribute("rows", "1");
         text.setAttribute("name", arr[i]+index);
         cell.appendChild(text);
     }

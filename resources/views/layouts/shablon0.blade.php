@@ -152,22 +152,7 @@
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/myFunction.js')}}"></script>
-    <script type="text/javascript">
-
-        window.onload=function(){
-            
-            var maxLenght = document.getElementById('maxLenght').offsetWidth;
-
-            document.getElementById('firstTr').style.height = (maxLenght  + 10) + 'px';
-
-            var rotate = document.getElementsByClassName('rotate');
-
-            for (var i = rotate.length - 1; i >= 0; i--) {
-                rotate[i].width = '40px';
-            }
-            
-        }
-    </script>  
+    
 
 </body>
 </html>

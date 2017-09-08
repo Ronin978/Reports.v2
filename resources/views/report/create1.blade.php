@@ -8,9 +8,9 @@
 <div class="row">
 <div class="12u">   
 @include('flash::message')
-<form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
-
-    <section >  
+ <section >  
+    <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
+   
         <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy"> за чергування {{date("l / «d» F Y")}}.</p>       
        
         Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
@@ -33,10 +33,10 @@
                         {{$type}}
                     </td>
                     <td>
-                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" >
+                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15">
                     </td>
                     <td>
-                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" >
+                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15">
                     </td>
                     <td></td>
                 </tr>
@@ -49,7 +49,7 @@
             @foreach ($sections as $key => $sect)
                 
                 <td>{{$sect}}<br>
-                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" value="{{$key+1}}">
+                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" value="{{$key+1}}" size="15">
                 </td>
                 @if ( ($key+1) % 7 == 0)
                     </tr>
@@ -84,7 +84,7 @@
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" value="1+2" oninput = "oninput2()">
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" value="1+2" oninput = "oninput2()" size="10">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>
@@ -100,17 +100,17 @@
         <br>
 
         <input type="submit" value="Save">
-    </section>
-</form>
-                
-    <section>                
-        <form id="twoform" method="GET" action="{{action('ReportController@create2')}}">
-            <input id="toDate" type="hidden" name="date" value="">
-           
+    
+    </form>
+</section>                
+<section>                
+    <form id="twoform" method="GET" action="{{action('ReportController@create2')}}">
+        <input id="toDate" type="hidden" name="date" value="">
+       
 
-            <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Next</div>
-        </form>
-    </section>
+        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Next</div>
+    </form>
+</section>
 </div>
 </div>
 </div>

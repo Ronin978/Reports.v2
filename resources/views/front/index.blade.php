@@ -135,7 +135,7 @@
         <!-- Sidebar -->
         <section>
             <header>
-                <h3>Сформувати звіт</h3>
+                <h3>Сформувати повний звіт</h3>
                 <blockquote>
                     <form method="GET" action="{{action('FrontController@QuickFind')}}">
                         <input type="date" name="date" >

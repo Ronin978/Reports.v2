@@ -20,6 +20,15 @@ table
 	width: 100%;
 }
 
+
+
+textarea
+{
+	resize: vertical; 
+	
+	width: 99%;
+} 
+
 #table1-1 td 
 {	
 	width: 20%;

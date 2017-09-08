@@ -55,43 +55,54 @@ class ReportController extends Controller
     {
         $date = ($request->all())['date'];
         $title = 'Смертність в присутності бригади (успішна реанімація)';
-        return view('report.create5', ['date'=>$date, 'title'=>$title]);
+        $pidtype = 'fatal';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create6(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create6', ['date'=>$date]);
+        $title = 'ДТП і «НС» (надзвичайні стани)';
+        $pidtype = 'dtp+ns';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create7(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create7', ['date'=>$date]);
+        $title = 'Складні травми';
+        $pidtype = 'high_travmy';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create8(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create8', ['date'=>$date]);
+        $title = 'Травми китиці';
+        $pidtype = 'tr_kytyzi';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create9(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create9', ['date'=>$date]);
+        $title = 'Опіки/ Переохолодження';
+        $pidtype = 'opic';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create10(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create10', ['date'=>$date]);
+        $title = 'Травматизм (кримінальний, виробничий)';
+        $pidtype = 'travmat';
+        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
     }
 
     public function create11(Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create11', ['date'=>$date]);
+        return view('report.create6', ['date'=>$date]);
     }
 
 
