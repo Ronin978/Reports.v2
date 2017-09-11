@@ -17,7 +17,8 @@ class Transfer extends Migration
         {
          $table->increments('id');
          $table->date('date');                  
-         $table->integer('no_card');         
+         $table->string('timer', 20);                  
+         $table->string('no_card', 10);         
          $table->string('pib');
          $table->string('at');
          $table->string('from');
@@ -25,7 +26,7 @@ class Transfer extends Migration
          $table->string('who_direct');
          $table->string('diagnoz');
          $table->string('brig');
-         $table->string('other');
+         $table->string('other')->nullable();
          $table->timestamps();
          
         });

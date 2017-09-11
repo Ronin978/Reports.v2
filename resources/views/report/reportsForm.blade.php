@@ -1,29 +1,30 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
-@include('flash::message')
-<div id="main_box">
-	<div id="menu">
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">   
+@include('flash::message')     
+<section>
 		<p>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</p>
-	</div>
-
-	<div id="content">
-
+	
 		Екстр. - {{($inf[1])[0]}}
         <br>
         Неекстр. - {{($inf[1])[1]}}
 
-		<table class="mytable">
+		<table class="table1-1">
             <tr>
-                <td class="firstColumn"></td>
+                <td class="firstColumn1"></td>
                 <td>День</td>
                 <td>Ніч</td>
                 <td>Всього</td>
             </tr>                            
             @foreach ($types as $key => $type)
                 <tr>
-                    <td class="firstColumn">
+                    <td class="firstColumn1">
                         {{$type}}
                     </td>
                     <td>
@@ -38,7 +39,7 @@
            
         </table>
 
-		<table id="myTable" class="table mytable" >
+		<table id="table1-2" >
             <tr>
             @foreach ($sections as $key => $sect)
                 
@@ -54,7 +55,7 @@
             </tr>
         </table>
 
-        <table class="table mytable">
+        <table id="table1-3">
             <tr>
                 @foreach($gospit as $key => $gosp)
                     <td>
@@ -66,9 +67,9 @@
             
         </table>
 
-        <p>Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></p>
-
-        <table class="table mytable">
+       
+        <table id="table1-4">
+             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
@@ -90,18 +91,17 @@
 			Інформація по запізненнях бригад на виклики за {{$date}}
 		</p>
 
-		<br>
-        <hr>
+	    <hr>
 
-		<table id="twoTable" border="1">
-			<tr>
-				<td class="firstColumn">№<br>п/п</td>
+		<table id="table2">
+			<tr id="firstTr">
+				<td>№<br>п/п</td>
                 <td>Відділення / пункт що має обслуговувати</td>
                 <td>№ виїзної карти /е(н)</td>
                 <td>Адреса виклику (район)</td>
                 <td>№ Бригада що обслуговувала</td>
                 <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
-                <td><div class="rotate">постдиспетч підтримка</div></td>
+                <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
                 <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
                 <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
 			</tr>
@@ -143,18 +143,17 @@
 		<p>
 			Транспортування на Луцьк (Київ) {{$date}}
 		</p>
-
-		<br>
         <hr>
-		<table id="twoTable" border="1">
-			 <tr>
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table3">
+            <tr id="firstTr3">
+                <td>№<br>п/п</td>
                 <td>Дата/час</td>
                 <td>№ карти виїзду</td>
                 <td>ПІП хворого</td>
                 <td>Звідки забрано</td>
-                <td><div class="rotate">Куди доставлено</div></td>
-                <td><div class="rotate">направлення</div></td>
+                <td id="maxLenght3" class="rotate">Куди доставлено</td>
+                <td class="rotate">направлення</td>
                 <td>Хто направляє</td>
                 <td>Діагноз</td>
                 <td>№ бр., керівник</td>
@@ -200,16 +199,13 @@
 		</table>
 		<br>
         <hr>
-
-
-		ГКС {{$date}}
-
-
-		<br>
+		
+		<p>ГКС {{$date}}</p>
         <hr>
-		<table id="table4" border="1">
-			<tr class="firstTr">
-				<td class="firstColumn">№<br>п/п</td>
+		
+		<table id="table4">
+			<tr id="firstTr4">
+				<td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
@@ -217,10 +213,10 @@
                 <td>Вік</td>
                 <td>Діагноз</td>
                 <td>№ бр.,<br> керівник</td>
-                <td><div class="rotate">Тромболізис</div></td>
-                <td><div class="rotate">Стентування</div></td>
-                <td><div class="rotate">Госпіталізація<br>(лікувальний заклад)/година</div></td>
-                <td><div class="rotate">Зв’язок з лікарем консультантом</div>
+                <td class="rotate">Тромболізис</td>
+                <td class="rotate">Стентування</td>
+                <td id="maxLenght4" class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
+                <td class="rotate">Зв’язок з лікарем консультантом
                 </td>
 			</tr>
 			@foreach ($reports4 as $key=>$report)
@@ -267,13 +263,12 @@
 		<br>
         <hr>
 
-		Смертність в присутності бригади (успішна реанімація)  {{$date}}
+		<p>Смертність в присутності бригади (успішна реанімація)  {{$date}}</p>
+		<hr>
 
-		<br>
-        <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -314,13 +309,12 @@
 		<br>
         <hr>
 
-		ДТП і «НС» (надзвичайні стани)  {{$date}}
-
-        <br>
+		<p>ДТП і «НС» (надзвичайні стани)  {{$date}}</p>
         <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -361,13 +355,12 @@
 		<br>
         <hr>
 
-        Складні травми   {{$date}}
-
-		<br>
+        <p>Складні травми   {{$date}}</p>
         <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -408,13 +401,12 @@
 		<br>
         <hr>
 
-        Травми китиці   {{$date}}
-
-        <br>
+        <p>Травми китиці   {{$date}}</p>
         <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -455,13 +447,12 @@
 		<br>
         <hr>
 
-        Опіки/ Переохолодження   {{$date}}
-
-        <br>
+        <p>Опіки/ Переохолодження   {{$date}}</p>
         <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -502,13 +493,12 @@
 		<br>
         <hr>
 
-        Травматизм (кримінальний, виробничий)   {{$date}}
-
-        <br>
+        <p>Травматизм (кримінальний, виробничий)   {{$date}}</p>
         <hr>
-		<table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table5">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
                 <td>Адреса НС</td>
@@ -549,13 +539,12 @@
 		<br>
         <hr>
 
-        Зауваження по роботі, скарги, подяки {{$date}}
-
-		<br>
+        <p>Зауваження по роботі, скарги, подяки {{$date}}</p>
         <hr>
-		 <table id="twoTable" border="1">
-            <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
+
+		<table id="table6">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>№ картки</td>
                 <td>Відділення</td>
@@ -581,8 +570,10 @@
 			</tr>
 			@endforeach
 		</table>
-
-	</div>
-	
+</section>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection

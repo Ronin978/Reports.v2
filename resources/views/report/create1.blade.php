@@ -16,9 +16,9 @@
         Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
         <br><br>
 
-        Екстр. - <input type="text" id="extr" name="value_i">
+        Екстр. - <input type="text" id="extr" name="value52">
         <br>
-        Неекстр. - <input type="text" id="noext" name="value_i+1">
+        Неекстр. - <input type="text" id="noext" name="value53">
        
         <table id="table1-1">
             <tr>
@@ -49,7 +49,7 @@
             @foreach ($sections as $key => $sect)
                 
                 <td>{{$sect}}<br>
-                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" value="{{$key+1}}" size="15">
+                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" size="15">
                 </td>
                 @if ( ($key+1) % 7 == 0)
                     </tr>
@@ -71,7 +71,7 @@
             <tr>
                 @for ($i=$key+2; $i <= count($sections)+count($gospit); $i++)
                     <td>
-                        <input type="text" id="value{{$i}}" class="two" name="value{{$i}}" value="{{$i}}">
+                        <input type="text" id="value{{$i}}" class="two" name="value{{$i}}">
                     </td>
                 @endfor
             </tr>
@@ -84,7 +84,7 @@
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" value="1+2" oninput = "oninput2()" size="10">
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>

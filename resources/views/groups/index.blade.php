@@ -1,20 +1,23 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
-
-	
-<div id="templatemo_wrapper">
-	<div id="templatemo_main">
-		<table border="1" class="table mytable">
+<div id="content-wrapper">
+<div id="content">
+<div class="container">
+<div class="row">
+<div class="12u">   
+@include('flash::message')
+ <section >  
+		<table id="groupTable">
 			@foreach($groups as $group)
 			<tr>
 				<td>{{$group->id}}</td>
 				<td>
-					{{$group->group}}
+					<div>{{$group->group}}</div>
 				</td>
-				<td>
-					{{$group->title}}
+				<td width="500px" >
+					<div align="left">{{$group->title}}</div>
 				</td>
 				<td><a href="{{action('GroupController@edit', ['id'=>$group->id])}}">Редагувати</a></td>
 			</tr>
@@ -22,7 +25,12 @@
 		</table>
 
 		<a href="{{action('GroupController@create')}}">Створити</a>
-	</div>
+</section>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 
 @endsection

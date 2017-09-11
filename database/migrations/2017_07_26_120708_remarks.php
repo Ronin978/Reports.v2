@@ -17,9 +17,10 @@ class Remarks extends Migration
         {
          $table->increments('id');
          $table->date('date'); 
-         $table->integer('no_card');
+         $table->string('timer', 20);
+         $table->string('no_card', 10);
          $table->string('subdiv');
-         $table->string('other');
+         $table->string('other')->nullable();
          $table->timestamps();
          
         });

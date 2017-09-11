@@ -8,8 +8,9 @@
 <div class="row">
 <div class="12u">	
 @include('flash::message')
-	<section >	
-	<h3 align="center" >{{$title}}</h3>
+	<section >
+		
+	<h3 align="center" >{{$title}} за {{$reports[0]->date}}</h3>
 		<table id="table3">
 			 <tr id="firstTr">
                 <td >№<br>п/п</td>
@@ -25,12 +26,13 @@
                 <td>Примітки</td>
             </tr> 
 			@foreach ($reports as $key=>$report)
+			@if($report->first())
 			<tr>
 				<td>
 					{{$key+1}}
 				</td>
 				<td>
-					{{$report->date}}
+					{{$report->timer}}
 				</td>
 				<td>
 					{{$report->no_card}}
@@ -60,8 +62,10 @@
 					{{$report->other}}
 				</td>
 			</tr>
+			@endif
 			@endforeach
 		</table>
+		
 	</section>
 </div>
 </div>

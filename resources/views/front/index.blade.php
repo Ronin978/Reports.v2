@@ -1,13 +1,13 @@
 @extends('layouts.shablon0')
 
 @section('content')
-@include('flash::message')
    
 <!-- Features -->
 <div id="features-wrapper">
 <div id="features">
 <div class="container">
 <div class="row">
+@include('flash::message')
     <div class="2u 12u(mobile)">
 
         <!-- Feature #1 -->
@@ -149,6 +149,9 @@
     <div class="9u 12u(mobile) important(mobile)">
     <section>
 	
+    @if (empty($table0))
+        <p>Поки, що немає доданих звітів
+    @else    
         <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
 
         Екстр. - {{$table4[0]}}
@@ -230,6 +233,7 @@
                 @endfor
             </tr>                         
         </table>
+    @endif
     </section>
     </div>
 

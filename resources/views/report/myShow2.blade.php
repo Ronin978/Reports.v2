@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')
 	<section >	
-	<h3 align="center" >{{$title}}</h3>
+	<h3 align="center" >{{$title}} за {{$reports[0]->date}}</h3>
 		<table id="table2">
 			<tr id="firstTr">
 				<td >№<br>п/п</td>
@@ -23,6 +23,7 @@
                 <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
 			</tr>
 			@foreach ($reports as $key=>$report)
+			
 			<tr>
 				<td>
 					{{$key+1}}

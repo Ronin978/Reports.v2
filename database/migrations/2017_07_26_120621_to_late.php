@@ -18,7 +18,7 @@ class ToLate extends Migration
          $table->increments('id');
          $table->date('date');                  
          $table->string('punkt');         
-         $table->integer('no_card');
+         $table->string('no_card', 10);
          $table->string('adress');
          $table->string('brig');
          $table->string('time');

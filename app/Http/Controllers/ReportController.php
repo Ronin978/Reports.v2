@@ -240,7 +240,8 @@ class ReportController extends Controller
         $date = $post['date'];
         for ($i=0; $i < (count($post)-2)/10 ; $i++) 
             {                
-                $report['date'] = $post["date$i"];  
+                $report['date'] = $date;  
+                $report['timer'] = $post["date$i"];  
                 $report['no_card'] = $post["no_card$i"];  
                 $report['pib'] = $post["pib$i"];  
                 $report['at'] = $post["at$i"];  
@@ -265,7 +266,8 @@ class ReportController extends Controller
         $date = $post['date'];
         for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
-                $report['date'] = $post["date$i"];  
+                $report['date'] = $date;  
+                $report['timer'] = $post["date$i"];   
                 $report['no_card'] = $post["no_card$i"];  
                 $report['adress'] = $post["adress$i"];  
                 $report['pib'] = $post["pib$i"];  
@@ -292,7 +294,8 @@ class ReportController extends Controller
         for ($i=0; $i < (count($post)-3)/8 ; $i++) 
             {                
                 $report['pidtype'] = $post["pidtype"];  
-                $report['date'] = $post["date$i"];  
+                $report['date'] = $date;  
+                $report['timer'] = $post["date$i"];  
                 $report['title'] = $post["title$i"];  
                 $report['adress'] = $post["adress$i"];  
                 $report['pib'] = $post["pib$i"];  
@@ -338,7 +341,8 @@ class ReportController extends Controller
         $date = $post['date'];
         for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
-                $report['date'] = $post["date$i"];  
+                $report['date'] = $date;  
+                $report['timer'] = $post["date$i"];   
                 $report['no_card'] = $post["no_card$i"];  
                 $report['subdiv'] = $post["subdiv$i"];  
                 $report['other'] = $post["other$i"];  

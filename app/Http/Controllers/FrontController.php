@@ -21,32 +21,40 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $maxDate = Info::max('date');
+        if (Info::where('id_group', '1')->first())
+        {
+            $maxDate = Info::max('date');
 
-        $types = Group::where('group', 'call')->get()->first();
-        $typ = explode(";", $types->title);
-        $table0 = Report1::where('date', $maxDate)->get();
+            $types = Group::where('group', 'call')->get()->first();
+            $typ = explode(";", $types->title);
+            $table0 = Report1::where('date', $maxDate)->get();
 
-        
-        $table1 = Info::where('id_group', '4')->where('date', $maxDate)->get()->first();
-        $tabl1 = explode(";", $table1->value);
-        $sections = Group::where('group', 'sections')->get()->first();
-        $sect = explode(";", $sections->title);
+            
+            $table1 = Info::where('id_group', '4')->where('date', $maxDate)->get()->first();
+            $tabl1 = explode(";", $table1->value);
+            $sections = Group::where('group', 'sections')->get()->first();
+            $sect = explode(";", $sections->title);
 
-        $table2 = Info::where('id_group', '2')->where('date', $maxDate)->get()->first();
-        $tabl2 = explode(";", $table2->value);
-        $gospit = Group::where('group', 'gosp')->get()->first();
-        $gosp = explode(";", $gospit->title);
+            $table2 = Info::where('id_group', '2')->where('date', $maxDate)->get()->first();
+            $tabl2 = explode(";", $table2->value);
+            $gospit = Group::where('group', 'gosp')->get()->first();
+            $gosp = explode(";", $gospit->title);
 
-        $table3 = Info::where('id_group', '3')->where('date', $maxDate)->get()->first();
-        $tabl3 = explode(";", $table3->value);
-        $region = Group::where('group', 'region')->get()->first();
-        $reg = explode(";", $region->title);
+            $table3 = Info::where('id_group', '3')->where('date', $maxDate)->get()->first();
+            $tabl3 = explode(";", $table3->value);
+            $region = Group::where('group', 'region')->get()->first();
+            $reg = explode(";", $region->title);
 
-        $table4 = Info::where('id_group', '1')->where('date', $maxDate)->get()->first();
-        $tabl4 = explode(";", $table4->value);
-        
-        return view('front.index', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'table0'=>$table0, 'table1'=>$tabl1, 'table2'=>$tabl2, 'table3'=>$tabl3, 'table4'=>$tabl4, 'date'=>$maxDate]);
+            $table4 = Info::where('id_group', '1')->where('date', $maxDate)->get()->first();
+            $tabl4 = explode(";", $table4->value);
+            
+            return view('front.index', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'table0'=>$table0, 'table1'=>$tabl1, 'table2'=>$tabl2, 'table3'=>$tabl3, 'table4'=>$tabl4, 'date'=>$maxDate]);
+        }
+        else
+        {
+            return view('front.index');
+        }
+
     }
 
     /**
@@ -166,19 +174,17 @@ class FrontController extends Controller
         }
 //end Report1
 
-        $reports2 = Report2::where('date', $date)->get();
-        $reports3 = Report3::where('date', $date)->get();
-        $reports4 = Report4::where('date', $date)->get();
+        $reports2 = Report2::where('date', $date)->get();//Report2
+        $reports3 = Report3::where('date', $date)->get();//Report3
+        $reports4 = Report4::where('date', $date)->get();//Report4
 //Report5
         $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
         foreach ($tables as $key => $table) {
             $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
         }
 //end Report5
-        $reports6 = Report6::where('date', $date)->get();
+        $reports6 = Report6::where('date', $date)->get();//Report11
         
-
-
         return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
     }
 

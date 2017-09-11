@@ -34,7 +34,7 @@
                         <!-- Nav -->
                             <nav id="nav">
                                 <a href="{{action('ReportController@create1')}}">Створити щоденний звіт</a>
-                                <a href="#">Керування групами</a>
+                                <a href="{{action('GroupController@index')}}">Керування групами</a>
                             @if (Auth::guest())
                                 <a href="{{ route('login') }}">Login</a>
                                 <a href="{{ route('register') }}">Register</a>

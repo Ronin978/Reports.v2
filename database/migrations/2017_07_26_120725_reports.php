@@ -17,13 +17,14 @@ class Reports extends Migration
         {
          $table->increments('id');
          $table->string('pidtype');
-         $table->date('date');                  
+         $table->date('date'); 
+         $table->string('timer', 20);                 
          $table->string('title');         
          $table->string('adress');
          $table->string('pib');
-         $table->integer('no_card');
+         $table->string('no_card', 10);
          $table->string('brig');
-         $table->string('other');
+         $table->string('other')->nullable();
          $table->timestamps();
          
         });

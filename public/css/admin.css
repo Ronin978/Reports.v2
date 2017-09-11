@@ -18,16 +18,19 @@ table
 {
 	border-collapse: collapse;
 	width: 100%;
+
 }
-
-
 
 textarea
 {
-	resize: vertical; 
-	
+	resize: vertical; 	
 	width: 99%;
 } 
+
+#groupTable
+{
+	word-break: break-all;
+}
 
 #table1-1 td 
 {	
@@ -57,7 +60,6 @@ textarea
 
 .row p
 {	
-	height: 70px;
 	text-align: center;
 }
 
@@ -79,3 +81,7 @@ td
 	vertical-align: middle;
 }
 
+p
+{
+	margin: 0;
+}

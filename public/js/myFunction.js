@@ -8,11 +8,39 @@ window.onload=function()
 
         var rotate = document.getElementsByClassName('rotate');
 
-        for (var i = rotate.length - 1; i >= 0; i--) {
-            rotate[i].width = '40px';
+        for (var i = rotate.length - 1; i >= 0; i--) 
+        {
+            rotate[i].width = '30px';
         }
-    } 
-    
+    }
+ 
+    if (document.getElementById('maxLenght3') !== null) 
+    {
+        var maxLenght = document.getElementById('maxLenght3').offsetWidth;
+
+        document.getElementById('firstTr3').style.height = (maxLenght  + 10) + 'px';
+
+        var rotate = document.getElementsByClassName('rotate');
+
+        for (var i = rotate.length - 1; i >= 0; i--) 
+        {
+            rotate[i].width = '30px';
+        }
+    }
+
+    if (document.getElementById('maxLenght4') !== null) 
+    {
+        var maxLenght = document.getElementById('maxLenght4').offsetWidth;
+
+        document.getElementById('firstTr4').style.height = (maxLenght  + 10) + 'px';
+
+        var rotate = document.getElementsByClassName('rotate');
+
+        for (var i = rotate.length - 1; i >= 0; i--) 
+        {
+            rotate[i].width = '30px';
+        }
+    }
 }
 
 

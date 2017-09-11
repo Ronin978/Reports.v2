@@ -17,7 +17,8 @@ class Gks extends Migration
         {
          $table->increments('id');
          $table->date('date'); 
-         $table->integer('no_card'); 
+         $table->string('timer', 20);
+         $table->string('no_card', 10); 
          $table->string('adress');
          $table->string('pib');
          $table->integer('age');
