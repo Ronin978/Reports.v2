@@ -6,16 +6,21 @@
 <div id="content">
 <div class="container">
 <div class="row">
-<div class="12u">	
+<div class="12u">   
 @include('flash::message')
-	<section >	
-        <h3 align="center" >РАПОРТ старших лікарів змін {{$reports[0]->chergovy}} за чергування {{$date}}</h3>
-	
-		Екстр. - {{($inf[1])[0]}}
-        <br>
-        Неекстр. - {{($inf[1])[1]}}
+ <section >  
+    <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
+   
+        <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy"> за чергування {{date("l / «d» F Y")}}.</p>       
+       
+        Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
+        <br><br>
 
-		<table id="table1-1">
+        Екстр. - <input type="text" id="extr" name="value52">
+        <br>
+        Неекстр. - <input type="text" id="noext" name="value53">
+       
+        <table id="table1-1">
             <tr>
                 <td class="firstColumn1"></td>
                 <td>День</td>
@@ -28,23 +33,23 @@
                         {{$type}}
                     </td>
                     <td>
-                        {{($reports[$key])->day}}
+                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15">
                     </td>
                     <td>
-                        {{($reports[$key])->night}}
+                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15">
                     </td>
-                    <td>{{($reports[$key])->day + ($reports[$key])->night}}</td>
+                    <td></td>
                 </tr>
             @endforeach
            
         </table>
-
-		<table id="table1-2" >
+    
+        <table id="table1-2">
             <tr>
             @foreach ($sections as $key => $sect)
                 
                 <td>{{$sect}}<br>
-                    {{($inf[4])[$key]}}
+                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" size="15">
                 </td>
                 @if ( ($key+1) % 7 == 0)
                     </tr>
@@ -54,28 +59,32 @@
             @endforeach
             </tr>
         </table>
-
+    
         <table id="table1-3">
             <tr>
-                @foreach($gospit as $key => $gosp)
+                @foreach($gospit as $gosp)
                     <td>
-                        {{$gosp}}<br>
-                        {{($inf[2])[$key]}} 
+                        {{$gosp}}
                     </td>
                 @endforeach
             </tr>
-            
+            <tr>
+                @for ($i=$key+2; $i <= count($sections)+count($gospit); $i++)
+                    <td>
+                        <input type="text" id="value{{$i}}" class="two" name="value{{$i}}">
+                    </td>
+                @endfor
+            </tr>
         </table>
 
        
-
         <table id="table1-4">
             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        {{($inf[3])[$key]}} 
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>
@@ -85,13 +94,18 @@
                 @endforeach
             </tr>                         
         </table>
-    </secttion>
-</div>
-</div>
-</div>
-</div>
-</div>
-	
-	
+    
+        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
+        <br>
+
+        <input type="submit" value="Save">
+    
+    </form>
+</section>                
+</div>
+</div>
+</div>
+</div>
+</div>
 @endsection

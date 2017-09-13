@@ -16,9 +16,9 @@
         Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
         <br><br>
 
-        Екстр. - <input type="text" id="extr" name="value52">
+        Екстр. - <input type="text" id="extr" name="valuei">
         <br>
-        Неекстр. - <input type="text" id="noext" name="value53">
+        Неекстр. - <input type="text" id="noext" name="valuei1">
        
         <table id="table1-1">
             <tr>
@@ -98,9 +98,9 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
         <br>
-
-        <input type="submit" value="Save">
-    
+        <div onclick="document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}}; document.getElementById('noext').name = 'value' + {{count($sections)+count($gospit)+count($region)+2}}; document.getElementById('firstForm').submit();">Save
+            
+        </div>
     </form>
 </section>                
 <section>                

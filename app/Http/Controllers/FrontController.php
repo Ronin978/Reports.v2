@@ -135,7 +135,10 @@ class FrontController extends Controller
                 $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $title = 'Травматизм (кримінальний, виробничий)';
                 break;
-            
+            case 'allReports':
+                $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'РАПОРТ старших лікарів';
+                break;
             default:
                 $obj=array();
                 $title = 'ERROR 404/ NOT FOUND';
@@ -241,6 +244,43 @@ class FrontController extends Controller
             case 'Report6':
                 $reports = Report6::where('date', $date)->get();
                 return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'allReports':
+        //Report1
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
+
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
+
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
+
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
+                
+                $reports1 = Report1::where('date', $date)->get();
+                for ($i=1; $i <= 4; $i++)
+                {
+                    $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
+                    
+                    $inf[$i] = explode(";", $info[$i]->value);
+                    //dd(($inf[$i]));
+                }
+        //end Report1
+
+                $reports2 = Report2::where('date', $date)->get();//Report2
+                $reports3 = Report3::where('date', $date)->get();//Report3
+                $reports4 = Report4::where('date', $date)->get();//Report4
+        //Report5
+                $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+                foreach ($tables as $key => $table) {
+                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
+                }
+        //end Report5
+                $reports6 = Report6::where('date', $date)->get();//Report11
+                
+                return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
                 break;
             default:
                 $reports = Report5::where('date', $date)->where('pidtype', $table)->get();

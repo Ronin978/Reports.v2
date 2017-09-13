@@ -359,4 +359,77 @@ class ReportController extends Controller
         dd($date);
     }
 
+    public function edit($id)
+    {
+        //dd($id);
+        switch ($id) 
+        {
+            case 'Report1':
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
+
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
+
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
+
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
+
+                $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'РАПОРТ старших лікарів';
+
+                return view('report.edit1', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'object'=>$obj, 'title'=>$title]);
+
+                break;
+            case 'Report2':
+                $obj=Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Інформація по запізненнях бригад на виклики';
+                break;
+            case 'Report3':
+                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Транспортування на Луцьк (Київ)';
+                break;
+            case 'Report4':
+                $obj=Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'ГКС';
+                break;
+            case 'Report6':
+                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Зауваження по роботі, скарги, подяки';
+                break;
+    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+            case 'fatal':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Смертність в присутності бригади (успішна реанімація)';
+                break;
+            case 'dtp+ns':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'ДТП і «НС» (надзвичайні стани)';
+                break;
+            case 'high_travmy':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Складні травми';
+                break;
+            case 'tr_kytyzi':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Травми китиці';
+                break;
+            case 'opic':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Опіки/ Переохолодження';
+                break;
+            case 'travmat':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Травматизм (кримінальний, виробничий)';
+                break;
+            
+            default:
+                $obj=array();
+                $title = 'ERROR 404/ NOT FOUND';
+                break;
+        }
+    }
+
 }

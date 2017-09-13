@@ -120,6 +120,16 @@
             </p>
         </section>
     </div>    
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #6 -->
+        <section>      
+            <a href="{{action('FrontController@show', ['id'=>'allReports'])}}" class="bordered-feature-image"><img src="images/pic01.jpg" alt="" /></a>
+            <p>
+                Повний рапорт старших лікарів
+            </p>
+        </section>
+    </div>    
 </div>
 </div>
 </div>
@@ -138,9 +148,9 @@
                 <h3>Сформувати повний звіт</h3>
                 <blockquote>
                     <form method="GET" action="{{action('FrontController@QuickFind')}}">
-                        <input type="date" name="date" >
+                        <input type="date" name="date" value="{{date('Y-m-d')}}">
 
-                        <input type="submit" value="Знайти">
+                        <input type="submit" value="Сформувати">
                     </form>
                 </blockquote>
             </header>
