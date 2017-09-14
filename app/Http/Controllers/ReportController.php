@@ -346,90 +346,168 @@ class ReportController extends Controller
                 $report['no_card'] = $post["no_card$i"];  
                 $report['subdiv'] = $post["subdiv$i"];  
                 $report['other'] = $post["other$i"];  
-               
-                                     
+                                   
                 Report6::create($report);
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@index');
     }
 
-    public function reportsForm($date)
+    public function update(Request $request, $table, $newDate)
     {
-        dd($date);
-    }
+    
+    $post = $request->all();
 
-    public function edit($id)
-    {
-        //dd($id);
-        switch ($id) 
+    switch ($table) 
         {
             case 'Report1':
-                $types = Group::where('group', 'call')->get()->first();
-                $typ = explode(";", $types->title);
-
-                $sections = Group::where('group', 'sections')->get()->first();
+                $sections = Group::where('group', 'sections')->first();
                 $sect = explode(";", $sections->title);
 
-                $gospit = Group::where('group', 'gosp')->get()->first();
-                $gosp = explode(";", $gospit->title);
+                $gospit = Group::where('group', 'gosp')->first();
+                $gos = explode(";", $gospit->title);
 
-                $region = Group::where('group', 'region')->get()->first();
+                $region = Group::where('group', 'region')->first();
                 $reg = explode(";", $region->title);
 
-                $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'РАПОРТ старших лікарів';
+                for ($i=0; $i < 4; $i++) 
+                { 
+                    switch ($i) 
+                    {
+                        case 0:
+                            
+                            $info['id_group'] = $sections->id;
+                            $info['value'] = '';
+                            $infoTable = Info::where('date', $newDate)->where('id_group', $sections->id)->first();
+                            
+                            for ($i=1; $i <= count($sect); $i++) 
+                            {                         
+                                if ($i==count($sect)) 
+                                {
+                                    $info['value'] .= $post["value$i"];
+                                }
+                                else
+                                {
+                                    $info['value'] .= $post["value$i"].';';
+                                }
+                            }
 
-                return view('report.edit1', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'object'=>$obj, 'title'=>$title]);
+                            $info['date'] = $post["date"];
+                            $infoTable->update($info);
+                            $infoTable->save();
+                            //break 1;
+                        case 1:
+                            $info['id_group'] = $gospit->id;
+                            $info['value'] = '';
+                            $infoTable = Info::where('date', $newDate)->where('id_group', $gospit->id)->first();
+                            
+                            for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
+                            { 
+                                if ($i==count($sect)+count($gos)) 
+                                {
+                                    $info['value'] .= $post["value$i"];
+                                }
+                                else
+                                {
+                                    $info['value'] .= $post["value$i"].';';
+                                }
+                            }
+                            $info['date'] = $post["date"];
+                            $infoTable->update($info);
+                            $infoTable->save();
+                            //break 1;
+                        case 2:
+                            $info['id_group'] = $region->id;
+                            $info['value'] = '';
+                            $infoTable = Info::where('date', $newDate)->where('id_group', $region->id)->first();
 
+                            for ($i=count($sect)+count($gos)+1; $i <= count($sect)+count($gos)+count($reg); $i++) 
+                            { 
+                                if ($i==count($sect)+count($gos)+count($reg)) 
+                                {
+                                    $info['value'] .= $post["value$i"];
+                                }
+                                else
+                                {
+                                    $info['value'] .= $post["value$i"].';';
+                                }
+                            }
+                            $info['date'] = $post["date"];
+                            $infoTable->update($info);
+                            $infoTable->save();
+                            //break 1;
+                        case 3:
+                            $info['id_group'] = 1;
+                            $info['value'] = '';
+                            $infoTable = Info::where('date', $newDate)->where('id_group', '1')->first();
+                            for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++) 
+                            { 
+                                if ($i==count($sect)+count($gos)+count($reg)+2) 
+                                {
+                                    $info['value'] .= $post["value$i"];
+                                }
+                                else
+                                {
+                                    $info['value'] .= $post["value$i"].';';
+                                }
+                            }
+                            $info['date'] = $post["date"];
+                            $infoTable->update($info);
+                            $infoTable->save();
+                           // break 1;
+                    }
+                     
+                }
+                
+
+                for ($i=0; $i < 5 ; $i++)
+                {
+                    $report['day'] = $post["day$i"];  
+                    $report['night'] = $post["night$i"];
+                    $report['type'] = $i;
+                   
+                    $report['date'] = $post["date"];
+                    $report['chergovy'] = $post["chergovy"];
+                   
+                    $myReport = Report1::where('date', $report['date'])->where('type', $i)->first(); 
+                    $myReport->update($report);
+                    $myReport->save();
+                }
+                flash('Дані внесені.');
                 break;
             case 'Report2':
-                $obj=Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Інформація по запізненнях бригад на виклики';
-                break;
-            case 'Report3':
-                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Транспортування на Луцьк (Київ)';
-                break;
-            case 'Report4':
-                $obj=Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'ГКС';
-                break;
-            case 'Report6':
-                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Зауваження по роботі, скарги, подяки';
-                break;
-    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
-            case 'fatal':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Смертність в присутності бригади (успішна реанімація)';
-                break;
-            case 'dtp+ns':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'ДТП і «НС» (надзвичайні стани)';
-                break;
-            case 'high_travmy':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Складні травми';
-                break;
-            case 'tr_kytyzi':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Травми китиці';
-                break;
-            case 'opic':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Опіки/ Переохолодження';
-                break;
-            case 'travmat':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Травматизм (кримінальний, виробничий)';
-                break;
-            
-            default:
-                $obj=array();
-                $title = 'ERROR 404/ NOT FOUND';
-                break;
-        }
-    }
+                //dd($post);
+                $date = $post['date'];
+                //if (count($treport)+3 == count($post))
+                $treport = Report2::where('date', $newDate)->get();
 
+                for ($i=0; $i < (count($post)-3)/8 ; $i++) 
+                    {                
+                        $report['date'] = $date;  
+                        $report['punkt'] = $post["punkt$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['brig'] = $post["brig$i"];
+                        $report['time'] = $post["time$i"];
+                        $report['support'] = $post["support$i"];
+                        $report['cause'] = $post["cause$i"];
+                        $report['call'] = $post["call$i"];       
+                        //dd($report['punkt']);
+                        $treport[$i]->update($report);
+                        $treport[$i]->save();
+                    }
+                flash('Дані внесені.2');
+                break;
+        }    
+
+
+        
+        
+
+
+
+
+        return back();
+    }
+   
 }

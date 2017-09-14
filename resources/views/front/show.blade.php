@@ -28,6 +28,7 @@
 				<div onclick="document.getElementById('myform').submit();">
 					<a>{{$obj->date}}</a>
 					<p>Створено: {{$obj->created_at}} <br>Оновлено: {{$obj->updated_at}}</p>
+					<small><a href="{{action('FrontController@edit', ['table'=>$id, 'date'=>$obj->date])}}">Редагувати</a></small>
 				</div>
 			</form>
 			<hr>

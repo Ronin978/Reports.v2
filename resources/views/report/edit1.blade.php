@@ -8,17 +8,17 @@
 <div class="row">
 <div class="12u">   
 @include('flash::message')
- <section >  
-    <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
+<section >  
+    <form id="firstForm" method="POST" action="{{action('ReportController@update', ['table'=>'Report1', 'newDate'=>$date])}}">
    
-        <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy"> за чергування {{date("l / «d» F Y")}}.</p>       
+        <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy" value="{{$reports[0]->chergovy}}"> за чергування {{$date}}.</p>       
        
-        Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
+        Дата: <input id="firstdate" type="date" name="date" value="{{$date}}"> 
         <br><br>
 
-        Екстр. - <input type="text" id="extr" name="value52">
+        Екстр. - <input type="text" id="extr" name="valuei" value="{{($inf[1])[0]}}">
         <br>
-        Неекстр. - <input type="text" id="noext" name="value53">
+        Неекстр. - <input type="text" id="noext" name="valuei1" value="{{($inf[1])[1]}}">
        
         <table id="table1-1">
             <tr>
@@ -33,12 +33,12 @@
                         {{$type}}
                     </td>
                     <td>
-                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15">
+                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15" value="{{($reports[$key])->day}}">
                     </td>
                     <td>
-                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15">
+                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15" value="{{($reports[$key])->night}}">
                     </td>
-                    <td></td>
+                    <td>{{($reports[$key])->day + ($reports[$key])->night}}</td>
                 </tr>
             @endforeach
            
@@ -49,7 +49,7 @@
             @foreach ($sections as $key => $sect)
                 
                 <td>{{$sect}}<br>
-                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" size="15">
+                    <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" size="15" value="{{($inf[4])[$key]}}">
                 </td>
                 @if ( ($key+1) % 7 == 0)
                     </tr>
@@ -62,18 +62,14 @@
     
         <table id="table1-3">
             <tr>
-                @foreach($gospit as $gosp)
+                @foreach($gospit as $key=>$gosp)
                     <td>
-                        {{$gosp}}
+                        
+                            {{$gosp}}<br>
+                            <input type="text" id="value{{$key+count($sections)+1}}" class="two" name="value{{$key+count($sections)+1}}" value="{{($inf[2])[$key]}}">
+                        
                     </td>
                 @endforeach
-            </tr>
-            <tr>
-                @for ($i=$key+2; $i <= count($sections)+count($gospit); $i++)
-                    <td>
-                        <input type="text" id="value{{$i}}" class="two" name="value{{$i}}">
-                    </td>
-                @endfor
             </tr>
         </table>
 
@@ -84,7 +80,7 @@
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10">
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10" value="{{($inf[3])[$key]}}">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>
@@ -96,10 +92,17 @@
         </table>
     
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+        <input type="hidden" name="_method" value="put"/>
 
         <br>
 
-        <input type="submit" value="Save">
+        <input type="submit" value="Зберегти">
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};
+                document.getElementById('noext').name = 'value' + {{count($sections)+count($gospit)+count($region)+2}}; 
+            });
+        </script>
     
     </form>
 </section>                
@@ -108,4 +111,5 @@
 </div>
 </div>
 </div>
+
 @endsection

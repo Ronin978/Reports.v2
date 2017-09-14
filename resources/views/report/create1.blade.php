@@ -98,9 +98,13 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
         <br>
-        <div onclick="document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}}; document.getElementById('noext').name = 'value' + {{count($sections)+count($gospit)+count($region)+2}}; document.getElementById('firstForm').submit();">Save
-            
-        </div>
+        <input type="submit" value="Зберегти">
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};
+                document.getElementById('noext').name = 'value' + {{count($sections)+count($gospit)+count($region)+2}}; 
+            });
+        </script>
     </form>
 </section>                
 <section>                

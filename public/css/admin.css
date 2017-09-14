@@ -44,7 +44,10 @@ textarea
 
 #table1-3 td 
 {
+	vertical-align: top;
 	width: 20%;
+	margin: 0;
+	padding: 0;
 }
 
 .table1-4 td

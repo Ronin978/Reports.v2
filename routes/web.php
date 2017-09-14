@@ -22,6 +22,8 @@ Route::get('/create', 'FrontController@create');
 Route::get('/show/{id}', 'FrontController@show');
 Route::get('/QuickFind', 'FrontController@QuickFind');
 Route::post('/myShow/{date}', 'FrontController@myShow');
+Route::get('/edit/{table}/{date}', 'FrontController@edit');
+Route::put('/report/update/{table}/{newDate}', 'ReportController@update');
 
 Route::get('/report/create1', 'ReportController@create1');
 Route::get('/report/create2', 'ReportController@create2');
