@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')
 	<section >	
-		<h3 align="center" >{{$title}} за {{$report->date}}</h3>
+		<h3 align="center" >{{$title}} за {{$reports[0]->date}}</h3>
 		<table id="table4">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>

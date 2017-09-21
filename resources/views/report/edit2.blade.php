@@ -10,8 +10,7 @@
 @include('flash::message')     
 <section>
     <form id="firstForm" method="POST" action="{{action('ReportController@update', ['table'=>'Report2', 'newDate'=>$date])}}">
-    
-    
+        
         <p align="center">Інформація по запізненнях бригад на виклики за {{$date}}</p>
         <input id="date" type="hidden" name="date" value="{{$date}}">
         <table id="table2">

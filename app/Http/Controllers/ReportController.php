@@ -207,6 +207,7 @@ class ReportController extends Controller
            
             Report1::create($report); 
         }
+        flash('Дані внесені.');
         return redirect()->action('ReportController@create2', 
             ['date'=>$post['date']]);
     }
@@ -291,9 +292,11 @@ class ReportController extends Controller
         $post = $request->all();
         //dd($post);
         $date = $post['date'];
+
+        $report['pidtype'] = $post["pidtype"];
         for ($i=0; $i < (count($post)-3)/8 ; $i++) 
             {                
-                $report['pidtype'] = $post["pidtype"];  
+                  
                 $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];  
                 $report['title'] = $post["title$i"];  
@@ -339,7 +342,7 @@ class ReportController extends Controller
         $post = $request->all();
        // dd($post);
         $date = $post['date'];
-        for ($i=0; $i < (count($post)-2)/11 ; $i++) 
+        for ($i=0; $i < (count($post)-2)/4 ; $i++) 
             {                
                 $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];   
@@ -357,10 +360,12 @@ class ReportController extends Controller
     {
     
     $post = $request->all();
-
+    $updt = date('Y-m-d H:i:s');
+    $date = $post['date'];
     switch ($table) 
         {
             case 'Report1':
+               
                 $sections = Group::where('group', 'sections')->first();
                 $sect = explode(";", $sections->title);
 
@@ -374,8 +379,7 @@ class ReportController extends Controller
                 { 
                     switch ($i) 
                     {
-                        case 0:
-                            
+                        case 0: 
                             $info['id_group'] = $sections->id;
                             $info['value'] = '';
                             $infoTable = Info::where('date', $newDate)->where('id_group', $sections->id)->first();
@@ -391,16 +395,15 @@ class ReportController extends Controller
                                     $info['value'] .= $post["value$i"].';';
                                 }
                             }
-
-                            $info['date'] = $post["date"];
+                            $info['date'] = $date;
+                            $info['updated_at'] = $updt;
                             $infoTable->update($info);
                             $infoTable->save();
-                            //break 1;
+                            
                         case 1:
                             $info['id_group'] = $gospit->id;
                             $info['value'] = '';
-                            $infoTable = Info::where('date', $newDate)->where('id_group', $gospit->id)->first();
-                            
+                            $infoTable = Info::where('date', $newDate)->where('id_group', $gospit->id)->first();                            
                             for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
                             { 
                                 if ($i==count($sect)+count($gos)) 
@@ -413,14 +416,14 @@ class ReportController extends Controller
                                 }
                             }
                             $info['date'] = $post["date"];
+                            $info['updated_at'] = $updt;
                             $infoTable->update($info);
                             $infoTable->save();
-                            //break 1;
+                            
                         case 2:
                             $info['id_group'] = $region->id;
                             $info['value'] = '';
                             $infoTable = Info::where('date', $newDate)->where('id_group', $region->id)->first();
-
                             for ($i=count($sect)+count($gos)+1; $i <= count($sect)+count($gos)+count($reg); $i++) 
                             { 
                                 if ($i==count($sect)+count($gos)+count($reg)) 
@@ -433,9 +436,10 @@ class ReportController extends Controller
                                 }
                             }
                             $info['date'] = $post["date"];
+                            $info['updated_at'] = $updt;
                             $infoTable->update($info);
                             $infoTable->save();
-                            //break 1;
+                            
                         case 3:
                             $info['id_group'] = 1;
                             $info['value'] = '';
@@ -452,13 +456,11 @@ class ReportController extends Controller
                                 }
                             }
                             $info['date'] = $post["date"];
+                            $info['updated_at'] = $updt;
                             $infoTable->update($info);
                             $infoTable->save();
-                           // break 1;
-                    }
-                     
-                }
-                
+                    }    
+                }                
 
                 for ($i=0; $i < 5 ; $i++)
                 {
@@ -466,24 +468,25 @@ class ReportController extends Controller
                     $report['night'] = $post["night$i"];
                     $report['type'] = $i;
                    
-                    $report['date'] = $post["date"];
+                    $report['date'] = $date;
                     $report['chergovy'] = $post["chergovy"];
                    
                     $myReport = Report1::where('date', $report['date'])->where('type', $i)->first(); 
+                    $report['updated_at'] = $updt;
                     $myReport->update($report);
                     $myReport->save();
                 }
                 flash('Дані внесені.');
                 break;
             case 'Report2':
-                //dd($post);
-                $date = $post['date'];
+                
                 //if (count($treport)+3 == count($post))
                 $treport = Report2::where('date', $newDate)->get();
 
                 for ($i=0; $i < (count($post)-3)/8 ; $i++) 
                     {                
-                        $report['date'] = $date;  
+                        $report['date'] = $date; 
+
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"];  
@@ -492,22 +495,109 @@ class ReportController extends Controller
                         $report['support'] = $post["support$i"];
                         $report['cause'] = $post["cause$i"];
                         $report['call'] = $post["call$i"];       
-                        //dd($report['punkt']);
+                        
+                        $report['updated_at'] = $updt;
                         $treport[$i]->update($report);
                         $treport[$i]->save();
                     }
                 flash('Дані внесені.2');
                 break;
-        }    
+            case 'Report3':
+               //dd($post);
+                //if (count($treport)+3 == count($post))
+                $treport = Report3::where('date', $newDate)->get();
 
+                for ($i=0; $i < (count($post)-3)/10 ; $i++) 
+                    {                
+                        $report['date'] = $date;  
 
-        
-        
+                        $report['timer'] = $post["date$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['at'] = $post["at$i"];  
+                        $report['from'] = $post["from$i"];
+                        $report['direct'] = $post["direct$i"];
+                        $report['who_direct'] = $post["who_direct$i"];
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
 
+                        $report['updated_at'] = $updt;
+                        $treport[$i]->update($report);
+                        $treport[$i]->save();
+                    }
+                flash('Дані внесені.3');
+                break;
+            case 'Report4':
+                //if (count($treport)+3 == count($post))
+                $treport = Report4::where('date', $newDate)->get();
 
+                for ($i=0; $i < (count($post)-3)/11 ; $i++) 
+                    {                
+                        $report['date'] = $date;
 
+                        $report['timer'] = $post["date$i"];
+                        $report['no_card'] = $post["no_card$i"];
+                        $report['adress'] = $post["adress$i"];
+                        $report['pib'] = $post["pib$i"];
+                        $report['age'] = $post["age$i"];
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['tromb'] = $post["tromb$i"];
+                        $report['stent'] = $post["stent$i"];
+                        $report['gospital'] = $post["gospital$i"];
+                        $report['support'] = $post["support$i"];
 
+                        $report['updated_at'] = $updt;
+                        $treport[$i]->update($report);
+                        $treport[$i]->save();
+                    }
+                flash('Дані внесені.4');
+                break;
+            
+            case 'Report6':
+                //if (count($treport)+3 == count($post))
+                $treport = Report6::where('date', $newDate)->get();
+
+                for ($i=0; $i < (count($post)-3)/4 ; $i++) 
+                    {                
+                        $report['date'] = $date;
+
+                        $report['timer'] = $post["date$i"];   
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['subdiv'] = $post["subdiv$i"];  
+                        $report['other'] = $post["other$i"]; 
+
+                        $report['updated_at'] = $updt;
+                        $treport[$i]->update($report);
+                        $treport[$i]->save();
+                    }
+                flash('Дані внесені.6');
+                break;
+
+            case ('fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat'):
+                //if (count($treport)+3 == count($post))
+                $treport = Report5::where('date', $newDate)->where('pidtype', $table)->get();
+                for ($i=0; $i < (count($post)-3)/7 ; $i++)
+                    {                
+                        $report['date'] = $date;
+                        $report['pidtype'] = $table;
+                          
+                        $report['timer'] = $post["date$i"];  
+                        $report['title'] = $post["title$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['no_card'] = $post["no_card$i"]; 
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $report['updated_at'] = $updt;
+                        $treport[$i]->update($report);
+                        $treport[$i]->save();
+                    }
+                flash('Дані внесені.5');
+                break;   
+        }   
         return back();
-    }
-   
+    }  
 }

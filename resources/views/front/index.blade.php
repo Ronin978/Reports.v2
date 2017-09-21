@@ -7,7 +7,7 @@
 <div id="features">
 <div class="container">
 <div class="row">
-@include('flash::message')
+
     <div class="2u 12u(mobile)">
 
         <!-- Feature #1 -->
@@ -134,7 +134,7 @@
 </div>
 </div>
 </div>
-
+@include('flash::message')
 <div id="content-wrapper">
 <div id="content">
 <div class="container">

@@ -33,7 +33,7 @@
             </tr> 
             <tr>
                 <td>
-                    1
+                    <div>1</div>
                 </td>
                 <td>
                     <textarea name="date0" rows="1"></textarea>

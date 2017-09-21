@@ -10,7 +10,7 @@
 @include('flash::message')     
 <section>
 		<p>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</p>
-	
+@if($inf)	
 		Екстр. - {{($inf[1])[0]}}
         <br>
         Неекстр. - {{($inf[1])[1]}}
@@ -86,13 +86,13 @@
         </table>
         <br>
         <hr>
-
+@endif
 		<p>
 			Інформація по запізненнях бригад на виклики за {{$date}}
 		</p>
 
 	    <hr>
-
+@if(!empty($reports2))
 		<table id="table2">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>
@@ -139,12 +139,12 @@
 		</table>
 		<br>
         <hr>
-
+@endif
 		<p>
 			Транспортування на Луцьк (Київ) {{$date}}
 		</p>
         <hr>
-
+@if($reports3)
 		<table id="table3">
             <tr id="firstTr3">
                 <td>№<br>п/п</td>
@@ -199,10 +199,11 @@
 		</table>
 		<br>
         <hr>
-		
+@endif
+
 		<p>ГКС {{$date}}</p>
         <hr>
-		
+@if($reports4)		
 		<table id="table4">
 			<tr id="firstTr4">
 				<td>№<br>п/п</td>
@@ -262,10 +263,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
 		<p>Смертність в присутності бригади (успішна реанімація)  {{$date}}</p>
 		<hr>
-
+@if($reports5)
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -308,10 +309,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
 		<p>ДТП і «НС» (надзвичайні стани)  {{$date}}</p>
         <hr>
-
+@if($reports5[1])
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -354,10 +355,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
         <p>Складні травми   {{$date}}</p>
         <hr>
-
+@if($reports5[2])
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -400,10 +401,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
         <p>Травми китиці   {{$date}}</p>
         <hr>
-
+@if($reports5[3])
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -446,10 +447,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
         <p>Опіки/ Переохолодження   {{$date}}</p>
         <hr>
-
+@if($reports5[4])
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -492,10 +493,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
         <p>Травматизм (кримінальний, виробничий)   {{$date}}</p>
         <hr>
-
+@if($reports5[5])
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -538,10 +539,10 @@
 		</table>
 		<br>
         <hr>
-
+@endif
         <p>Зауваження по роботі, скарги, подяки {{$date}}</p>
         <hr>
-
+@if($reports6)
 		<table id="table6">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -570,6 +571,7 @@
 			</tr>
 			@endforeach
 		</table>
+@endif
 </section>
 </div>
 </div>

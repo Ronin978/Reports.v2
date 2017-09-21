@@ -147,7 +147,7 @@ class FrontController extends Controller
         }
 
 
-        return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'id'=>$id]);
+        return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$id]);
     }
 
     public function QuickFind(Request $request)
@@ -170,10 +170,17 @@ class FrontController extends Controller
         $reports1 = Report1::where('date', $date)->get();
         for ($i=1; $i <= 4; $i++)
         {
-            $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-            
-            $inf[$i] = explode(";", $info[$i]->value);
-            //dd(($inf[$i]));
+            if (Info::where('id_group', $i)->where('date', $date)->first()) 
+            {
+                $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
+                
+                $inf[$i] = explode(";", $info[$i]->value);
+                //dd(($inf[$i]));
+            }
+            else 
+            {
+                $inf[$i] = 0;
+            }
         }
 //end Report1
 
@@ -191,12 +198,11 @@ class FrontController extends Controller
         return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
     }
 
-    public function myShow(Request $request, $date)
+    public function myShow(Request $request, $table, $date)
     {
         $req = $request->all();
-       // dd($req);
+        //dd($date);
         
-        $table = $req['table'];//pidtype or (and) name models
         $title = $req['title'];
 
         switch ($table) 
@@ -246,6 +252,7 @@ class FrontController extends Controller
                 return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
                 break;
             case 'allReports':
+        //and fullReport
         //Report1
                 $types = Group::where('group', 'call')->get()->first();
                 $typ = explode(";", $types->title);
@@ -282,6 +289,7 @@ class FrontController extends Controller
                 
                 return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
                 break;
+        //end Full Report
             default:
                 $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
                 return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
@@ -327,47 +335,56 @@ class FrontController extends Controller
                 return view('report.edit2', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report3':
-                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Транспортування на Луцьк (Київ)';
+                $reports = Report3::where('date', $date)->get();
+                return view('report.edit3', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report4':
-                $obj=Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'ГКС';
+                $reports = Report4::where('date', $date)->get();
+                return view('report.edit4', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report6':
-                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Зауваження по роботі, скарги, подяки';
+                $reports = Report6::where('date', $date)->get();
+                //dd($reports);
+                return view('report.edit6', ['date'=>$date, 'reports'=>$reports]);
                 break;
     //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
-            case 'fatal':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Смертність в присутності бригади (успішна реанімація)';
-                break;
-            case 'dtp+ns':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'ДТП і «НС» (надзвичайні стани)';
-                break;
-            case 'high_travmy':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Складні травми';
-                break;
-            case 'tr_kytyzi':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Травми китиці';
-                break;
-            case 'opic':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Опіки/ Переохолодження';
-                break;
-            case 'travmat':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Травматизм (кримінальний, виробничий)';
+            default:
+                switch ($table) 
+                {
+                    case 'fatal':
+                        $title = 'Смертність в присутності бригади (успішна реанімація)';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'dtp+ns':
+                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'high_travmy':
+                        $title = 'Складні травми';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'tr_kytyzi':
+                        $title = 'Травми китиці';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'opic':
+                        $title = 'Опіки/ Переохолодження';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'travmat':
+                        $title = 'Травматизм (кримінальний, виробничий)';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;                    
+                    default:
+                        $title = 'ERROR 404/ NOT FOUND';
+                        break;
+                }
+                //break;
+
+                return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
                 break;
             
-            default:
-                $obj=array();
-                $title = 'ERROR 404/ NOT FOUND';
-                break;
+            
         }
     }
 
