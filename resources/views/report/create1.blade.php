@@ -33,12 +33,12 @@
                         {{$type}}
                     </td>
                     <td>
-                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15">
+                        <input type="text" name="day{{$key}}" oninput="oninput1('{{$key}}');" size="15">
                     </td>
                     <td>
-                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15">
+                        <input type="text" name="night{{$key}}" oninput="oninput1('{{$key}}');" size="15">
                     </td>
-                    <td></td>
+                    <td id="res{{$key}}"></td>
                 </tr>
             @endforeach
            
@@ -84,7 +84,7 @@
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10">
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2({{$i}}, {{$i+count($region)-1}})" size="10">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>

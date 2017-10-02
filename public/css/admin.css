@@ -64,6 +64,7 @@ textarea
 .row p
 {	
 	text-align: center;
+	vertical-align: bottom;
 }
 
 .row a

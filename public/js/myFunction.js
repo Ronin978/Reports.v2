@@ -43,30 +43,34 @@ window.onload=function()
     }
 }
 
-
-function oninput2()
+function oninput1(key)
 {
-    var mass0 = [];
-    var mass1 = [];
-    var first = 0;
-    var two = 0;
-    for (var i = 34; i <= 51; i++) {
+    alert(key);
+   }
+
+function oninput2(next, last)
+{
+    var mass0 = [0];
+    var mass1 = [0];
+    var p1 = 0;
+    var p2 = 0;
+    var sum0 = 0;
+    var sum1 = 0;
+    for (var i = next; i <= last; i++) {
+
+
         var example = document.getElementById('value'+i).value.split('+');
         
         if (example[0]!=='') {
-            first = example[0];
+            p1 = example[0];
+            mass0[mass0.length] = p1;
         }
         
         if (example[1]!=='') {
-            two = example[1];
-        }
-
-        mass0[mass0.length] = first;
-        mass1[mass1.length] = two;
-    }
-    
-    var sum0 = 0;
-    var sum1 = 0;
+            p2 = example[1];
+            mass1[mass1.length] = p2;
+        }     
+    }    
 
     for(var i = 0; i < mass0.length; i++){
         sum0 += parseInt(mass0[i]);

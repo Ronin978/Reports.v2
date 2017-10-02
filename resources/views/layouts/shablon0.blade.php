@@ -26,28 +26,39 @@
         <div id="header-wrapper">
             <header id="header" class="container">
                 <div class="row">
-                    <div class="12u">
+                    <div class="row 12u">
 
                         <!-- Logo -->
-                            <h1><a href="{{action('FrontController@index')}}" id="logo">На головну</a></h1>
-
+                        <div id="logo">
+                            <h1><a href="{{action('FrontController@index')}}">На головну</a></h1>
+                        </div>
+                            
+                        
                         <!-- Nav -->
-                            <nav id="nav">
-                                <a href="{{action('ReportController@create1')}}">Створити щоденний звіт</a>
-                                <a href="{{action('GroupController@index')}}">Керування групами</a>
+                            
+                    <nav id="nav">
+                                
+                        
+                        <div class="nav navbar-nav navbar-right">  
+
+                            <a href="{{action('ReportController@create1')}}">Створити щоденний звіт</a>
+
+                           <!-- 
+                           <a href="{{action('GroupController@index')}}">Керування групами</a>
+                           -->
+                            
                             @if (Auth::guest())
-                                <a href="{{ route('login') }}">Login</a>
-                                <a href="{{ route('register') }}">Register</a>
+                                <a href="{{ route('login') }}">Вхід</a>
+                                <a href="{{ route('register') }}">Реєстрація</a>
                             @else
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                                 </a> 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Вийти
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -55,8 +66,12 @@
                                         </form>
                                     </li>
                                 </ul>
-                            @endif 
-                            </nav>
+                            @endif
+                            
+                        </div>
+                        
+                            
+                    </nav>
 
                     </div>
                 </div>

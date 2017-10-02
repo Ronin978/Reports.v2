@@ -1,4 +1,4 @@
-@extends('layouts.shablon1')
+@extends('layouts.shablon0')
 
 @section('content')
 
@@ -11,7 +11,9 @@
  	<section >  
 		<form method="POST" action="{{action('GroupController@update',['id'=>$group->id])}}"/>
 				
-				<input type="text" name="group" value="{{$group->group}}">
+				Назва таблиці:<br>
+				<input type="text" name="group" value="{{$group->group}}"> <br><hr>
+				Назви ланок таблиці: <br>
 				<textarea name="title">{{$group->title}}"</textarea>
 			
 			<input type="hidden" name="_method" value="put"/>

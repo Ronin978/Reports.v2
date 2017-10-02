@@ -19,6 +19,11 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show', 'QuickFind', 'myShow']]);
+    }
+
     public function index()
     {
         if (Info::where('id_group', '1')->first())
@@ -62,22 +67,7 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $types = Group::where('group', 'call')->get()->first();
-        $typ = explode(";", $types->title);
-
-        $sections = Group::where('group', 'sections')->get()->first();
-        $sect = explode(";", $sections->title);
-
-        $gospit = Group::where('group', 'gosp')->get()->first();
-        $gosp = explode(";", $gospit->title);
-
-        $region = Group::where('group', 'region')->get()->first();
-        $reg = explode(";", $region->title);
-
-        return view('report.create1', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg]);
-    }
+   
 
     /**
      * Display the specified resource.
@@ -152,50 +142,61 @@ class FrontController extends Controller
 
     public function QuickFind(Request $request)
     {
-//Report1
+
         $date = ($request->all())['date'];
 
-        $types = Group::where('group', 'call')->get()->first();
-        $typ = explode(";", $types->title);
-
-        $sections = Group::where('group', 'sections')->get()->first();
-        $sect = explode(";", $sections->title);
-
-        $gospit = Group::where('group', 'gosp')->get()->first();
-        $gosp = explode(";", $gospit->title);
-
-        $region = Group::where('group', 'region')->get()->first();
-        $reg = explode(";", $region->title);
-        
-        $reports1 = Report1::where('date', $date)->get();
-        for ($i=1; $i <= 4; $i++)
+        if ((Report1::where('date', $date)->first()) !== null) 
         {
-            if (Info::where('id_group', $i)->where('date', $date)->first()) 
-            {
-                $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                
-                $inf[$i] = explode(";", $info[$i]->value);
-                //dd(($inf[$i]));
-            }
-            else 
-            {
-                $inf[$i] = 0;
-            }
-        }
-//end Report1
+    //Titles
+            $types = Group::where('group', 'call')->get()->first();
+            $typ = explode(";", $types->title);
 
-        $reports2 = Report2::where('date', $date)->get();//Report2
-        $reports3 = Report3::where('date', $date)->get();//Report3
-        $reports4 = Report4::where('date', $date)->get();//Report4
-//Report5
-        $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
-        foreach ($tables as $key => $table) {
-            $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
+            $sections = Group::where('group', 'sections')->get()->first();
+            $sect = explode(";", $sections->title);
+
+            $gospit = Group::where('group', 'gosp')->get()->first();
+            $gosp = explode(";", $gospit->title);
+
+            $region = Group::where('group', 'region')->get()->first();
+            $reg = explode(";", $region->title);
+    //end Titles
+    //Report1        
+            $reports1 = Report1::where('date', $date)->get();
+            for ($i=1; $i <= 4; $i++)
+            {
+                if (Info::where('id_group', $i)->where('date', $date)->first()) 
+                {
+                    $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
+                    
+                    $inf[$i] = explode(";", $info[$i]->value);
+                    //dd(($inf[$i]));
+                }
+                else 
+                {
+                    $inf[$i] = 0;
+                }
+            }
+    //end Report1
+
+            $reports2 = Report2::where('date', $date)->get();//Report2
+            $reports3 = Report3::where('date', $date)->get();//Report3
+            $reports4 = Report4::where('date', $date)->get();//Report4
+    //Report5
+            $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+            foreach ($tables as $key => $table) {
+                $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
+            }
+    //end Report5
+            $reports6 = Report6::where('date', $date)->get();//Report11
+            
+            return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
+
         }
-//end Report5
-        $reports6 = Report6::where('date', $date)->get();//Report11
-        
-        return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
+        else
+        {            
+            return view('front.error', ['title'=>"Вказана дата $date відсутня у списку рапортів."]);
+
+        }
     }
 
     public function myShow(Request $request, $table, $date)

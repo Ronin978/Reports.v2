@@ -10,6 +10,12 @@
 @include('flash::message')
  <section >  
 		<table id="groupTable">
+			<tr>
+				<td>ID</td>
+				<td>Title</td>
+				<td>TextTable</td>
+				<td>Операції</td>
+			</tr>
 			@foreach($groups as $group)
 			<tr>
 				<td>{{$group->id}}</td>
