@@ -59,27 +59,27 @@
         <button type="button" onclick="AddLine5()" >Додати стрічку</button>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
         <br>
-        <input type="submit" value="Save">
+        <input type="submit" value="Зберегти та продовжити">
     </form>        
 </section>
 
 <section>            
     @if ($pidtype=='fatal')
-        <a href="{{action('ReportController@create6', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create6', ['date'=>$date])}}">Слідуюча таблиця</a>
     @elseif($pidtype=='dtp+ns')
-        <a href="{{action('ReportController@create7', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create7', ['date'=>$date])}}">Слідуюча таблиця</a>
     @elseif($pidtype=='high_travmy')
-        <a href="{{action('ReportController@create8', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create8', ['date'=>$date])}}">Слідуюча таблиця</a>
     @elseif($pidtype=='tr_kytyzi')
-        <a href="{{action('ReportController@create9', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create9', ['date'=>$date])}}">Слідуюча таблиця</a>
     @elseif($pidtype=='opic')
-        <a href="{{action('ReportController@create10', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create10', ['date'=>$date])}}">Слідуюча таблиця</a>
     @elseif($pidtype=='travmat')
-        <a href="{{action('ReportController@create11', ['date'=>$date])}}">Next</a>
+        <a href="{{action('ReportController@create11', ['date'=>$date])}}">Слідуюча таблиця</a>
     @endif
 
     <div class="gotoback" onclick="window.history.go(-1); return false;">
-        <p>Back</p>                        
+        <p>Назад</p>                        
     </div>
 </section>
 

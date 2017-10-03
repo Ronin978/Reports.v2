@@ -159,9 +159,9 @@
     <div class="9u 12u(mobile) important(mobile)">
     <section>
 	
-    @if (empty($table0))
-        <p>Поки, що немає доданих звітів
-    @else    
+@if (empty($table0))
+    <p>Поки, що немає доданих звітів
+@else    
         <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
 
         Екстр. - {{$table4[0]}}
@@ -224,26 +224,45 @@
                     </td>
                 @endfor
             </tr>
-       
+        </table>    
 
-        
+<?php
+    $a = 0;
+    $b = 0;
+    for ($i=0; $i < count($table3); $i++) 
+    { 
+        $summa = explode("+", $table3[$i]);
+        $a += $summa[0];
+        if(!empty($summa[1]))
+        {
+            $b += $summa[1];
+        }
+    }
+?>
         <table id="table1-4">
-            <tr><td colspan="9">Невідкладна допомога (ПМСД)    +</td> </tr>
+            <tr>
+                <td colspan="9">Невідкладна допомога (ПМСД)       
+                <span id="sp1">{{$a}}</span> + <span id="sp2">{{$b}}</span>
+                </td>
+            </tr>
             <tr>
                 @for ($key=0; $key < count($region); $key++)
                     
-                    <td>{{$region[$key]}}<br>
+                    <td id="sum{{$key}}">{{$region[$key]}}<br>
                         {{$table3[$key]}}
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>
                         <tr>
                     @endif
-                
+                                    
                 @endfor
             </tr>                         
         </table>
-    @endif
+
+
+
+@endif
     </section>
     </div>
 

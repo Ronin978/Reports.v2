@@ -33,15 +33,18 @@
                         {{$type}}
                     </td>
                     <td>
-                        <input type="text" name="day{{$key}}" oninput="oninputt('{{$key}}');" size="15" value="{{($reports[$key])->day}}">
+                        <input id="day{{$key}}" type="text" name="day{{$key}}" oninput="oninput1({{$key}});" size="15" value="{{($reports[$key])->day}}">
                     </td>
                     <td>
-                        <input type="text" name="night{{$key}}" oninput="oninputt('{{$key}}');" size="15" value="{{($reports[$key])->night}}">
+                        <input id="night{{$key}}" type="text" name="night{{$key}}" oninput="oninput1({{$key}});" size="15" value="{{($reports[$key])->night}}">
                     </td>
-                    <td>{{($reports[$key])->day + ($reports[$key])->night}}</td>
+                    <td id="res{{$key}}">{{($reports[$key])->day + ($reports[$key])->night}}</td>
                 </tr>
             @endforeach
-           
+<?php
+    $variable=0;
+    $variable += $key;
+?>           
         </table>
     
         <table id="table1-2">
@@ -59,7 +62,9 @@
             @endforeach
             </tr>
         </table>
-    
+<?php
+    $variable += $key;
+?>     
         <table id="table1-3">
             <tr>
                 @foreach($gospit as $key=>$gosp)
@@ -72,15 +77,16 @@
                 @endforeach
             </tr>
         </table>
-
-       
+<?php
+    $variable += $key - 1;
+?>     
         <table id="table1-4">
             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
-                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2()" size="10" value="{{($inf[3])[$key]}}">
+                        <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2({{$variable}}, {{$variable+count($inf[3])-1}})" size="10" value="{{($inf[3])[$key]}}">
                     </td>
                     @if ( ($key+1) % 9 == 0)
                         </tr>

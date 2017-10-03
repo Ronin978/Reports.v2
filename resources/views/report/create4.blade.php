@@ -76,16 +76,16 @@
         <button type="button" onclick="AddLine4()" >Додати стрічку</button>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
         <br>
-        <input type="submit" value="Save">
+        <input type="submit" value="Зберегти та продовжити">
     
     </form>
 </section>
 
 <section>  
-    <a href="{{action('ReportController@create5', ['date'=>$date])}}">Next</a>
+    <a href="{{action('ReportController@create5', ['date'=>$date])}}">Слідуюча таблиця</a>
 
      <div class="gotoback" onclick="window.history.go(-1); return false;">
-        <p>Back</p>                        
+        <p>Назад</p>                        
     </div>
 </section>
 

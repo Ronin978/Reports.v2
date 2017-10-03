@@ -3,11 +3,8 @@ window.onload=function()
     if (document.getElementById('maxLenght') !== null) 
     {        
         var maxLenght = document.getElementById('maxLenght').offsetWidth;
-
         document.getElementById('firstTr').style.height = (maxLenght  + 10) + 'px';
-
         var rotate = document.getElementsByClassName('rotate');
-
         for (var i = rotate.length - 1; i >= 0; i--) 
         {
             rotate[i].width = '30px';
@@ -17,11 +14,8 @@ window.onload=function()
     if (document.getElementById('maxLenght3') !== null) 
     {
         var maxLenght = document.getElementById('maxLenght3').offsetWidth;
-
         document.getElementById('firstTr3').style.height = (maxLenght  + 10) + 'px';
-
         var rotate = document.getElementsByClassName('rotate');
-
         for (var i = rotate.length - 1; i >= 0; i--) 
         {
             rotate[i].width = '30px';
@@ -31,11 +25,8 @@ window.onload=function()
     if (document.getElementById('maxLenght4') !== null) 
     {
         var maxLenght = document.getElementById('maxLenght4').offsetWidth;
-
         document.getElementById('firstTr4').style.height = (maxLenght  + 10) + 'px';
-
         var rotate = document.getElementsByClassName('rotate');
-
         for (var i = rotate.length - 1; i >= 0; i--) 
         {
             rotate[i].width = '30px';
@@ -45,8 +36,10 @@ window.onload=function()
 
 function oninput1(key)
 {
-    alert(key);
-   }
+    var a = parseInt(document.getElementById('day'+key).value);
+    var b = parseInt(document.getElementById('night'+key).value);
+    document.getElementById('res'+key).innerHTML = a + b;
+}
 
 function oninput2(next, last)
 {
@@ -73,6 +66,11 @@ function oninput2(next, last)
     }    
 
     for(var i = 0; i < mass0.length; i++){
+        if (mass0[i] == '' || null)
+        {mass0[i] = 0;}
+        if (mass1[i] == '')
+        {mass1[i] = 0;}
+
         sum0 += parseInt(mass0[i]);
         sum1 += parseInt(mass1[i]);
     }
@@ -199,3 +197,14 @@ function AddLine6()
         cell.appendChild(text);
     }
 }
+
+function sizeAuto(key)
+{ 
+    var start = document.getElementById(key).size;
+    var fact = document.getElementById(key).value.length;    
+    if (fact > start) 
+    {
+        document.getElementById(key).size = fact + 4;
+    }
+}
+

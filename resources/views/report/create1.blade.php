@@ -11,10 +11,13 @@
  <section >  
     <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
    
-        <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy"> за чергування {{date("l / «d» F Y")}}.</p>       
-       
-        Дата: <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> 
-        <br><br>
+        <p align="center">РАПОРТ старших лікарів змін 
+           
+           
+                 <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>       
+
+        за чергування <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> .</p>      
+    
 
         Екстр. - <input type="text" id="extr" name="valuei">
         <br>
@@ -33,10 +36,10 @@
                         {{$type}}
                     </td>
                     <td>
-                        <input type="text" name="day{{$key}}" oninput="oninput1('{{$key}}');" size="15">
+                        <input id="day{{$key}}" type="text" name="day{{$key}}" oninput="oninput1({{$key}});" size="15">
                     </td>
                     <td>
-                        <input type="text" name="night{{$key}}" oninput="oninput1('{{$key}}');" size="15">
+                        <input id="night{{$key}}" type="text" name="night{{$key}}" oninput="oninput1({{$key}});" size="15">
                     </td>
                     <td id="res{{$key}}"></td>
                 </tr>
@@ -98,7 +101,7 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
         <br>
-        <input type="submit" value="Зберегти">
+        <input type="submit" value="Зберегти та продовжити">
         <script type="text/javascript">
             $( document ).ready(function() {
                 document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};
@@ -112,7 +115,7 @@
         <input id="toDate" type="hidden" name="date" value="">
        
 
-        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Next</div>
+        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
     </form>
 </section>
 </div>

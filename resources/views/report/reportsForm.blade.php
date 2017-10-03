@@ -10,7 +10,7 @@
 @include('flash::message')     
 <section>
 		<p>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</p>
-@if($inf)	
+
 		Екстр. - {{($inf[1])[0]}}
         <br>
         Неекстр. - {{($inf[1])[1]}}
@@ -36,7 +36,7 @@
                     <td>{{($reports1[$key])->day + ($reports1[$key])->night}}</td>
                 </tr>
             @endforeach
-           
+         
         </table>
 
 		<table id="table1-2" >
@@ -66,10 +66,22 @@
             </tr>
             
         </table>
-
        
+<?php
+    $a = 0;
+    $b = 0;
+    for ($i=0; $i < count($inf[3]); $i++) 
+    { 
+        $summa = explode("+", $inf[3][$i]);
+        $a += $summa[0];
+         if(!empty($summa[1]))
+        {
+            $b += $summa[1];
+        }
+    }
+?>        
         <table id="table1-4">
-             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
+             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span>{{$a}}</span> + <span>{{$b}}</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
@@ -84,15 +96,17 @@
                 @endforeach
             </tr>                         
         </table>
+
         <br>
         <hr>
-@endif
+
+@if(!empty($reports2->first()))
 		<p>
 			Інформація по запізненнях бригад на виклики за {{$date}}
 		</p>
 
 	    <hr>
-@if(!empty($reports2))
+
 		<table id="table2">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>
@@ -140,11 +154,12 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports3->first()))
 		<p>
 			Транспортування на Луцьк (Київ) {{$date}}
 		</p>
         <hr>
-@if($reports3)
+
 		<table id="table3">
             <tr id="firstTr3">
                 <td>№<br>п/п</td>
@@ -200,10 +215,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports4->first()))		
 
 		<p>ГКС {{$date}}</p>
         <hr>
-@if($reports4)		
 		<table id="table4">
 			<tr id="firstTr4">
 				<td>№<br>п/п</td>
@@ -264,9 +279,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[0]->first()))
 		<p>Смертність в присутності бригади (успішна реанімація)  {{$date}}</p>
 		<hr>
-@if($reports5)
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -310,9 +326,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[1]->first()))
 		<p>ДТП і «НС» (надзвичайні стани)  {{$date}}</p>
         <hr>
-@if($reports5[1])
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -356,9 +373,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[2]->first()))
         <p>Складні травми   {{$date}}</p>
         <hr>
-@if($reports5[2])
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -402,9 +420,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[3]->first()))
         <p>Травми китиці   {{$date}}</p>
         <hr>
-@if($reports5[3])
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -448,9 +467,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[4]->first()))
         <p>Опіки/ Переохолодження   {{$date}}</p>
         <hr>
-@if($reports5[4])
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -494,9 +514,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports5[5]->first()))
         <p>Травматизм (кримінальний, виробничий)   {{$date}}</p>
         <hr>
-@if($reports5[5])
+
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -540,9 +561,10 @@
 		<br>
         <hr>
 @endif
+@if(!empty($reports6->first()))
         <p>Зауваження по роботі, скарги, подяки {{$date}}</p>
         <hr>
-@if($reports6)
+
 		<table id="table6">
             <tr id="firstTr">
                 <td>№<br>п/п</td>

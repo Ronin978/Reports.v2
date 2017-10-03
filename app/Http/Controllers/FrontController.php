@@ -188,7 +188,7 @@ class FrontController extends Controller
             }
     //end Report5
             $reports6 = Report6::where('date', $date)->get();//Report11
-            
+           // dd( ($inf[4]));
             return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
 
         }
