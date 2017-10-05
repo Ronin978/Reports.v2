@@ -221,6 +221,8 @@ class ReportController extends Controller
             $report['date'] = $post["date"];
             $report['chergovy'] = $post["chergovy"];
            
+            if ($report['day'] == '')
+                { $report['day'] = ' '; }
             Report1::create($report); 
         }
         flash('Дані внесені.');
@@ -231,10 +233,9 @@ class ReportController extends Controller
     public function store2(Request $request)
     {
         $post = $request->all();
-        $date = $post['date'];
+        $report['date'] = $post['date'];  
         for ($i=0; $i < (count($post)-2)/8 ; $i++) 
-            {                
-                $report['date'] = $date;  
+            {   
                 $report['punkt'] = $post["punkt$i"];  
                 $report['no_card'] = $post["no_card$i"];  
                 $report['adress'] = $post["adress$i"];  
@@ -243,8 +244,23 @@ class ReportController extends Controller
                 $report['support'] = $post["support$i"];
                 $report['cause'] = $post["cause$i"];
                 $report['call'] = $post["call$i"];
-                                     
-                Report2::create($report);
+
+                $limit=0;
+                foreach ($report as $rep) 
+                {
+                    if ($rep == '') 
+                        { $limit++; }
+                }
+
+                if ($limit < (count($report)-3))
+                {
+                    foreach ($report as $key => $rep)
+                    {
+                        if ($rep == '')
+                            { $report[$key] = ' '; }
+                    }
+                    Report2::create($report);
+                }
             }
         flash('Дані внесені.');
         return redirect()->action('ReportController@create3', 
@@ -254,10 +270,9 @@ class ReportController extends Controller
 	public function store3(Request $request)
     {
     	$post = $request->all();
-        $date = $post['date'];
+        $report['date'] = $post['date'];  
         for ($i=0; $i < (count($post)-2)/10 ; $i++) 
             {                
-                $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];  
                 $report['no_card'] = $post["no_card$i"];  
                 $report['pib'] = $post["pib$i"];  
@@ -269,7 +284,22 @@ class ReportController extends Controller
                 $report['brig'] = $post["brig$i"];
                 $report['other'] = $post["other$i"];
                                      
-                Report3::create($report);
+                $limit=0;
+                foreach ($report as $rep) 
+                {
+                    if ($rep == '') 
+                        { $limit++; }
+                }
+
+                if ($limit < (count($report)-3))
+                {
+                    foreach ($report as $key => $rep)
+                    {
+                        if ($rep == '')
+                            { $report[$key] = ' '; }
+                    }
+                    Report3::create($report);
+                }
             }
         flash('Дані внесені.');
         return redirect()->action('ReportController@create4', 
@@ -279,11 +309,9 @@ class ReportController extends Controller
 	public function store4(Request $request)
     {
     	$post = $request->all();
-       // dd($post);
-        $date = $post['date'];
+        $report['date'] = $post['date'];  
         for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
-                $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];   
                 $report['no_card'] = $post["no_card$i"];  
                 $report['adress'] = $post["adress$i"];  
@@ -296,7 +324,22 @@ class ReportController extends Controller
                 $report['gospital'] = $post["gospital$i"];
                 $report['support'] = $post["support$i"];
                                      
-                Report4::create($report);
+                $limit=0;
+                foreach ($report as $rep) 
+                {
+                    if ($rep == '') 
+                        { $limit++; }
+                }
+
+                if ($limit < (count($report)-3))
+                {
+                    foreach ($report as $key => $rep)
+                    {
+                        if ($rep == '')
+                            { $report[$key] = ' '; }
+                    }
+                    Report4::create($report);
+                }
             }
         flash('Дані внесені.');
         return redirect()->action('ReportController@create5', 
@@ -306,14 +349,11 @@ class ReportController extends Controller
     public function store5(Request $request)
     {
         $post = $request->all();
-        //dd($post);
-        $date = $post['date'];
-
+        $report['date'] = $post['date'];  
         $report['pidtype'] = $post["pidtype"];
         for ($i=0; $i < (count($post)-3)/8 ; $i++) 
             {                
                   
-                $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];  
                 $report['title'] = $post["title$i"];  
                 $report['adress'] = $post["adress$i"];  
@@ -321,8 +361,23 @@ class ReportController extends Controller
                 $report['no_card'] = $post["no_card$i"]; 
                 $report['brig'] = $post["brig$i"];
                 $report['other'] = $post["other$i"];
-                                     
-                Report5::create($report);
+                
+                $limit=0;
+                foreach ($report as $rep) 
+                {
+                    if ($rep == '') 
+                        { $limit++; }
+                }
+
+                if ($limit < (count($report)-3))
+                {
+                    foreach ($report as $key => $rep)
+                    {
+                        if ($rep == '')
+                            { $report[$key] = ' '; }
+                    }
+                    Report5::create($report);
+                }
             }
         flash('Дані внесені.');
         
@@ -356,17 +411,30 @@ class ReportController extends Controller
     public function store6(Request $request)
     {
         $post = $request->all();
-       // dd($post);
-        $date = $post['date'];
+        $report['date'] = $post['date'];  
         for ($i=0; $i < (count($post)-2)/4 ; $i++) 
             {                
-                $report['date'] = $date;  
                 $report['timer'] = $post["date$i"];   
                 $report['no_card'] = $post["no_card$i"];  
                 $report['subdiv'] = $post["subdiv$i"];  
                 $report['other'] = $post["other$i"];  
-                                   
-                Report6::create($report);
+                
+                $limit=0;
+                foreach ($report as $rep) 
+                {
+                    if ($rep == '') 
+                        { $limit++; }
+                }
+
+                if ($limit < (count($report)-3))
+                {
+                    foreach ($report as $key => $rep)
+                    {
+                        if ($rep == '')
+                            { $report[$key] = ' '; }
+                    }
+                    Report6::create($report);
+                }
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@index');
@@ -402,13 +470,17 @@ class ReportController extends Controller
                             
                             for ($i=1; $i <= count($sect); $i++) 
                             {                         
+                                $value = $post["value$i"];
+                                if ($value == '') 
+                                {$value = ' ';}
+
                                 if ($i==count($sect)) 
                                 {
-                                    $info['value'] .= $post["value$i"];
+                                    $info['value'] .= $value;
                                 }
                                 else
                                 {
-                                    $info['value'] .= $post["value$i"].';';
+                                    $info['value'] .= $value.';';
                                 }
                             }
                             $info['date'] = $date;
@@ -422,13 +494,17 @@ class ReportController extends Controller
                             $infoTable = Info::where('date', $newDate)->where('id_group', $gospit->id)->first();                            
                             for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
                             { 
+                                $value = $post["value$i"];
+                                if ($value == '') 
+                                {$value = ' ';}
+
                                 if ($i==count($sect)+count($gos)) 
                                 {
-                                    $info['value'] .= $post["value$i"];
+                                    $info['value'] .= $value;
                                 }
                                 else
                                 {
-                                    $info['value'] .= $post["value$i"].';';
+                                    $info['value'] .= $value.';';
                                 }
                             }
                             $info['date'] = $post["date"];
@@ -442,13 +518,17 @@ class ReportController extends Controller
                             $infoTable = Info::where('date', $newDate)->where('id_group', $region->id)->first();
                             for ($i=count($sect)+count($gos)+1; $i <= count($sect)+count($gos)+count($reg); $i++) 
                             { 
+                                $value = $post["value$i"];
+                                if ($value == '') 
+                                {$value = ' ';}
+
                                 if ($i==count($sect)+count($gos)+count($reg)) 
                                 {
-                                    $info['value'] .= $post["value$i"];
+                                    $info['value'] .= $value;
                                 }
                                 else
                                 {
-                                    $info['value'] .= $post["value$i"].';';
+                                    $info['value'] .= $value.';';
                                 }
                             }
                             $info['date'] = $post["date"];
@@ -462,13 +542,17 @@ class ReportController extends Controller
                             $infoTable = Info::where('date', $newDate)->where('id_group', '1')->first();
                             for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++) 
                             { 
+                                $value = $post["value$i"];
+                                if ($value == '') 
+                                {$value = ' ';}
+
                                 if ($i==count($sect)+count($gos)+count($reg)+2) 
                                 {
-                                    $info['value'] .= $post["value$i"];
+                                    $info['value'] .= $value;
                                 }
                                 else
                                 {
-                                    $info['value'] .= $post["value$i"].';';
+                                    $info['value'] .= $value.';';
                                 }
                             }
                             $info['date'] = $post["date"];
@@ -487,6 +571,12 @@ class ReportController extends Controller
                     $report['date'] = $date;
                     $report['chergovy'] = $post["chergovy"];
                    
+                    if ($report['day'] == '')
+                        { $report['day'] = ' '; }
+
+                    if ($report['night'] == '')
+                        { $report['night'] = ' '; }
+
                     $myReport = Report1::where('date', $report['date'])->where('type', $i)->first(); 
                     $report['updated_at'] = $updt;
                     $myReport->update($report);
@@ -496,11 +586,13 @@ class ReportController extends Controller
                 break;
             case 'Report2':
                 $treport = Report2::where('date', $newDate)->get();
+                $report['date'] = $date;
+                $report['updated_at'] = $updt;
 
-                for ($i=0; $i < count($treport) ; $i++) 
-                    {                
-                        $report['date'] = $date; 
-
+                if (count($treport) == (count($post)-3)/8)
+                {   //якщо к-сть в запиті дорівнює к-сті в БД
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"];  
@@ -508,19 +600,72 @@ class ReportController extends Controller
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
                         $report['cause'] = $post["cause$i"];
-                        $report['call'] = $post["call$i"];       
-                        
-                        $report['updated_at'] = $updt;
-                        $treport[$i]->update($report);
-                        $treport[$i]->save();
+                        $report['call'] = $post["call$i"]; 
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
                     }
-                
-                if (count($treport) !== (count($post)-3)/8)
-                { 
+                }
+                elseif (count($treport) < (count($post)-3)/8)
+                {   //якщо додані додаткові рядки
+                    //поновлюємо існуючі
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
+                        $report['punkt'] = $post["punkt$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['brig'] = $post["brig$i"];
+                        $report['time'] = $post["time$i"];
+                        $report['support'] = $post["support$i"];
+                        $report['cause'] = $post["cause$i"];
+                        $report['call'] = $post["call$i"]; 
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+                    //Та додаємо нові
+                    $report['created_at'] = Report2::where('date', $newDate)->first()->created_at; 
+
                     for ($i = count($treport); $i < (count($post)-3)/8; $i++) 
                     { 
-                        $report['date'] = $date;  
-
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"];  
@@ -529,19 +674,80 @@ class ReportController extends Controller
                         $report['support'] = $post["support$i"];
                         $report['cause'] = $post["cause$i"];
                         $report['call'] = $post["call$i"];
-                                             
-                        Report2::create($report);
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            Report2::create($report);
+                        }
                     }
                 }
+                else
+                {   //якщо видалені рядки
+                    //поновлюємо ті що прийшли з форми
+                    for ($i=0; $i < (count($post)-3)/8 ; $i++) 
+                    {   
+                        $report['punkt'] = $post["punkt$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['brig'] = $post["brig$i"];
+                        $report['time'] = $post["time$i"];
+                        $report['support'] = $post["support$i"];
+                        $report['cause'] = $post["cause$i"];
+                        $report['call'] = $post["call$i"]; 
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save(); 
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+
+                    //Та видаляємо всі решту
+                    for ($i = (count($post)-3)/8 ; $i < count($treport); $i++) 
+                    { 
+                        $treport[$i]->delete();
+                    }
+                }
+                
                 flash('Зміни внесені.2');
                 break;
             case 'Report3':
                 $treport = Report3::where('date', $newDate)->get();
+                $report['date'] = $date;  
+                $report['updated_at'] = $updt;
 
-                for ($i=0; $i < count($treport) ; $i++) 
-                    {                
-                        $report['date'] = $date;  
-
+                if (count($treport) == (count($post)-3)/10)
+                {   //якщо к-сть в запиті дорівнює к-сті в БД
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {  
                         $report['timer'] = $post["date$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
@@ -553,16 +759,72 @@ class ReportController extends Controller
                         $report['brig'] = $post["brig$i"];
                         $report['other'] = $post["other$i"];
 
-                        $report['updated_at'] = $updt;
-                        $treport[$i]->update($report);
-                        $treport[$i]->save();
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
                     }
-                if (count($treport) !== (count($post)-3)/10)
-                { 
+                }
+                elseif (count($treport) < (count($post)-3)/10)
+                {   //якщо додані додаткові рядки
+                    //поновлюємо існуючі
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['at'] = $post["at$i"];  
+                        $report['from'] = $post["from$i"];
+                        $report['direct'] = $post["direct$i"];
+                        $report['who_direct'] = $post["who_direct$i"];
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+                    //Та додаємо нові
+                    $report['created_at'] = Report3::where('date', $newDate)->first()->created_at;
+
                     for ($i = count($treport); $i < (count($post)-3)/10; $i++) 
                     { 
-                        $report['date'] = $date;  
-
                         $report['timer'] = $post["date$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
@@ -573,19 +835,81 @@ class ReportController extends Controller
                         $report['diagnoz'] = $post["diagnoz$i"];
                         $report['brig'] = $post["brig$i"];
                         $report['other'] = $post["other$i"];
-                                     
-                        Report3::create($report);
+
+                       $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            Report3::create($report);
+                        }
+                    }
+                }
+                else
+                {   //якщо видалені рядки
+                    //поновлюємо ті що прийшли з форми
+                    for ($i=0; $i < (count($post)-3)/10 ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['at'] = $post["at$i"];  
+                        $report['from'] = $post["from$i"];
+                        $report['direct'] = $post["direct$i"];
+                        $report['who_direct'] = $post["who_direct$i"];
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save(); 
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+
+                    //Та видаляємо всі решту
+                    for ($i = (count($post)-3)/10 ; $i < count($treport); $i++) 
+                    { 
+                        $treport[$i]->delete();
                     }
                 }
                 flash('Зміни внесені.3');
                 break;
             case 'Report4':
                 $treport = Report4::where('date', $newDate)->get();
+                $report['date'] = $date;
+                $report['updated_at'] = $updt;
 
-                for ($i=0; $i < count($treport) ; $i++) 
-                    {                
-                        $report['date'] = $date;
-
+                if (count($treport) == (count($post)-3)/11)
+                {   //якщо к-сть в запиті дорівнює к-сті в БД
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {  
                         $report['timer'] = $post["date$i"];
                         $report['no_card'] = $post["no_card$i"];
                         $report['adress'] = $post["adress$i"];
@@ -598,16 +922,72 @@ class ReportController extends Controller
                         $report['gospital'] = $post["gospital$i"];
                         $report['support'] = $post["support$i"];
 
-                        $report['updated_at'] = $updt;
-                        $treport[$i]->update($report);
-                        $treport[$i]->save();
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
                     }
-                if (count($treport) !== (count($post)-3)/11)
-                { 
+                }
+                elseif (count($treport) < (count($post)-3)/11)
+                {   //якщо додані додаткові рядки
+                    //поновлюємо існуючі
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['at'] = $post["at$i"];  
+                        $report['from'] = $post["from$i"];
+                        $report['direct'] = $post["direct$i"];
+                        $report['who_direct'] = $post["who_direct$i"];
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+                    //Та додаємо нові
+                    $report['created_at'] = Report4::where('date', $newDate)->first()->created_at;
+
                     for ($i = count($treport); $i < (count($post)-3)/11; $i++) 
                     { 
-                        $report['date'] = $date;  
-
                         $report['timer'] = $post["date$i"];   
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"];  
@@ -619,43 +999,208 @@ class ReportController extends Controller
                         $report['stent'] = $post["stent$i"];
                         $report['gospital'] = $post["gospital$i"];
                         $report['support'] = $post["support$i"];
-                                             
-                        Report4::create($report);
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            Report4::create($report);
+                        }
+                    }
+                }
+                else
+                {   //якщо видалені рядки
+                    //поновлюємо ті що прийшли з форми
+                    for ($i=0; $i < (count($post)-3)/11 ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];   
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['age'] = $post["age$i"];  
+                        $report['diagnoz'] = $post["diagnoz$i"];
+                        $report['brig'] = $post["brig$i"];
+                        $report['tromb'] = $post["tromb$i"];
+                        $report['stent'] = $post["stent$i"];
+                        $report['gospital'] = $post["gospital$i"];
+                        $report['support'] = $post["support$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save(); 
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+
+                    //Та видаляємо всі решту
+                    for ($i = (count($post)-3)/11 ; $i < count($treport); $i++)
+                    { 
+                        $treport[$i]->delete();
                     }
                 }
                 flash('Дані внесені.4');
                 break;
             
             case 'Report6':
-                //if (count($treport)+3 == count($post))
                 $treport = Report6::where('date', $newDate)->get();
+                $report['date'] = $date;
+                $report['updated_at'] = $updt;
 
-                for ($i=0; $i < count($treport); $i++) 
-                    {                
-                        $report['date'] = $date;
-
+                if (count($treport) == (count($post)-3)/4)
+                {   //якщо к-сть в запиті дорівнює к-сті в БД    
+                    for ($i=0; $i < count($treport); $i++) 
+                    { 
                         $report['timer'] = $post["date$i"];   
                         $report['no_card'] = $post["no_card$i"];  
                         $report['subdiv'] = $post["subdiv$i"];  
                         $report['other'] = $post["other$i"]; 
 
-                        $report['updated_at'] = $updt;
-                        $treport[$i]->update($report);
-                        $treport[$i]->save();
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
                     }
+                }
+                elseif (count($treport) < (count($post)-3)/4)
+                {   //якщо додані додаткові рядки
+                    //поновлюємо існуючі
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];   
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['subdiv'] = $post["subdiv$i"];  
+                        $report['other'] = $post["other$i"]; 
 
-                if (count($treport) !== (count($post)-3)/4)
-                { 
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+                    //Та додаємо нові 
+                    $report['created_at'] = Report6::where('date', $newDate)->first()->created_at;
+
                     for ($i = count($treport); $i < (count($post)-3)/4; $i++) 
-                    {                                      
-                        $report['date'] = $date; 
-
+                    { 
                         $report['timer'] = $post["date$i"];   
                         $report['no_card'] = $post["no_card$i"];  
                         $report['subdiv'] = $post["subdiv$i"];  
                         $report['other'] = $post["other$i"];  
-                                           
-                        Report6::create($report);
+                        
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            Report6::create($report);
+                        }
+                    }
+                }
+                else
+                {   //якщо видалені рядки
+                    //поновлюємо ті що прийшли з форми
+                    for ($i=0; $i < (count($post)-3)/4 ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];   
+                        $report['no_card'] = $post["no_card$i"];  
+                        $report['subdiv'] = $post["subdiv$i"];  
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-3))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save(); 
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+
+                    //Та видаляємо всі решту
+                    for ($i = (count($post)-3)/4 ; $i < count($treport); $i++)
+                    { 
+                        $treport[$i]->delete();
                     }
                 }
                 flash('Дані внесені.6');
@@ -664,12 +1209,14 @@ class ReportController extends Controller
             case ('fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat'):
                 //if (count($treport)+3 == count($post))
                 $treport = Report5::where('date', $newDate)->where('pidtype', $table)->get();
+                $report['date'] = $date;
+                $report['pidtype'] = $table;
+                $report['updated_at'] = $updt;
         
-                for ($i=0; $i < count($treport) ; $i++)
-                    {                
-                        $report['date'] = $date;
-                        $report['pidtype'] = $table;
-                          
+                if (count($treport) == (count($post)-3)/7)
+                {   //якщо к-сть в запиті дорівнює к-сті в БД       
+                    for ($i=0; $i < count($treport) ; $i++)
+                    {       
                         $report['timer'] = $post["date$i"];  
                         $report['title'] = $post["title$i"];  
                         $report['adress'] = $post["adress$i"];  
@@ -678,26 +1225,131 @@ class ReportController extends Controller
                         $report['brig'] = $post["brig$i"];
                         $report['other'] = $post["other$i"];
 
-                        $report['updated_at'] = $updt;
-                        $treport[$i]->update($report);
-                        $treport[$i]->save();
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                    }
+                }
+                elseif (count($treport) < (count($post)-3)/7)
+                {   //якщо додані додаткові рядки
+                    //поновлюємо існуючі
+                    for ($i=0; $i < count($treport) ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['title'] = $post["title$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['no_card'] = $post["no_card$i"]; 
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save();
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
+                    }
+                    //Та додаємо нові 
+                     $report['created_at'] = Report5::where('date', $newDate)->where('pidtype', $table)->first()->created_at;
+
+                    for ($i = count($treport); $i < (count($post)-3)/7; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['title'] = $post["title$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['no_card'] = $post["no_card$i"]; 
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-5))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            Report5::create($report);
+                        }
+                    }
+                }
+                else
+                {   //якщо видалені рядки
+                    //поновлюємо ті що прийшли з форми
+                    for ($i=0; $i < (count($post)-3)/7 ; $i++) 
+                    {   
+                        $report['timer'] = $post["date$i"];  
+                        $report['title'] = $post["title$i"];  
+                        $report['adress'] = $post["adress$i"];  
+                        $report['pib'] = $post["pib$i"];  
+                        $report['no_card'] = $post["no_card$i"]; 
+                        $report['brig'] = $post["brig$i"];
+                        $report['other'] = $post["other$i"];
+
+                        $limit=0;
+                        foreach ($report as $rep) 
+                        {
+                            if ($rep == '') 
+                                { $limit++; }
+                        }
+
+                        if ($limit < (count($report)-4))
+                        {
+                            foreach ($report as $key => $rep)
+                            {
+                                if ($rep == '')
+                                    { $report[$key] = ' '; }
+                            }
+                            $treport[$i]->update($report);
+                            $treport[$i]->save(); 
+                        }
+                        else
+                        {
+                            $treport[$i]->delete();
+                        }
                     }
 
-                if (count($treport) !== (count($post)-3)/7)
-                { 
-                    $report['pidtype'] = $table;
-                    for ($i = count($treport); $i < (count($post)-3)/7; $i++) 
-                    {                                      
-                        $report['date'] = $date;  
-                        $report['timer'] = $post["date$i"];  
-                        $report['title'] = $post["title$i"];  
-                        $report['adress'] = $post["adress$i"];  
-                        $report['pib'] = $post["pib$i"];  
-                        $report['no_card'] = $post["no_card$i"]; 
-                        $report['brig'] = $post["brig$i"];
-                        $report['other'] = $post["other$i"];
-                                             
-                        Report5::create($report);
+                    //Та видаляємо всі решту
+                    for ($i = (count($post)-3)/7 ; $i < count($treport); $i++)
+                    { 
+                        $treport[$i]->delete();
                     }
                 }
                 flash('Дані внесені.5');

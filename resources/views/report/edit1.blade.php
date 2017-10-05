@@ -13,7 +13,7 @@
    
         <p align="center">РАПОРТ старших лікарів змін <input type="text" name="chergovy" value="{{$reports[0]->chergovy}}"> за чергування {{$date}}.</p>       
        
-        Дата: <input id="firstdate" type="date" name="date" value="{{$date}}"> 
+        <input id="firstdate" type="hidden" name="date" value="{{$date}}"> 
         <br><br>
 
         Екстр. - <input type="text" id="extr" name="valuei" value="{{($inf[1])[0]}}">

@@ -148,7 +148,7 @@
                 <h3>Сформувати повний звіт</h3>
                 <blockquote>
                     <form method="GET" action="{{action('FrontController@QuickFind')}}">
-                        <input type="date" name="date" value="{{date('Y-m-d')}}">
+                        <input type="date" name="date" value="{{date('Y-m-d')}}" >
 
                         <input type="submit" value="Сформувати">
                     </form>

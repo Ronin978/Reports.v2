@@ -303,6 +303,10 @@ class FrontController extends Controller
        // dd($date);
         switch ($table) 
         {
+            case 'allReports':
+                $title = 'Дана фукція в розробці. Редагуйте таблиці по одній, в головному меню.';
+                return view('front.error', ['title'=>$title]);
+                break;
             case 'Report1':
                 //Заголовки
 
@@ -348,7 +352,7 @@ class FrontController extends Controller
                 //dd($reports);
                 return view('report.edit6', ['date'=>$date, 'reports'=>$reports]);
                 break;
-    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+                    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
             default:
                 switch ($table) 
                 {
@@ -384,9 +388,6 @@ class FrontController extends Controller
 
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
                 break;
-            
-            
         }
     }
-
 }

@@ -207,4 +207,3 @@ function sizeAuto(key)
         document.getElementById(key).size = fact + 4;
     }
 }
-

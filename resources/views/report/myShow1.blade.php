@@ -8,7 +8,8 @@
 <div class="row">
 <div class="12u">	
 @include('flash::message')
-	<section >	
+	
+    <section id="pagePrint">	
         <h3 align="center" >РАПОРТ старших лікарів змін {{$reports[0]->chergovy}} за чергування {{$date}}</h3>
 	
 		Екстр. - {{($inf[1])[0]}}
