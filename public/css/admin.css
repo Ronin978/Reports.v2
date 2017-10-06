@@ -61,7 +61,7 @@ textarea
 	width: 40% !important;
 }
 
-.row p
+.row h5
 {	
 	text-align: center;
 	vertical-align: bottom;
@@ -70,6 +70,7 @@ textarea
 .row a
 {
 	margin: 0;
+	cursor: pointer;
 }
 
 .rotate

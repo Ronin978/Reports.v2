@@ -1,15 +1,16 @@
 @extends('layouts.shablon0')
 
 @section('content')
-<div id="pagePrint">
+
 <div id="content-wrapper">
 <div id="content">
 <div class="container">
 <div class="row">
 <div class="12u">   
 @include('flash::message')     
-<section>
-		<p>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</p>
+ <a onClick="CallPrint('pagePrint');">Роздрукувати</a>
+<section id="pagePrint">
+		<h5>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</h5>
 
 		Екстр. - {{($inf[1])[0]}}
         <br>
@@ -99,9 +100,9 @@
         <hr>
 
 @if(!empty($reports2->first()))
-		<p>
+		<h5>
 			Інформація по запізненнях бригад на виклики за {{$date}}
-		</p>
+		</h5>
 		<table id="table2">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>
@@ -149,9 +150,9 @@
 		<hr>
 @endif
 @if(!empty($reports3->first()))
-		<p>
+		<h5>
 			Транспортування на Луцьк (Київ) {{$date}}
-		</p>
+		</h5>
         <table id="table3">
             <tr id="firstTr3">
                 <td>№<br>п/п</td>
@@ -208,7 +209,7 @@
 @endif
 @if(!empty($reports4->first()))		
 
-		<p>ГКС {{$date}}</p>
+		<h5>ГКС {{$date}}</h5>
         <table id="table4">
 			<tr id="firstTr4">
 				<td>№<br>п/п</td>
@@ -269,7 +270,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[0]->first()))
-		<p>Смертність в присутності бригади (успішна реанімація)  {{$date}}</p>
+		<h5>Смертність в присутності бригади (успішна реанімація)  {{$date}}</h5>
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -313,7 +314,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[1]->first()))
-		<p>ДТП і «НС» (надзвичайні стани)  {{$date}}</p>
+		<h5>ДТП і «НС» (надзвичайні стани)  {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -357,7 +358,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[2]->first()))
-        <p>Складні травми   {{$date}}</p>
+        <h5>Складні травми   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -401,7 +402,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[3]->first()))
-        <p>Травми китиці   {{$date}}</p>
+        <h5>Травми китиці   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -445,7 +446,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[4]->first()))
-        <p>Опіки/ Переохолодження   {{$date}}</p>
+        <h5>Опіки/ Переохолодження   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -489,7 +490,7 @@
 		<hr>
 @endif
 @if(!empty($reports5[5]->first()))
-        <p>Травматизм (кримінальний, виробничий)   {{$date}}</p>
+        <h5>Травматизм (кримінальний, виробничий)   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -533,7 +534,7 @@
 		<hr>
 @endif
 @if(!empty($reports6->first()))
-        <p>Зауваження по роботі, скарги, подяки {{$date}}</p>
+        <h5>Зауваження по роботі, скарги, подяки {{$date}}</h5>
         <table id="table6">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -564,10 +565,11 @@
 		</table>
 @endif
 </section>
+ <a onClick="CallPrint('pagePrint');">Роздрукувати</a>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
+
 @endsection

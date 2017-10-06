@@ -51,7 +51,6 @@ function oninput2(next, last)
     var sum1 = 0;
     for (var i = next; i <= last; i++) {
 
-
         var example = document.getElementById('value'+i).value.split('+');
         
         if (example[0]!=='') {
