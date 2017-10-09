@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Info;
 use App\Group;
 use App\Report1;
@@ -32,10 +33,8 @@ class ReportController extends Controller
     }
 
     public function create2(Request $request)
-    {
-        
+    { 
         $date = ($request->all())['date'];
-        //dd($post['date']);
         return view('report.create2', ['date'=>$date]);
     }
 
@@ -142,8 +141,8 @@ class ReportController extends Controller
                         }
                     }
                     $info['date'] = $post["date"];
+                    $info['users'] = Auth::user()->name;
                     Info::create($info);
-                    //break 1;
                 case 1:
                     $info['id_group'] = $gospit->id;
                     $info['value'] = '';
@@ -163,8 +162,8 @@ class ReportController extends Controller
                         }
                     }
                     $info['date'] = $post["date"];
+                    $info['users'] = Auth::user()->name;
                     Info::create($info);
-                    //break 1;
                 case 2:
                     $info['id_group'] = $region->id;
                     $info['value'] = '';
@@ -184,8 +183,8 @@ class ReportController extends Controller
                         }
                     }
                     $info['date'] = $post["date"];
+                    $info['users'] = Auth::user()->name;
                     Info::create($info);
-                    //break 1;
                 case 3:
                     $info['id_group'] = 1;
                     $info['value'] = '';
@@ -205,18 +204,16 @@ class ReportController extends Controller
                         }
                     }
                     $info['date'] = $post["date"];
+                    $info['users'] = Auth::user()->name;
                     Info::create($info);
-                   // break 1;
             }
-             
         }
-        
-
         for ($i=0; $i < 5 ; $i++)
         {
             $report['day'] = $post["day$i"];  
             $report['night'] = $post["night$i"];
             $report['type'] = $i;
+            $report['users'] = Auth::user()->name;
            
             $report['date'] = $post["date"];
             $report['chergovy'] = $post["chergovy"];
@@ -233,7 +230,8 @@ class ReportController extends Controller
     public function store2(Request $request)
     {
         $post = $request->all();
-        $report['date'] = $post['date'];  
+        $report['date'] = $post['date'];
+        $report['users'] = Auth::user()->name;  
         for ($i=0; $i < (count($post)-2)/8 ; $i++) 
             {   
                 $report['punkt'] = $post["punkt$i"];  
@@ -271,6 +269,7 @@ class ReportController extends Controller
     {
     	$post = $request->all();
         $report['date'] = $post['date'];  
+        $report['users'] = Auth::user()->name;
         for ($i=0; $i < (count($post)-2)/10 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];  
@@ -309,7 +308,8 @@ class ReportController extends Controller
 	public function store4(Request $request)
     {
     	$post = $request->all();
-        $report['date'] = $post['date'];  
+        $report['date'] = $post['date']; 
+        $report['users'] = Auth::user()->name; 
         for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];   
@@ -351,6 +351,7 @@ class ReportController extends Controller
         $post = $request->all();
         $report['date'] = $post['date'];  
         $report['pidtype'] = $post["pidtype"];
+        $report['users'] = Auth::user()->name;
         for ($i=0; $i < (count($post)-3)/8 ; $i++) 
             {                
                   
@@ -411,7 +412,8 @@ class ReportController extends Controller
     public function store6(Request $request)
     {
         $post = $request->all();
-        $report['date'] = $post['date'];  
+        $report['date'] = $post['date']; 
+        $report['users'] = Auth::user()->name; 
         for ($i=0; $i < (count($post)-2)/4 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];   
@@ -485,6 +487,7 @@ class ReportController extends Controller
                             }
                             $info['date'] = $date;
                             $info['updated_at'] = $updt;
+                            $info['users'] = Auth::user()->name;
                             $infoTable->update($info);
                             $infoTable->save();
                             
@@ -509,6 +512,7 @@ class ReportController extends Controller
                             }
                             $info['date'] = $post["date"];
                             $info['updated_at'] = $updt;
+                            $info['users'] = Auth::user()->name;
                             $infoTable->update($info);
                             $infoTable->save();
                             
@@ -533,6 +537,7 @@ class ReportController extends Controller
                             }
                             $info['date'] = $post["date"];
                             $info['updated_at'] = $updt;
+                            $info['users'] = Auth::user()->name;
                             $infoTable->update($info);
                             $infoTable->save();
                             
@@ -557,10 +562,16 @@ class ReportController extends Controller
                             }
                             $info['date'] = $post["date"];
                             $info['updated_at'] = $updt;
+                            $info['users'] = Auth::user()->name;
                             $infoTable->update($info);
                             $infoTable->save();
                     }    
                 }                
+
+                $report['users'] = Auth::user()->name;
+                $report['date'] = $date;
+                $report['chergovy'] = $post["chergovy"];
+                $report['updated_at'] = $updt;
 
                 for ($i=0; $i < 5 ; $i++)
                 {
@@ -568,17 +579,13 @@ class ReportController extends Controller
                     $report['night'] = $post["night$i"];
                     $report['type'] = $i;
                    
-                    $report['date'] = $date;
-                    $report['chergovy'] = $post["chergovy"];
-                   
                     if ($report['day'] == '')
                         { $report['day'] = ' '; }
 
                     if ($report['night'] == '')
                         { $report['night'] = ' '; }
 
-                    $myReport = Report1::where('date', $report['date'])->where('type', $i)->first(); 
-                    $report['updated_at'] = $updt;
+                    $myReport = Report1::where('date', $report['date'])->where('type', $i)->first();  
                     $myReport->update($report);
                     $myReport->save();
                 }
@@ -588,6 +595,7 @@ class ReportController extends Controller
                 $treport = Report2::where('date', $newDate)->get();
                 $report['date'] = $date;
                 $report['updated_at'] = $updt;
+                $report['users'] = Auth::user()->name;
 
                 if (count($treport) == (count($post)-3)/8)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
@@ -736,13 +744,13 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                
-                flash('Зміни внесені.2');
+                flash('Зміни внесені.');
                 break;
             case 'Report3':
                 $treport = Report3::where('date', $newDate)->get();
                 $report['date'] = $date;  
                 $report['updated_at'] = $updt;
+                $report['users'] = Auth::user()->name;
 
                 if (count($treport) == (count($post)-3)/10)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
@@ -905,6 +913,7 @@ class ReportController extends Controller
                 $treport = Report4::where('date', $newDate)->get();
                 $report['date'] = $date;
                 $report['updated_at'] = $updt;
+                $report['users'] = Auth::user()->name;
 
                 if (count($treport) == (count($post)-3)/11)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
@@ -1071,6 +1080,7 @@ class ReportController extends Controller
                 $treport = Report6::where('date', $newDate)->get();
                 $report['date'] = $date;
                 $report['updated_at'] = $updt;
+                $report['users'] = Auth::user()->name;
 
                 if (count($treport) == (count($post)-3)/4)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД    
@@ -1212,6 +1222,7 @@ class ReportController extends Controller
                 $report['date'] = $date;
                 $report['pidtype'] = $table;
                 $report['updated_at'] = $updt;
+                $report['users'] = Auth::user()->name;
         
                 if (count($treport) == (count($post)-3)/7)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД       

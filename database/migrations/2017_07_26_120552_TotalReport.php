@@ -22,6 +22,7 @@ class TotalReport extends Migration
          $table->integer('night');
          $table->string('chergovy');
          $table->timestamps();
+         $table->string('users');
          
         });
     }

@@ -22,6 +22,7 @@ class Remarks extends Migration
          $table->string('subdiv');
          $table->string('other')->nullable();
          $table->timestamps();
+         $table->string('users');
          
         });
     }

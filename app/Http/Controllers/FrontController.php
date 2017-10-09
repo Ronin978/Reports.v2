@@ -77,7 +77,6 @@ class FrontController extends Controller
      */
     public function show($id)
     {
-    //dd($id);
         switch ($id) 
         {
             case 'Report1':
@@ -132,11 +131,8 @@ class FrontController extends Controller
             default:
                 $obj=array();
                 $title = 'ERROR 404/ NOT FOUND';
-
                 break;
         }
-
-
         return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$id]);
     }
 
@@ -167,17 +163,12 @@ class FrontController extends Controller
                 if (Info::where('id_group', $i)->where('date', $date)->first()) 
                 {
                     $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                    
                     $inf[$i] = explode(";", $info[$i]->value);
-                    //dd(($inf[$i]));
                 }
                 else 
-                {
-                    $inf[$i] = 0;
-                }
+                { $inf[$i] = 0; }
             }
     //end Report1
-
             $reports2 = Report2::where('date', $date)->get();//Report2
             $reports3 = Report3::where('date', $date)->get();//Report3
             $reports4 = Report4::where('date', $date)->get();//Report4
@@ -190,26 +181,20 @@ class FrontController extends Controller
             $reports6 = Report6::where('date', $date)->get();//Report11
            // dd( ($inf[4]));
             return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
-
         }
         else
         {            
             return view('front.error', ['title'=>"Вказана дата $date відсутня у списку рапортів."]);
-
         }
     }
 
     public function myShow(Request $request, $table, $date)
     {
         $req = $request->all();
-        //dd($date);
-        
         $title = $req['title'];
-
         switch ($table) 
         {
             case 'Report1':
-               
                 //Заголовки
                 $types = Group::where('group', 'call')->get()->first();
                 $typ = explode(";", $types->title);
@@ -228,12 +213,8 @@ class FrontController extends Controller
                 for ($i=1; $i <= 4; $i++)
                 {
                     $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                    
                     $inf[$i] = explode(";", $info[$i]->value);
-                    //dd(($inf[$i]));
                 }
-                //dd($inf);
-
                 return view('report.myShow1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'title'=>$title, 'inf'=>$inf]);
                 break;
             case 'Report2':
@@ -276,7 +257,6 @@ class FrontController extends Controller
                     //dd(($inf[$i]));
                 }
         //end Report1
-
                 $reports2 = Report2::where('date', $date)->get();//Report2
                 $reports3 = Report3::where('date', $date)->get();//Report3
                 $reports4 = Report4::where('date', $date)->get();//Report4
@@ -287,7 +267,6 @@ class FrontController extends Controller
                 }
         //end Report5
                 $reports6 = Report6::where('date', $date)->get();//Report11
-                
                 return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
                 break;
         //end Full Report
@@ -300,16 +279,14 @@ class FrontController extends Controller
 
     public function edit($table, $date)
     {
-       // dd($date);
-        switch ($table) 
+    switch ($table) 
         {
             case 'allReports':
                 $title = 'Дана фукція в розробці. Редагуйте таблиці по одній, в головному меню.';
                 return view('front.error', ['title'=>$title]);
                 break;
             case 'Report1':
-                //Заголовки
-
+    //Заголовки
                 $types = Group::where('group', 'call')->get()->first();
                 $typ = explode(";", $types->title);
 
@@ -321,20 +298,16 @@ class FrontController extends Controller
 
                 $region = Group::where('group', 'region')->get()->first();
                 $reg = explode(";", $region->title);
-                //Заголовки END
-                //Date Table
+    //Заголовки END
+    //Date Table
                 $reports = Report1::where('date', $date)->get();
                 for ($i=1; $i <= 4; $i++)
                 {
                     $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                    
                     $inf[$i] = explode(";", $info[$i]->value);
-                    //dd(($inf[$i]));
                 }
-                //dd($inf);
-
                 return view('report.edit1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'inf'=>$inf]);
-                //break;
+                break;
             case 'Report2':
                 $reports = Report2::where('date', $date)->get();
                 return view('report.edit2', ['date'=>$date, 'reports'=>$reports]);
@@ -349,10 +322,9 @@ class FrontController extends Controller
                 break;
             case 'Report6':
                 $reports = Report6::where('date', $date)->get();
-                //dd($reports);
                 return view('report.edit6', ['date'=>$date, 'reports'=>$reports]);
                 break;
-                    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
             default:
                 switch ($table) 
                 {
@@ -384,8 +356,6 @@ class FrontController extends Controller
                         $title = 'ERROR 404/ NOT FOUND';
                         break;
                 }
-                //break;
-
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
                 break;
         }

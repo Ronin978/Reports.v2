@@ -20,6 +20,7 @@ class Info extends Migration
          $table->string('id_group');
          $table->string('value');
          $table->timestamps();
+         $table->string('users');
          
         });
     }

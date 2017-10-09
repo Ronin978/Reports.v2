@@ -29,6 +29,7 @@ class Gks extends Migration
          $table->string('gospital');
          $table->string('support');
          $table->timestamps();
+         $table->string('users');
          
         });
     }

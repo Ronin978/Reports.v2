@@ -26,6 +26,7 @@ class Reports extends Migration
          $table->string('brig');
          $table->string('other')->nullable();
          $table->timestamps();
+         $table->string('users');
          
         });
     }

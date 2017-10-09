@@ -26,6 +26,7 @@ class ToLate extends Migration
          $table->string('cause');
          $table->string('call');
          $table->timestamps();
+         $table->string('users');
          
         });
     }
