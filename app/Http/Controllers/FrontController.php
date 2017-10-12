@@ -136,7 +136,7 @@ class FrontController extends Controller
         return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$id]);
     }
 
-    public function QuickFind(Request $request)
+    public function DateFind(Request $request)
     {
 
         $date = ($request->all())['date'];
@@ -357,6 +357,69 @@ class FrontController extends Controller
                         break;
                 }
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
+                break;
+        }
+    }
+
+    public function QuickFind(Request $request)
+    {
+        $post = $request->all();
+        
+        $dateStart = $post['dateStart'];
+        $dateEnd = $post['dateEnd'];
+        $table = $post['table'];
+        //$date = "$dateStart --- $dateEnd";date_diff()->days
+
+        $date1 = date_create($dateEnd);
+        $date2 = date_create($dateStart);
+
+        //dd(date_diff(strtotime($dateEnd), strtotime($dateStart)));
+        dd(date_diff($date1, $date2)->days);
+
+        switch ($table) 
+        {
+            case 'Report1':
+                //Заголовки
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
+
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
+
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
+
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
+                //Заголовки END
+                //Date Table
+                $reports = Report1::where('date', $dateStart)->get();
+                for ($i=1; $i <= 4; $i++)
+                {
+                    $info[$i] = Info::where('id_group', $i)->where('date', $dateStart)->first();
+                    $inf[$i] = explode(";", $info[$i]->value);
+                }
+                return view('report.myShow1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'title'=>$title, 'inf'=>$inf]);
+                break;
+            case 'Report2':
+                $reports = Report2::where('date', $date)->get();
+                return view('report.myShow2', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report3':
+                $reports = Report3::where('date', $date)->get();
+                return view('report.myShow3', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report4':
+                $reports = Report4::where('date', $date)->get();
+                return view('report.myShow4', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            case 'Report6':
+                $reports = Report6::where('date', $date)->get();
+                return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
+                break;
+            default:
+                $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
                 break;
         }
     }

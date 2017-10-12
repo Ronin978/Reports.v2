@@ -21,13 +21,11 @@ Route::get('/', 'FrontController@index');
 
 Route::get('/show/{id}', 'FrontController@show');
 Route::get('/QuickFind', 'FrontController@QuickFind');
+Route::get('/DateFind', 'FrontController@DateFind');
 Route::post('/myShow/{table}/{date}', 'FrontController@myShow');
 
-
-
 Route::group(['prefix'=>'report','middleware'=>'auth'], function()
-{
-    
+{ 
     Route::get('/create1', 'ReportController@create1');
 	Route::get('/create2', 'ReportController@create2');
 	Route::get('/create3', 'ReportController@create3');

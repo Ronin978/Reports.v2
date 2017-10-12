@@ -145,22 +145,57 @@
         <!-- Sidebar -->
         <section>
             <header>
+            <blockquote>
                 <h3>Сформувати повний звіт</h3>
-                <blockquote>
-                    <form method="GET" action="{{action('FrontController@QuickFind')}}">
+            </blockquote>
+            </header>   
+                    <form method="GET" action="{{action('FrontController@DateFind')}}">
                         <input type="date" name="date" value="{{date('Y-m-d')}}" >
 
                         <input type="submit" value="Сформувати">
                     </form>
-                </blockquote>
-            </header>
+                
         </section>
+
+        <section>
+            <header>
+            <blockquote>
+                <h3>Вивести звіт</h3>
+            </blockquote>
+            </header>
+                    <form method="GET" action="{{action('FrontController@QuickFind')}}">    
+                        Тип звіту   
+                        <select id="mySelect" name="table">
+                            <option selected value="Report1">РАПОРТ старших лікарів змін</option>
+                            <option value="Report2">Інформація по запізненнях бригад на виклики</option>
+                            <option value="Report3">Транспортування на Луцьк</option>
+                            <option value="Report4">ГКС</option>
+                            <option value="fatal">Смертність в присутності бригади (успішна реанімація)</option>
+                            <option value="dtp+ns">ДТП і «НС» (надзвичайні стани)</option>
+                            <option value="high_travmy">Складні травми</option>
+                            <option value="tr_kytyzi">Травми китиці</option>
+                            <option value="opic">Опіки/ Переохолодження</option>
+                            <option value="travmat">Травматизм (кримінальний, виробничий)</option>
+                            <option value="Report6">Зауваження по роботі, скарги, подяки</option>
+                        </select>
+                        
+                        <input type="date" name="dateStart" value="{{date('Y-m-d')}}" >
+                        <input type="date" name="dateEnd" value="{{date('Y-m-d')}}" >
+
+                        <input type="submit" value="Вивести">
+                    </form>
+               
+        </section>
+
     </div>
+
+
+    
     <div class="9u 12u(mobile) important(mobile)">
     <section>
 	
 @if (empty($table0))
-    <p>Поки, що немає доданих звітів
+    <p>Поки, що немає доданих звітів</p>
 @else    
         <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
 
@@ -200,7 +235,7 @@
                 <td>{{$sections[$key]}}<br>
                     {{$table1[$key]}}
                 </td>
-                @if ( ($key+1) % 7 == 0)
+                @if ( ($key+1) % 8 == 0)
                     </tr>
                     <tr>
                 @endif
@@ -232,16 +267,18 @@
     for ($i=0; $i < count($table3); $i++) 
     { 
         $summa = explode("+", $table3[$i]);
-        $a += $summa[0];
+            $a += intval($summa[0]);
+        
         if(!empty($summa[1]))
         {
-            $b += $summa[1];
+            $b += intval($summa[1]);
         }
+        else {$b = 0;}
     }
 ?>
         <table id="table1-4">
             <tr>
-                <td colspan="9">Невідкладна допомога (ПМСД)       
+                <td colspan="10">Невідкладна допомога (ПМСД)       
                 <span id="sp1">{{$a}}</span> + <span id="sp2">{{$b}}</span>
                 </td>
             </tr>
@@ -251,7 +288,7 @@
                     <td id="sum{{$key}}">{{$region[$key]}}<br>
                         {{$table3[$key]}}
                     </td>
-                    @if ( ($key+1) % 9 == 0)
+                    @if ( ($key+1) % 10 == 0)
                         </tr>
                         <tr>
                     @endif

@@ -31,25 +31,25 @@
                         <DIV>1</DIV>
                     </td>
                     <td>
-                        <textarea name="punkt0" rows="1"></textarea>
+                        <textarea name="punkt0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="no_card0" rows="1"></textarea>
+                        <textarea name="no_card0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="adress0" rows="1"></textarea>
+                        <textarea name="adress0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="brig0" rows="1"></textarea>
+                        <textarea name="brig0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="time0" rows="1"></textarea>
+                        <textarea name="time0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="support0" rows="1"></textarea>
+                        <textarea name="support0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
-                        <textarea name="cause0" rows="1"></textarea>
+                        <textarea name="cause0" rows="1" data="elastic"></textarea>
                     </td>
                     <td>
                         <textarea name="call0" rows="1"></textarea>

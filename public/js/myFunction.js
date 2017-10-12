@@ -1,5 +1,6 @@
 window.onload=function()
 {
+    
     if (document.getElementById('maxLenght') !== null) 
     {        
         var maxLenght = document.getElementById('maxLenght').offsetWidth;

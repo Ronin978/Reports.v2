@@ -18,13 +18,11 @@ table
 {
 	border-collapse: collapse;
 	width: 100%;
-
 }
 
 textarea
 {
-	resize: vertical; 	
-	width: 99%;
+	overflow: hidden;
 } 
 
 #groupTable
@@ -89,6 +87,11 @@ td
 p
 {
 	margin: 0;
+}
+
+#mySelect
+{
+	width: 100%;
 }
 
 
