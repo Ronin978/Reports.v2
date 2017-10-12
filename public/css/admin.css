@@ -23,6 +23,7 @@ table
 textarea
 {
 	overflow: hidden;
+	width: 99%;
 } 
 
 #groupTable

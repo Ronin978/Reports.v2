@@ -9,10 +9,8 @@
 <div class="12u">   
 @include('flash::message')     
 <section>  
-    <form id="firstForm" method="POST" action="{{action('ReportController@store4')}}">
-   
-        <p align="center">ГКС {{$date}}</p>
-        <input id="date" type="hidden" name="date" value="{{$date}}">
+    <form id="firstForm" method="POST" action="{{action('ReportController@store4')}}">   
+        <p align="center">ГКС за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>
        
         <table id="table4">
             <tr id="firstTr">
@@ -29,7 +27,6 @@
                 <td id="maxLenght" class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
                 <td class="rotate">Зв’язок з лікарем консультантом
                 </td>
-                
             </tr> 
             <tr>
                 <td>
@@ -82,7 +79,10 @@
 </section>
 
 <section>  
-    <a href="{{action('ReportController@create5', ['date'=>$date])}}">Слідуюча таблиця</a>
+    <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'fatal'])}}">
+        <input id="toDate" type="hidden" name="date" value="">
+        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
+    </form>
 
      <div class="gotoback" onclick="window.history.go(-1); return false;">
         <p>Назад</p>                        

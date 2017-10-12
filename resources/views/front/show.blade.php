@@ -16,10 +16,9 @@
 		<section>	
 		@foreach ($ojects as $key => $obj)
 		
-			<form id="myform{{$key}}" method="POST" action="{{action('FrontController@myShow', ['date' => $obj->date, 'table'=>$table])}}">
+			<form id="myform{{$key}}" method="GET" action="{{action('FrontController@myShow', ['date' => $obj->date, 'table'=>$table])}}">
 				
 				<input type="hidden" name="title" value="{{$title}}">
-				<input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
 
 			
@@ -32,6 +31,9 @@
 			<hr>
 		
 		@endforeach
+
+		<a href="{{action('ReportController@create', ['table'=>$table, 'date'=>date('Y-m-d')])}}">Додати новий звіт</a>
+
 		</section>
 
 		

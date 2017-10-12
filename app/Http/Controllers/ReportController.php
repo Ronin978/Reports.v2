@@ -15,95 +15,67 @@ use App\Report6;
 
 class ReportController extends Controller
 {
-    public function create1()
-    {
-        $types = Group::where('group', 'call')->get()->first();
-        $typ = explode(";", $types->title);
-
-        $sections = Group::where('group', 'sections')->get()->first();
-        $sect = explode(";", $sections->title);
-
-        $gospit = Group::where('group', 'gosp')->get()->first();
-        $gosp = explode(";", $gospit->title);
-
-        $region = Group::where('group', 'region')->get()->first();
-        $reg = explode(";", $region->title);
-
-        return view('report.create1', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg]);
-    }
-
-    public function create2(Request $request)
-    { 
-        $date = ($request->all())['date'];
-        return view('report.create2', ['date'=>$date]);
-    }
-
-    public function create3(Request $request)
+    public function create($table, Request $request)
     {
         $date = ($request->all())['date'];
-        return view('report.create3', ['date'=>$date]);
-    }
+        switch ($table) {
+            case 'Report1':
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
 
-    public function create4(Request $request)
-    {
-        $date = ($request->all())['date'];
-        return view('report.create4', ['date'=>$date]);
-    }
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
 
-    public function create5(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'Смертність в присутності бригади (успішна реанімація)';
-        $pidtype = 'fatal';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
-    }
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
 
-    public function create6(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'ДТП і «НС» (надзвичайні стани)';
-        $pidtype = 'dtp+ns';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
-    }
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
 
-    public function create7(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'Складні травми';
-        $pidtype = 'high_travmy';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
+                return view('report.create1', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'date'=>$date]);
+                break;
+            case 'Report2':                
+                return view('report.create2', ['date'=>$date]);
+                break;
+            case 'Report3':
+                return view('report.create3', ['date'=>$date]);
+                break;
+            case 'Report4':
+                return view('report.create4', ['date'=>$date]);
+                break;
+            case 'Report6':
+                return view('report.create6', ['date'=>$date]);
+                break;
+            default:
+                switch ($table) 
+                {
+                    case 'fatal':
+                        $title = 'Смертність в присутності бригади (успішна реанімація)';
+                        break;
+                    case 'dtp+ns':
+                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        break;
+                    case 'high_travmy':
+                        $title = 'Складні травми';
+                        break;
+                    case 'tr_kytyzi':
+                        $title = 'Травми китиці';
+                        break;
+                    case 'opic':
+                        $title = 'Опіки/ Переохолодження';
+                        break;
+                    case 'travmat':
+                        $title = 'Травматизм (кримінальний, виробничий)';
+                        break;
+                    
+                    default:
+                        $title = 'ERROR 404/ NOT FOUND';
+                        break;
+                }
+                return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$table]);
+                break;
+        }
     }
-
-    public function create8(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'Травми китиці';
-        $pidtype = 'tr_kytyzi';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
-    }
-
-    public function create9(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'Опіки/ Переохолодження';
-        $pidtype = 'opic';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
-    }
-
-    public function create10(Request $request)
-    {
-        $date = ($request->all())['date'];
-        $title = 'Травматизм (кримінальний, виробничий)';
-        $pidtype = 'travmat';
-        return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$pidtype]);
-    }
-
-    public function create11(Request $request)
-    {
-        $date = ($request->all())['date'];
-        return view('report.create6', ['date'=>$date]);
-    }
-
 
     public function store1(Request $request)
     {
@@ -223,8 +195,8 @@ class ReportController extends Controller
             Report1::create($report); 
         }
         flash('Дані внесені.');
-        return redirect()->action('ReportController@create2', 
-            ['date'=>$post['date']]);
+        return redirect()->action('FrontController@myShow', 
+            ['date'=>$post['date'], 'table'=>'Report1', 'title'=>'Report1']);
     }
 
     public function store2(Request $request)

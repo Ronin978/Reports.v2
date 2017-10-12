@@ -54,7 +54,7 @@
                 <td>{{$sect}}<br>
                     <input type="text" id="value{{$key+1}}" class="two" name="value{{$key+1}}" size="15" value="{{($inf[4])[$key]}}">
                 </td>
-                @if ( ($key+1) % 7 == 0)
+                @if ( ($key+1) % 8 == 0)
                     </tr>
                     <tr>
                 @endif
@@ -81,14 +81,14 @@
     $variable += $key - 1;
 ?>     
         <table id="table1-4">
-            <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
+            <tr><td colspan="10">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
                         <input type="text" id="value{{$key+count($sections)+count($gospit)+1}}" name="value{{$key+count($sections)+count($gospit)+1}}" class="two" oninput = "oninput2({{$variable}}, {{$variable+count($inf[3])-1}})" size="10" value="{{($inf[3])[$key]}}">
                     </td>
-                    @if ( ($key+1) % 9 == 0)
+                    @if ( ($key+1) % 10 == 0)
                         </tr>
                         <tr>
                     @endif

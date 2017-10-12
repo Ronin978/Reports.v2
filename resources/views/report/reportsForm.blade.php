@@ -47,7 +47,7 @@
                 <td>{{$sect}}<br>
                     {{($inf[4])[$key]}}
                 </td>
-                @if ( ($key+1) % 7 == 0)
+                @if ( ($key+1) % 8 == 0)
                     </tr>
                     <tr>
                 @endif
@@ -74,22 +74,22 @@
     for ($i=0; $i < count($inf[3]); $i++) 
     { 
         $summa = explode("+", $inf[3][$i]);
-        $a += $summa[0];
+        $a += intval($summa[0]);
          if(!empty($summa[1]))
         {
-            $b += $summa[1];
+            $b += intval($summa[1]);
         }
     }
 ?>        
         <table id="table1-4">
-             <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span>{{$a}}</span> + <span>{{$b}}</span></td> </tr>
+             <tr><td colspan="10">Невідкладна допомога (ПМСД)   <span>{{$a}}</span> + <span>{{$b}}</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
                         {{($inf[3])[$key]}} 
                     </td>
-                    @if ( ($key+1) % 9 == 0)
+                    @if ( ($key+1) % 10 == 0)
                         </tr>
                         <tr>
                     @endif

@@ -47,7 +47,7 @@
                 <td>{{$sect}}<br>
                     {{($inf[4])[$key]}}
                 </td>
-                @if ( ($key+1) % 7 == 0)
+                @if ( ($key+1) % 8 == 0)
                     </tr>
                     <tr>
                 @endif
@@ -71,14 +71,14 @@
        
 
         <table id="table1-4">
-            <tr><td colspan="9">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
+            <tr><td colspan="10">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
             <tr>
                 @foreach ($region as $key => $reg)
                     
                     <td>{{$reg}}<br>
                         {{($inf[3])[$key]}} 
                     </td>
-                    @if ( ($key+1) % 9 == 0)
+                    @if ( ($key+1) % 10 == 0)
                         </tr>
                         <tr>
                     @endif

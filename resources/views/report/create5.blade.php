@@ -11,10 +11,8 @@
 <section>  
     <form id="firstForm" method="POST" action="{{action('ReportController@store5')}}">
    
-        <p align="center"> {{"$title"."   $date"}}</p>
+        <p align="center"> {{"$title"}} за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>
         <input type="hidden" name="pidtype" value="{{$pidtype}}">
-        <input id="date" type="hidden" name="date" value="{{$date}}">
-       
         <table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -65,18 +63,21 @@
 
 <section>            
     @if ($pidtype=='fatal')
-        <a href="{{action('ReportController@create6', ['date'=>$date])}}">Слідуюча таблиця</a>
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'dtp+ns'])}}">
     @elseif($pidtype=='dtp+ns')
-        <a href="{{action('ReportController@create7', ['date'=>$date])}}">Слідуюча таблиця</a>
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'high_travmy'])}}">
     @elseif($pidtype=='high_travmy')
-        <a href="{{action('ReportController@create8', ['date'=>$date])}}">Слідуюча таблиця</a>
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'tr_kytyzi'])}}">
     @elseif($pidtype=='tr_kytyzi')
-        <a href="{{action('ReportController@create9', ['date'=>$date])}}">Слідуюча таблиця</a>
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'opic'])}}">
     @elseif($pidtype=='opic')
-        <a href="{{action('ReportController@create10', ['date'=>$date])}}">Слідуюча таблиця</a>
+       <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'travmat'])}}">
     @elseif($pidtype=='travmat')
-        <a href="{{action('ReportController@create11', ['date'=>$date])}}">Слідуюча таблиця</a>
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report6'])}}">
     @endif
+    <input id="toDate" type="hidden" name="date" value="">
+        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
+    </form>
 
     <div class="gotoback" onclick="window.history.go(-1); return false;">
         <p>Назад</p>                        

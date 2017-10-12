@@ -16,7 +16,7 @@
            
                  <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>       
 
-        за чергування <input id="firstdate" type="date" name="date" value="{{date('Y-m-d')}}"> .</p>      
+        за чергування <input id="firstdate" type="date" name="date" value="{{$date}}"> .</p>      
     
 
         Екстр. - <input type="text" id="extr" name="valuei">
@@ -111,7 +111,7 @@
     </form>
 </section>                
 <section>                
-    <form id="twoform" method="GET" action="{{action('ReportController@create2')}}">
+    <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report2'])}}">
         <input id="toDate" type="hidden" name="date" value="">
        
 

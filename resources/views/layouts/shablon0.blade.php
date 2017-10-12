@@ -58,7 +58,7 @@
                         
                         <div class="nav navbar-nav navbar-right">  
 
-                            <a href="{{action('ReportController@create1')}}">Створити щоденний звіт</a>
+                            <a href="{{action('ReportController@create', ['table'=>'Report1', 'date'=>date('Y-m-d')])}}">Створити щоденний звіт</a>
                            
 
                            <!-- 

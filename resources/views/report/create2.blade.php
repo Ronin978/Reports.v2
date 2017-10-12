@@ -9,66 +9,65 @@
 <div class="12u">   
 @include('flash::message')     
 <section>
-    <form id="firstForm" method="POST" action="{{action('ReportController@store2')}}">
+    <form id="firstForm" method="POST" action="{{action('ReportController@store2')}}">    
     
-    
-        <p align="center">Інформація по запізненнях бригад на виклики за {{$date}}</p>
-        <input id="date" type="hidden" name="date" value="{{$date}}">
-            <table id="table2">
-                <tr id="firstTr">
-                    <td>№<br>п/п</td>
-                    <td>Відділення / пункт що має обслуговувати</td>
-                    <td>№ виїзної карти /е(н)</td>
-                    <td>Адреса виклику (район)</td>
-                    <td>№ Бригада що обслуговувала</td>
-                    <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
-                    <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
-                    <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
-                    <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
-                </tr> 
-                <tr>
-                    <td>
-                        <DIV>1</DIV>
-                    </td>
-                    <td>
-                        <textarea name="punkt0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="no_card0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="adress0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="brig0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="time0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="support0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="cause0" rows="1" data="elastic"></textarea>
-                    </td>
-                    <td>
-                        <textarea name="call0" rows="1"></textarea>
-                    </td>
-                </tr>                           
-                                    
-            </table>
+        <p align="center">Інформація по запізненнях бригад на виклики за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>        
+        <table id="table2">
+            <tr id="firstTr">
+                <td>№<br>п/п</td>
+                <td>Відділення / пункт що має обслуговувати</td>
+                <td>№ виїзної карти /е(н)</td>
+                <td>Адреса виклику (район)</td>
+                <td>№ Бригада що обслуговувала</td>
+                <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
+                <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
+                <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
+                <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
+            </tr> 
+            <tr>
+                <td>
+                    <DIV>1</DIV>
+                </td>
+                <td>
+                    <textarea name="punkt0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="no_card0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="adress0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="brig0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="time0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="support0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="cause0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <textarea name="call0" rows="1"></textarea>
+                </td>
+            </tr>              
+        </table>
 
-            <button type="button" onclick="AddLine2()" >Додати стрічку</button>
-        
-            <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-            <br>
-            <input type="submit" value="Зберегти та продовжити">
-        
+        <button type="button" onclick="AddLine2()" >Додати стрічку</button>
+    
+        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+        <br>
+        <input type="submit" value="Зберегти та продовжити">
     </form> 
 </section>           
     
 <section>
-    <a href="{{action('ReportController@create3', ['date'=>$date])}}">Слідуюча таблиця</a>
+    <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report3'])}}">
+        <input id="toDate" type="hidden" name="date" value="">
+        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
+    </form>
 
     <div class="gotoback" onclick="window.history.go(-1); return false;">
         <p>Назад</p>                        

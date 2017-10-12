@@ -11,8 +11,7 @@
 <section>
     <form id="firstForm" method="POST" action="{{action('ReportController@store6')}}">
 
-        <p align="center">Зауваження по роботі, скарги, подяки {{$date}}</p>
-        <input id="date" type="hidden" name="date" value="{{$date}}">
+        <p align="center">Зауваження по роботі, скарги, подяки за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>
     
         <table id="table6">
             <tr id="firstTr">
