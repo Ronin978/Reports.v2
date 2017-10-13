@@ -40,9 +40,7 @@ Route::group(['prefix'=>'report','middleware'=>'auth'], function()
 	Route::get('/edit/{table}/{date}', 'FrontController@edit');
 });
 
-
 Route::post('/reports/{date}', 'ReportController@reportsForm');
-
 
 Route::resource('/groups', 'GroupController');
 

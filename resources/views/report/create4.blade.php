@@ -33,37 +33,37 @@
                     <div>1</div>
                 </td>
                 <td>
-                    <textarea name="date0" rows="1"></textarea>
+                    <textarea name="date0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="no_card0" rows="1"></textarea>
+                    <textarea name="no_card0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="adress0" rows="1"></textarea>
+                    <textarea name="adress0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="pib0" rows="1"></textarea>
+                    <textarea name="pib0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="age0" rows="1"></textarea>
+                    <textarea name="age0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="diagnoz0" rows="1"></textarea>
+                    <textarea name="diagnoz0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="brig0" rows="1"></textarea>
+                    <textarea name="brig0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="tromb0" rows="1"></textarea>
+                    <textarea name="tromb0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                   <textarea name="stent0" rows="1"></textarea>
+                   <textarea name="stent0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="gospital0" rows="1"></textarea>
+                    <textarea name="gospital0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="support0" rows="1"></textarea>
+                    <textarea name="support0" rows="1" data="elastic"></textarea>
                 </td>
 
             </tr>                           

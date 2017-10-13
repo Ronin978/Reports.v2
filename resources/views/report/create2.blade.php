@@ -29,7 +29,7 @@
                     <DIV>1</DIV>
                 </td>
                 <td>
-                    <textarea name="punkt0" rows="1" data="elastic"></textarea>
+                    <textarea name="punkt0" rows="1" data = "elastic"></textarea>
                 </td>
                 <td>
                     <textarea name="no_card0" rows="1" data="elastic"></textarea>
@@ -50,7 +50,7 @@
                     <textarea name="cause0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="call0" rows="1"></textarea>
+                    <textarea name="call0" rows="1"  data="elastic"></textarea>
                 </td>
             </tr>              
         </table>

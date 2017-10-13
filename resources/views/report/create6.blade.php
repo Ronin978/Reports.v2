@@ -26,16 +26,16 @@
                     1
                 </td>
                 <td>
-                    <textarea name="date0" rows="1"></textarea>
+                    <textarea name="date0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="no_card0" rows="1"></textarea>
+                    <textarea name="no_card0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="subdiv0" rows="1"></textarea>
+                    <textarea name="subdiv0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="other0" rows="1"></textarea>
+                    <textarea name="other0" rows="1" data="elastic"></textarea>
                 </td>
                 
             </tr>                           

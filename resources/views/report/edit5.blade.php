@@ -32,25 +32,25 @@
                     <div>{{$key+1}}</div>
                 </td>
                 <td>
-                    <textarea name="date{{$key}}" rows="1">{{$report->timer}}</textarea>
+                    <textarea name="date{{$key}}" rows="1" data="elastic">{{$report->timer}}</textarea>
                 </td>
                 <td>
-                    <textarea name="title{{$key}}" rows="1">{{$report->title}}</textarea>
+                    <textarea name="title{{$key}}" rows="1" data="elastic">{{$report->title}}</textarea>
                 </td>
                 <td>
-                    <textarea name="adress{{$key}}" rows="1">{{$report->adress}}</textarea>
+                    <textarea name="adress{{$key}}" rows="1" data="elastic">{{$report->adress}}</textarea>
                 </td>
                 <td>
-                    <textarea name="pib{{$key}}" rows="1">{{$report->pib}}</textarea>
+                    <textarea name="pib{{$key}}" rows="1" data="elastic">{{$report->pib}}</textarea>
                 </td>
                 <td>
-                    <textarea name="no_card{{$key}}" rows="1">{{$report->no_card}}</textarea>
+                    <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
-                    <textarea name="brig{{$key}}" rows="1">{{$report->brig}}</textarea>
+                    <textarea name="brig{{$key}}" rows="1" data="elastic">{{$report->brig}}</textarea>
                 </td>
                 <td>
-                    <textarea name="other{{$key}}" rows="1">{{$report->other}}</textarea>
+                    <textarea name="other{{$key}}" rows="1" data="elastic">{{$report->other}}</textarea>
                 </td>
                 
             </tr>                           

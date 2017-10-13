@@ -31,28 +31,28 @@
                     <DIV>{{$key+1}}</DIV>
                 </td>
                 <td>
-                    <textarea name="punkt{{$key}}" rows="1">{{$report->punkt}}</textarea>
+                    <textarea name="punkt{{$key}}" rows="1" data="elastic">{{$report->punkt}}</textarea>
                 </td>
                 <td>
-                    <textarea name="no_card{{$key}}" rows="1">{{$report->no_card}}</textarea>
+                    <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
-                    <textarea name="adress{{$key}}" rows="1">{{$report->adress}}</textarea>
+                    <textarea name="adress{{$key}}" rows="1" data="elastic">{{$report->adress}}</textarea>
                 </td>
                 <td>
-                    <textarea name="brig{{$key}}" rows="1">{{$report->brig}}</textarea>
+                    <textarea name="brig{{$key}}" rows="1" data="elastic">{{$report->brig}}</textarea>
                 </td>
                 <td>
-                    <textarea name="time{{$key}}" rows="1">{{$report->time}}</textarea>
+                    <textarea name="time{{$key}}" rows="1" data="elastic">{{$report->time}}</textarea>
                 </td>
                 <td>
-                    <textarea name="support{{$key}}" rows="1">{{$report->support}}</textarea>
+                    <textarea name="support{{$key}}" rows="1" data="elastic">{{$report->support}}</textarea>
                 </td>
                 <td>
-                    <textarea name="cause{{$key}}" rows="1">{{$report->cause}}</textarea>
+                    <textarea name="cause{{$key}}" rows="1" data="elastic">{{$report->cause}}</textarea>
                 </td>
                 <td>
-                    <textarea name="call{{$key}}" rows="1">{{$report->call}}</textarea>
+                    <textarea name="call{{$key}}" rows="1" data="elastic">{{$report->call}}</textarea>
                 </td>
             </tr>                           
             @endforeach                    

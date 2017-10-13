@@ -30,34 +30,34 @@
                     <div>1</div>
                 </td>
                 <td>
-                    <textarea name="date0" rows="1"></textarea>
+                    <textarea name="date0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="no_card0" rows="1"></textarea>
+                    <textarea name="no_card0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="pib0" rows="1"></textarea>
+                    <textarea name="pib0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="at0" rows="1"></textarea>
+                    <textarea name="at0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="from0" rows="1"></textarea>
+                    <textarea name="from0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="direct0" rows="1"></textarea>
+                    <textarea name="direct0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="who_direct0" rows="1"></textarea>
+                    <textarea name="who_direct0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="diagnoz0" rows="1"></textarea>
+                    <textarea name="diagnoz0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="brig0" rows="1"></textarea>
+                    <textarea name="brig0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="other0" rows="1"></textarea>
+                    <textarea name="other0" rows="1" data="elastic"></textarea>
                 </td>
 
             </tr>                           

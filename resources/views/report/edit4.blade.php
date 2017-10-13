@@ -37,37 +37,37 @@
                     <div>{{$key+1}}</div>
                 </td>
                 <td>
-                    <textarea name="date{{$key}}" rows="1">{{$report->timer}}</textarea>
+                    <textarea name="date{{$key}}" rows="1" data="elastic">{{$report->timer}}</textarea>
                 </td>
                 <td>
-                    <textarea name="no_card{{$key}}" rows="1">{{$report->no_card}}</textarea>
+                    <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
-                    <textarea name="adress{{$key}}" rows="1">{{$report->adress}}</textarea>
+                    <textarea name="adress{{$key}}" rows="1" data="elastic">{{$report->adress}}</textarea>
                 </td>
                 <td>
-                    <textarea name="pib{{$key}}" rows="1">{{$report->pib}}</textarea>
+                    <textarea name="pib{{$key}}" rows="1" data="elastic">{{$report->pib}}</textarea>
                 </td>
                 <td>
-                    <textarea name="age{{$key}}" rows="1">{{$report->age}}</textarea>
+                    <textarea name="age{{$key}}" rows="1" data="elastic">{{$report->age}}</textarea>
                 </td>
                 <td>
-                    <textarea name="diagnoz{{$key}}" rows="1">{{$report->diagnoz}}</textarea>
+                    <textarea name="diagnoz{{$key}}" rows="1" data="elastic">{{$report->diagnoz}}</textarea>
                 </td>
                 <td>
-                    <textarea name="brig{{$key}}" rows="1">{{$report->brig}}</textarea>
+                    <textarea name="brig{{$key}}" rows="1" data="elastic">{{$report->brig}}</textarea>
                 </td>
                 <td>
-                    <textarea name="tromb{{$key}}" rows="1">{{$report->tromb}}</textarea>
+                    <textarea name="tromb{{$key}}" rows="1" data="elastic">{{$report->tromb}}</textarea>
                 </td>
                 <td>
-                   <textarea name="stent{{$key}}" rows="1">{{$report->stent}}</textarea>
+                   <textarea name="stent{{$key}}" rows="1" data="elastic">{{$report->stent}}</textarea>
                 </td>
                 <td>
-                   <textarea name="gospital{{$key}}" rows="1">{{$report->gospital}}</textarea>
+                   <textarea name="gospital{{$key}}" rows="1" data="elastic">{{$report->gospital}}</textarea>
                 </td>
                 <td>
-                    <textarea name="support{{$key}}" rows="1">{{$report->support}}</textarea>
+                    <textarea name="support{{$key}}" rows="1" data="elastic">{{$report->support}}</textarea>
                 </td>
 
             </tr>                           

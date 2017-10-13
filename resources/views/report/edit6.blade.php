@@ -28,16 +28,16 @@
                     {{$key+1}}
                 </td>
                 <td>
-                    <textarea name="date{{$key}}" rows="1">{{$report->timer}}</textarea>
+                    <textarea name="date{{$key}}" rows="1" data="elastic">{{$report->timer}}</textarea>
                 </td>
                 <td>
-                    <textarea name="no_card{{$key}}" rows="1">{{$report->no_card}}</textarea>
+                    <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
-                    <textarea name="subdiv{{$key}}" rows="1">{{$report->subdiv}}</textarea>
+                    <textarea name="subdiv{{$key}}" rows="1" data="elastic">{{$report->subdiv}}</textarea>
                 </td>
                 <td>
-                    <textarea name="other{{$key}}" rows="1">{{$report->other}}</textarea>
+                    <textarea name="other{{$key}}" rows="1" data="elastic">{{$report->other}}</textarea>
                 </td>
                 
             </tr>                           
