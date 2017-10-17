@@ -70,7 +70,8 @@ class ReportController extends Controller
                     
                     default:
                         $title = 'ERROR 404/ NOT FOUND';
-                        break;
+                        return view('front.error', ['title'=>$title]);
+                        break 2;
                 }
                 return view('report.create5', ['date'=>$date, 'title'=>$title, 'pidtype'=>$table]);
                 break;
@@ -196,7 +197,7 @@ class ReportController extends Controller
         }
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report1', 'title'=>'Report1']);
+            ['date'=>$post['date'], 'table'=>'Report1', 'title'=>'Статистика']);
     }
 
     public function store2(Request $request)
@@ -233,8 +234,8 @@ class ReportController extends Controller
                 }
             }
         flash('Дані внесені.');
-        return redirect()->action('ReportController@create3', 
-            ['date'=>$post['date']]);
+        return redirect()->action('FrontController@myShow', 
+            ['date'=>$post['date'], 'table'=>'Report2', 'title'=>'Інформація по запізненнях бригад на виклики']);
     }
 	
 	public function store3(Request $request)
@@ -273,8 +274,8 @@ class ReportController extends Controller
                 }
             }
         flash('Дані внесені.');
-        return redirect()->action('ReportController@create4', 
-            ['date'=>$post['date']]);
+       return redirect()->action('FrontController@myShow', 
+            ['date'=>$post['date'], 'table'=>'Report3', 'title'=>'Транспортування на Луцьк (Київ)']);
     }
 	
 	public function store4(Request $request)
@@ -314,8 +315,8 @@ class ReportController extends Controller
                 }
             }
         flash('Дані внесені.');
-        return redirect()->action('ReportController@create5', 
-            ['date'=>$post['date']]);
+        return redirect()->action('FrontController@myShow', 
+            ['date'=>$post['date'], 'table'=>'Report4', 'title'=>'ГКС']);
     }
 
     public function store5(Request $request)
@@ -325,8 +326,7 @@ class ReportController extends Controller
         $report['pidtype'] = $post["pidtype"];
         $report['users'] = Auth::user()->name;
         for ($i=0; $i < (count($post)-3)/8 ; $i++) 
-            {                
-                  
+            {      
                 $report['timer'] = $post["date$i"];  
                 $report['title'] = $post["title$i"];  
                 $report['adress'] = $post["adress$i"];  
@@ -354,31 +354,33 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
         
-        if ($report['pidtype'] == 'fatal') 
-        {
-            return redirect()->action('ReportController@create6', ['date'=>$post['date']]);
+        switch ($report['pidtype'])
+        { 
+            case 'fatal':
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'fatal', 'title'=>'Смертність в присутності бригади (успішна реанімація)']);
+                break;            
+            case 'dtp+ns': 
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'dtp+ns', 'title'=>'ДТП і «НС» (надзвичайні стани)']);
+                break;
+            case 'high_travmy':
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'high_travmy', 'title'=>'Складні травми']);
+                break;
+            case 'tr_kytyzi': 
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'tr_kytyzi', 'title'=>'Травми китиці']);
+                break;
+            case 'opic':
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'opic', 'title'=>'Опіки/ Переохолодження']);
+                break;
+            case 'travmat':
+                return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'travmat', 'title'=>'Травматизм (кримінальний, виробничий)']);
+                break;
         }
-        elseif ($report['pidtype'] == 'dtp+ns') 
-        {
-            return redirect()->action('ReportController@create7', ['date'=>$post['date']]);
-        }
-        elseif ($report['pidtype'] == 'high_travmy') 
-        {
-            return redirect()->action('ReportController@create8', ['date'=>$post['date']]);
-        }
-        elseif ($report['pidtype'] == 'tr_kytyzi') 
-        {
-            return redirect()->action('ReportController@create9', ['date'=>$post['date']]);
-        }
-        elseif ($report['pidtype'] == 'opic') 
-        {
-            return redirect()->action('ReportController@create10', ['date'=>$post['date']]);
-        }
-        elseif ($report['pidtype'] == 'travmat') 
-        {
-            return redirect()->action('ReportController@create11', ['date'=>$post['date']]);
-        }
-           
     }
 
     public function store6(Request $request)
@@ -411,19 +413,18 @@ class ReportController extends Controller
                 }
             }
         flash('Дані внесені.');
-        return redirect()->action('FrontController@index');
+        return redirect()->action('FrontController@myShow', 
+            ['date'=>$post['date'], 'table'=>'Report4', 'title'=>'Зауваження по роботі, скарги, подяки']);
     }
 
     public function update(Request $request, $table, $newDate)
     {
-    
     $post = $request->all();
     $updt = date('Y-m-d H:i:s');
     $date = $post['date'];
     switch ($table) 
         {
             case 'Report1':
-               
                 $sections = Group::where('group', 'sections')->first();
                 $sect = explode(";", $sections->title);
 

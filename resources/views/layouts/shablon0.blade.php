@@ -18,6 +18,8 @@
 
     <!-- Scripts -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    
     <script language="javascript">
     function CallPrint(strid) 
     { 
@@ -178,7 +180,6 @@
     
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
      
-    <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/skel.min.js')}}"></script>
     <script src="{{asset('js/skel-viewport.min.js')}}"></script>
     <script src="{{asset('js/util.js')}}"></script>

@@ -14,7 +14,7 @@
         <section>      
             <a href="{{action('FrontController@show', ['id'=>'Report1'])}}" class="bordered-feature-image"><img src="images/pic01.jpg" alt="" /></a>
             <p>
-                РАПОРТ старших лікарів змін за чергування
+                Статистика
             </p>
         </section>
     </div>
