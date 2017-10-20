@@ -99,14 +99,97 @@ class FrontController extends Controller
                 $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $title = 'Зауваження по роботі, скарги, подяки';
                 break;
-            case 'allReports':
-                      
-                        $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                        $title = 'РАПОРТ старших лікарів';
-                        break;
+            case 'allReports': 
+                $title = 'РАПОРТ старших лікарів';
+                $sort_flags = SORT_REGULAR;
+                
+                $obj1 = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj2 = Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj3 = Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj4 = Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj5 = Report5::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj6 = Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+//dd($obj6);
+                foreach ($obj1 as $key => $val1) 
+                {   
+                    $obj11['date'][$key] = $val1->date;
+                    $obj11['updated_at'][$key] = $val1->updated_at;
+                    $obj11['created_at'][$key] = $val1->created_at; 
+                }
+                foreach ($obj2 as $key => $val2) 
+                {   
+                    $obj22['date'][$key] = $val2->date;
+                    $obj22['updated_at'][$key] = $val2->updated_at;
+                    $obj22['created_at'][$key] = $val2->created_at; 
+                }
+                foreach ($obj3 as $key => $val3) 
+                {   
+                    $obj33['date'][$key] = $val3->date;
+                    $obj33['updated_at'][$key] = $val3->updated_at;
+                    $obj33['created_at'][$key] = $val3->created_at; 
+                }
+                foreach ($obj4 as $key => $val4) 
+                {   
+                    $obj44['date'][$key] = $val4->date; 
+                    $obj44['updated_at'][$key] = $val4->updated_at;
+                    $obj44['created_at'][$key] = $val4->created_at; 
+                }
+                foreach ($obj5 as $key => $val5) 
+                {   
+                    $obj55['date'][$key] = $val5->date;
+                    $obj55['updated_at'][$key] = $val5->updated_at;
+                    $obj55['created_at'][$key] = $val5->created_at; 
+                }
+                foreach ($obj6 as $key => $val6) 
+                {   
+                    $obj66['date'][$key] = $val6->date;
+                    $obj66['updated_at'][$key] = $val6->updated_at;
+                    $obj66['created_at'][$key] = $val6->created_at;
+                }
+               
+               // $array = rsort($arr);
+               // dd($obj33['date']);
+
+                $arr1 = array_merge($obj11['date'], $obj22['date'], $obj33['date'], $obj44['date'], $obj55['date'], $obj66['date']);
+
+                $arr2 = array_merge($obj11['updated_at'], $obj22['updated_at'], $obj33['updated_at'], $obj44['updated_at'], $obj55['updated_at'], $obj66['updated_at']);
+
+                $arr3 = array_merge($obj11['created_at'], $obj22['created_at'], $obj33['created_at'], $obj44['created_at'], $obj55['created_at'], $obj66['created_at']);
+
+                $array1 = array_unique($arr1);
+
+                $clon2 = clone $obj6;
+                
+               // 
+//dd($arr2[1]);
+                //Формуємо кінцевий масив
+
+                for ($key = 0; $key < count($array1); $key++) 
+                {
+                    $i = key($array1);
+                    //print($i);
+                    $clon1 = $clon2->items();//і-тий запис. В obj6 тільки 2 - '0' та '1'
+
+                    $clon['date'][$key] = $array1[$i];
+                    $clon['updated_at'][$key] = $arr2[$i];
+                    $clon['created_at'][$key] = $arr3[$i];
+/*
+                    $clon1->date = $clon['date'][$key];
+                    $clon1->updated_at = $clon['updated_at'][$key];
+                    $clon1->created_at = $clon['created_at'][$key];
+*/                
+                    next($array1);
+                }
+                
+                dd(get_class_methods($));
+              // $obj = (object)$objj;
+
+                
+                //this->список всіх можливих дат з різних моделей
+                break;
     //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
             default:
-                switch
+                switch ($id)
                 {
                     case 'fatal':
                         $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);

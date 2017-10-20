@@ -414,15 +414,15 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report4', 'title'=>'Зауваження по роботі, скарги, подяки']);
+            ['date'=>$post['date'], 'table'=>'Report6', 'title'=>'Зауваження по роботі, скарги, подяки']);
     }
 
     public function update(Request $request, $table, $newDate)
     {
-    $post = $request->all();
-    $updt = date('Y-m-d H:i:s');
-    $date = $post['date'];
-    switch ($table) 
+        $post = $request->all();
+        $updt = date('Y-m-d H:i:s');
+        $date = $post['date'];
+        switch ($table) 
         {
             case 'Report1':
                 $sections = Group::where('group', 'sections')->first();
