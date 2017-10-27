@@ -27,12 +27,12 @@
                         {{$type}}
                     </td>
                     <td>
-                        {{($reports[$key])->day}}
+                        {{$allReport['day'][$key]}}
                     </td>
                     <td>
-                        {{($reports[$key])->night}}
+                        {{$allReport['day'][$key]}}
                     </td>
-                    <td>{{($reports[$key])->day + ($reports[$key])->night}}</td>
+                    <td>{{$allReport['day'][$key] + $allReport['day'][$key]}}</td>
                 </tr>
             @endforeach           
         </table>
@@ -77,19 +77,7 @@
             </tr>                         
         </table>
     </section>
-    <section>  
-        <div class="btn-group"> 
-            <a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report2'])}}">
-                Слідуюча таблиця
-            </a>
-            <div class="gotoback" onclick="window.history.go(-1); return false;">
-                <p>Назад</p>                        
-            </div>
-            <a onClick="CallPrint('pagePrint');">   
-                Роздрукувати
-            </a>
-        </div>
-    </section>
+    
 </div>
 </div>
 </div>

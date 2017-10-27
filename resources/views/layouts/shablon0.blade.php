@@ -17,8 +17,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    
     
     <script language="javascript">
     function CallPrint(strid) 
@@ -68,9 +69,9 @@
                             @if (Auth::guest())
                                 <a href="{{ route('login') }}">Вхід</a>
                             @else
-                                <a href="{{action('ReportController@create', ['table'=>'Report1', 'date'=>date('Y-m-d')])}}">Створити щоденний звіт</a>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <a href="{{action('ReportController@create', ['table'=>'Report1', 'date'=>date('Y-m-d')])}}" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити щоденний звіт</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onmouseover="myHover('user', 'ov');" onmouseout="myHover('user', 'out');">
+                                <img id="user" src="{{asset('css/ico/user.png')}}" class="ico"> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a> 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>

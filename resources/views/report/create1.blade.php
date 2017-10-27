@@ -110,13 +110,15 @@
         </script>
     </form>
 </section>                
-<section>                
-    <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report2'])}}">
-        <input id="toDate" type="hidden" name="date" value="">
-       
+<section>  
+    <div class="btn-group">              
+        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report2'])}}">
+            <input id="toDate" type="hidden" name="date" value="">
+           
 
-        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
-    </form>
+            <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
+        </form>
+    </div>
 </section>
 </div>
 </div>

@@ -8,9 +8,9 @@
 <div class="row">
 <div class="12u">	
 @include('flash::message')
-	<section >
+	<section id="pagePrint">
 		
-	<h3 align="center" >{{$title}} за {{$reports[0]->date}}</h3>
+	<h3 align="center" >Транспортування на Луцьк (Київ) за {{$date}}</h3>
 		<table id="table3">
 			 <tr id="firstTr">
                 <td >№<br>п/п</td>
@@ -26,7 +26,7 @@
                 <td>Примітки</td>
             </tr> 
 			@foreach ($reports as $key=>$report)
-			@if($report->first())
+			
 			<tr>
 				<td>
 					{{$key+1}}
@@ -62,10 +62,24 @@
 					{{$report->other}}
 				</td>
 			</tr>
-			@endif
+			
 			@endforeach
 		</table>
-		
+	</section>
+	<section>  
+	    <div class="btn-group"> 
+	    @if (!empty($reports->first()))
+	        <a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report4'])}}">
+	            Слідуюча таблиця
+	        </a>
+	    @endif
+	        <div class="gotoback" onclick="window.history.go(-1); return false;">
+	            <p>Назад</p>                        
+	        </div>
+	        <a onClick="CallPrint('pagePrint');">   
+	            Роздрукувати
+	        </a>
+	    </div>
 	</section>
 </div>
 </div>

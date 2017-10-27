@@ -22,7 +22,7 @@ Route::get('/', 'FrontController@index');
 Route::get('/show/{id}', 'FrontController@show');
 Route::get('/QuickFind', 'FrontController@QuickFind');
 Route::get('/DateFind', 'FrontController@DateFind');
-Route::get('/myShow/{table}/{date}', 'FrontController@myShow');
+Route::get('/myShow/{date}/{table}', 'FrontController@myShow');
 
 Route::group(['prefix'=>'report','middleware'=>'auth'], function()
 { 

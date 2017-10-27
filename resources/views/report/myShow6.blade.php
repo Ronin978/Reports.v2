@@ -8,8 +8,8 @@
 <div class="row">
 <div class="12u">	
 @include('flash::message')
-	<section >	
-		<h2 align="center" >{{$title}} за {{$reports[0]->date}}</h2>
+	<section id="pagePrint">	
+		<h2 align="center" >Зауваження по роботі, скарги, подяки за {{$date}}</h2>
 		 <table id="twoTable" border="1">
             <tr class="firstTr">
                 <td class="firstColumn">№<br>п/п</td>
@@ -38,6 +38,14 @@
 			</tr>
 			@endforeach
 		</table>
+	</section>
+	<section>                
+	@if (!empty($reports->first()))
+	    <a href="{{action('FrontController@index', ['date'=>$date])}}">Завершити</a>
+	@endif
+	    <div class="gotoback" onclick="window.history.go(-1); return false;">
+	    	<p>Назад</p>                        
+	    </div>
 	</section>
 </div>
 </div>

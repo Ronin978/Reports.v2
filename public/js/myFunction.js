@@ -1,6 +1,5 @@
 window.onload=function()
 {
-    
     if (document.getElementById('maxLenght') !== null) 
     {        
         var maxLenght = document.getElementById('maxLenght').offsetWidth;
@@ -206,4 +205,19 @@ function sizeAuto(key)
     {
         document.getElementById(key).size = fact + 4;
     }
+}
+
+function myHover(nameId, type)
+{
+    var tag = document.getElementById(nameId);
+    if (type == 'ov') 
+    {
+        
+        tag.src = '{{asset(\'css/ico/'+nameId+'_active.png\')}}';
+    }
+    if (type == 'out')
+    {
+        tag.src = 'css/ico/'+nameId+'.png';
+    }
+    
 }

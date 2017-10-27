@@ -153,8 +153,7 @@
                         <input type="date" name="date" value="{{date('Y-m-d')}}" >
 
                         <input type="submit" value="Сформувати">
-                    </form>
-                
+                    </form>                
         </section>
 
         <section>

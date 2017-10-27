@@ -101,7 +101,7 @@ class FrontController extends Controller
                 break;
             case 'allReports': 
                 $title = 'РАПОРТ старших лікарів';
-                $sort_flags = SORT_REGULAR;
+/*                $sort_flags = SORT_REGULAR;
                 
                 $obj1 = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $obj2 = Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
@@ -110,6 +110,7 @@ class FrontController extends Controller
                 $obj5 = Report5::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $obj6 = Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
 //dd($obj6);
+                
                 foreach ($obj1 as $key => $val1) 
                 {   
                     $obj11['date'][$key] = $val1->date;
@@ -159,9 +160,17 @@ class FrontController extends Controller
                 $array1 = array_unique($arr1);
 
                 $clon2 = clone $obj6;
-                
+                $paginator = clone $obj1;
+
+                $paginator->getCollection()->transform(function ($value) 
+                {
+                        // Your code here    
+                });
+
+
+
                // 
-//dd($arr2[1]);
+//dd($obj6);
                 //Формуємо кінцевий масив
 
                 for ($key = 0; $key < count($array1); $key++) 
@@ -173,17 +182,18 @@ class FrontController extends Controller
                     $clon['date'][$key] = $array1[$i];
                     $clon['updated_at'][$key] = $arr2[$i];
                     $clon['created_at'][$key] = $arr3[$i];
-/*
-                    $clon1->date = $clon['date'][$key];
-                    $clon1->updated_at = $clon['updated_at'][$key];
-                    $clon1->created_at = $clon['created_at'][$key];
-*/                
+
+//                    $clon1->date = $clon['date'][$key];
+//                    $clon1->updated_at = $clon['updated_at'][$key];
+//                    $clon1->created_at = $clon['created_at'][$key];
+                
                     next($array1);
                 }
                 
-                dd(get_class_methods($));
-              // $obj = (object)$objj;
-
+                //dd(get_class_methods($));
+              //dd($clon);
+    */
+                $obj = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 
                 //this->список всіх можливих дат з різних моделей
                 break;
@@ -222,6 +232,153 @@ class FrontController extends Controller
                 }
         }
         return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$id]);
+    }
+
+    public function myShow($date, $table)
+    {
+        $datell = explode('-', $date);
+        $dateD = "$datell[2]-$datell[1]-$datell[0]";
+        switch ($table) 
+        {
+            case 'Report1':
+                //Заголовки
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
+
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
+
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
+
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
+                //Заголовки END
+                //Date Table
+                $reports = Report1::where('date', $date)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {    
+                    for ($i=1; $i <= 4; $i++)
+                    {
+                        $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
+                        $inf[$i] = explode(";", $info[$i]->value);
+                    }
+                 
+                    return view('report.myShow1', ['date'=>$dateD, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'inf'=>$inf]);
+                }
+                break;
+            case 'Report2':
+                $reports = Report2::where('date', $date)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {    
+                    return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
+                }
+                break;
+            case 'Report3':
+                $reports = Report3::where('date', $date)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {    
+                    return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
+                }
+                break;
+            case 'Report4':
+                $reports = Report4::where('date', $date)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {    
+                    return view('report.myShow4', ['reports'=>$reports, 'date'=>$dateD]);
+                }
+                break;
+            case 'Report6':
+                $reports = Report6::where('date', $date)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {    
+                    return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
+                }
+                break;
+            case 'allReports':
+        //and fullReport
+        //Report1
+               
+                $types = Group::where('group', 'call')->get()->first();
+                $typ = explode(";", $types->title);
+
+                $sections = Group::where('group', 'sections')->get()->first();
+                $sect = explode(";", $sections->title);
+
+                $gospit = Group::where('group', 'gosp')->get()->first();
+                $gosp = explode(";", $gospit->title);
+
+                $region = Group::where('group', 'region')->get()->first();
+                $reg = explode(";", $region->title);
+               
+                $reports1 = Report1::where('date', $date)->get();
+                for ($i=1; $i <= 4; $i++)
+                {
+                    $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();                    
+                    $inf[$i] = explode(";", $info[$i]->value);
+                    //dd(($inf[$i]));
+                }
+               
+            //end Report1
+                $reports2 = Report2::where('date', $date)->get();//Report2
+                $reports3 = Report3::where('date', $date)->get();//Report3
+                $reports4 = Report4::where('date', $date)->get();//Report4
+            //Report5
+                
+                $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+                foreach ($tables as $key => $table) 
+                {
+                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
+                }
+                
+            //end Report5
+                $reports6 = Report6::where('date', $date)->get();//Report11
+                
+                return view('report.reportsForm', ['date'=>$dateD, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
+                break;
+        //end Full Report
+            case 'fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
+                
+                    $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                if (empty($reports->first())) 
+                {
+                    flash('Звіту з такою датою не існує.');
+                    return back();
+                }
+                else
+                {               
+                    return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$table]);
+                }
+                break;
+            
+            default:
+                $table = 'ERROR';
+        }
     }
 
     public function DateFind(Request $request)
@@ -276,10 +433,22 @@ class FrontController extends Controller
         }
     }
 
-    public function myShow(Request $request, $table, $date)
+    
+    public function QuickFind(Request $request)
     {
-        $req = $request->all();
-        $title = $req['title'];
+        $post = $request->all();
+        
+        $dateStart = $post['dateStart'];
+        $dateEnd = $post['dateEnd'];
+        $table = $post['table'];
+        $date = "$dateStart --- $dateEnd";
+
+        $date1 = date_create($dateEnd);
+        $date2 = date_create($dateStart);
+        $dateCount = date_diff($date1, $date2)->days;
+
+        
+
         switch ($table) 
         {
             case 'Report1':
@@ -296,14 +465,39 @@ class FrontController extends Controller
                 $region = Group::where('group', 'region')->get()->first();
                 $reg = explode(";", $region->title);
                 //Заголовки END
-                //Date Table
-                $reports = Report1::where('date', $date)->get();
-                for ($i=1; $i <= 4; $i++)
+                //Data Table
+                $repDate = Report1::select('date')->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->distinct('date')->get(); 
+                
+                for ($type=0; $type < 5; $type++)  
                 {
-                    $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                    $inf[$i] = explode(";", $info[$i]->value);
+                    //$dateArray[] = $rd->date;
+                    $allDay = 0;
+                    $allNight = 0;
+                    foreach ($repDate as $key => $rd)
+                    { 
+                        $iter = Report1::where('date', $rd->date)->where('type', $type)->first();
+                        $allDay += $iter->day;
+                        $allNight += $iter->night;
+                    }
+                    $allReport['day'][$type] = $allDay;
+                    $allReport['night'][$type] = $allNight;
                 }
-                return view('report.myShow1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'title'=>$title, 'inf'=>$inf]);
+                //dd($day);
+                foreach ($repDate as $key => $rd)
+                {
+                    
+                    for ($i=1; $i <= 4; $i++)
+                    {
+                        $info[$i] = Info::where('id_group', $i)->where('date', $rd->date)->get();
+                        foreach ($info[$i] as $key => $inf1) 
+                        {
+                            $inf[$i] = explode(";", $inf1->value);
+                        }
+                    }
+                    $allInfo[] = $inf;
+                }
+                dd($allInfo);
+                return view('report.arrayReport.showAll1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'allReport'=>$allReport]);
                 break;
             case 'Report2':
                 $reports = Report2::where('date', $date)->get();
@@ -321,62 +515,12 @@ class FrontController extends Controller
                 $reports = Report6::where('date', $date)->get();
                 return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
                 break;
-            case 'allReports':
-        //and fullReport
-        //Report1
-                if (Report1::where('date', $date)->first())    
-                { 
-                    $types = Group::where('group', 'call')->get()->first();
-                    $typ = explode(";", $types->title);
-
-                    $sections = Group::where('group', 'sections')->get()->first();
-                    $sect = explode(";", $sections->title);
-
-                    $gospit = Group::where('group', 'gosp')->get()->first();
-                    $gosp = explode(";", $gospit->title);
-
-                    $region = Group::where('group', 'region')->get()->first();
-                    $reg = explode(";", $region->title);
-                   
-                    $reports1 = Report1::where('date', $date)->get();
-                    for ($i=1; $i <= 4; $i++)
-                    {
-                        $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();
-                        
-                        $inf[$i] = explode(";", $info[$i]->value);
-                        //dd(($inf[$i]));
-                    }
-                }
-            //end Report1
-                if (Report2::where('date', $date)->first())
-                    $reports2 = Report2::where('date', $date)->get();//Report2
-                if (Report3::where('date', $date)->first())
-                    $reports3 = Report3::where('date', $date)->get();//Report3
-                if (Report4::where('date', $date)->first())
-                    $reports4 = Report4::where('date', $date)->get();//Report4
-            //Report5
-                if (Report5::where('date', $date)->first())
-                {
-                    $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
-                    foreach ($tables as $key => $table) 
-                    {
-                        $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
-                    }
-                }
-            //end Report5
-                if (Report6::where('date', $date)->first())
-                    $reports6 = Report6::where('date', $date)->get();//Report11
-                
-                return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
-                break;
-        //end Full Report
             default:
                 $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
                 return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
                 break;
         }
     }
-
     public function edit($table, $date)
     {
     switch ($table) 
@@ -457,69 +601,6 @@ class FrontController extends Controller
                         break;
                 }
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
-                break;
-        }
-    }
-
-    public function QuickFind(Request $request)
-    {
-        $post = $request->all();
-        
-        $dateStart = $post['dateStart'];
-        $dateEnd = $post['dateEnd'];
-        $table = $post['table'];
-        //$date = "$dateStart --- $dateEnd";date_diff()->days
-
-        $date1 = date_create($dateEnd);
-        $date2 = date_create($dateStart);
-
-        //dd(date_diff(strtotime($dateEnd), strtotime($dateStart)));
-        dd(date_diff($date1, $date2)->days);
-
-        switch ($table) 
-        {
-            case 'Report1':
-                //Заголовки
-                $types = Group::where('group', 'call')->get()->first();
-                $typ = explode(";", $types->title);
-
-                $sections = Group::where('group', 'sections')->get()->first();
-                $sect = explode(";", $sections->title);
-
-                $gospit = Group::where('group', 'gosp')->get()->first();
-                $gosp = explode(";", $gospit->title);
-
-                $region = Group::where('group', 'region')->get()->first();
-                $reg = explode(";", $region->title);
-                //Заголовки END
-                //Date Table
-                $reports = Report1::where('date', $dateStart)->get();
-                for ($i=1; $i <= 4; $i++)
-                {
-                    $info[$i] = Info::where('id_group', $i)->where('date', $dateStart)->first();
-                    $inf[$i] = explode(";", $info[$i]->value);
-                }
-                return view('report.myShow1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'title'=>$title, 'inf'=>$inf]);
-                break;
-            case 'Report2':
-                $reports = Report2::where('date', $date)->get();
-                return view('report.myShow2', ['reports'=>$reports, 'title'=>$title]);
-                break;
-            case 'Report3':
-                $reports = Report3::where('date', $date)->get();
-                return view('report.myShow3', ['reports'=>$reports, 'title'=>$title]);
-                break;
-            case 'Report4':
-                $reports = Report4::where('date', $date)->get();
-                return view('report.myShow4', ['reports'=>$reports, 'title'=>$title]);
-                break;
-            case 'Report6':
-                $reports = Report6::where('date', $date)->get();
-                return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
-                break;
-            default:
-                $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
-                return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
                 break;
         }
     }
