@@ -211,13 +211,11 @@ function myHover(nameId, type)
 {
     var tag = document.getElementById(nameId);
     if (type == 'ov') 
-    {
-        
-        tag.src = '{{asset(\'css/ico/'+nameId+'_active.png\')}}';
+    {        
+        tag.src = window.location.protocol+'//'+window.location.hostname+'/css/ico/'+nameId+'_active.png';
     }
     if (type == 'out')
     {
-        tag.src = 'css/ico/'+nameId+'.png';
-    }
-    
+        tag.src = window.location.protocol+'//'+window.location.hostname+'/css/ico/'+nameId+'.png';
+    }    
 }

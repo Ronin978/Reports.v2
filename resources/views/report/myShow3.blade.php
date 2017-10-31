@@ -10,7 +10,7 @@
 @include('flash::message')
 	<section id="pagePrint">
 		
-	<h3 align="center" >Транспортування на Луцьк (Київ) за {{$date}}</h3>
+	<h4 align="center" >Транспортування на Луцьк (Київ) за {{$date}}</h4>
 		<table id="table3">
 			 <tr id="firstTr">
                 <td >№<br>п/п</td>

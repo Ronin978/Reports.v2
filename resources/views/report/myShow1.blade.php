@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')	
     <section id="pagePrint">	
-        <h3 align="center">Статистика за {{$date}}</h3>	
+        <h4 align="center">Статистика за {{$date}}</h4>	
 		Екстр. - {{($inf[1])[0]}}
         <br>
         Неекстр. - {{($inf[1])[1]}}

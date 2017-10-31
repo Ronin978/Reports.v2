@@ -102,7 +102,7 @@ class ReportController extends Controller
                     {                         
                         $value = $post["value$i"];                        
                         if ($value == '') 
-                        {$value = ' ';}
+                        {$value = '0';}
                         
                         if ($i==count($sect)) 
                         {
@@ -123,7 +123,7 @@ class ReportController extends Controller
                     { 
                         $value = $post["value$i"];                        
                         if ($value == '') 
-                        {$value = ' ';}
+                        {$value = '0';}
 
                         if ($i==count($sect)+count($gos)) 
                         {
@@ -144,7 +144,7 @@ class ReportController extends Controller
                     { 
                         $value = $post["value$i"];                        
                         if ($value == '') 
-                        {$value = ' ';}
+                        {$value = '0';}
 
                         if ($i==count($sect)+count($gos)+count($reg)) 
                         {
@@ -165,7 +165,7 @@ class ReportController extends Controller
                     { 
                         $value = $post["value$i"];                        
                         if ($value == '') 
-                        {$value = ' ';}
+                        {$value = '0';}
                     
                         if ($i==count($sect)+count($gos)+count($reg)+2) 
                         {
@@ -192,7 +192,7 @@ class ReportController extends Controller
             $report['chergovy'] = $post["chergovy"];
            
             if ($report['day'] == '')
-                { $report['day'] = ' '; }
+                { $report['day'] = '0'; }
             Report1::create($report); 
         }
         flash('Дані внесені.');
@@ -447,7 +447,7 @@ class ReportController extends Controller
                             {                         
                                 $value = $post["value$i"];
                                 if ($value == '') 
-                                {$value = ' ';}
+                                {$value = '0';}
 
                                 if ($i==count($sect)) 
                                 {
@@ -472,7 +472,7 @@ class ReportController extends Controller
                             { 
                                 $value = $post["value$i"];
                                 if ($value == '') 
-                                {$value = ' ';}
+                                {$value = '0';}
 
                                 if ($i==count($sect)+count($gos)) 
                                 {
@@ -497,7 +497,7 @@ class ReportController extends Controller
                             { 
                                 $value = $post["value$i"];
                                 if ($value == '') 
-                                {$value = ' ';}
+                                {$value = '0';}
 
                                 if ($i==count($sect)+count($gos)+count($reg)) 
                                 {
@@ -522,7 +522,7 @@ class ReportController extends Controller
                             { 
                                 $value = $post["value$i"];
                                 if ($value == '') 
-                                {$value = ' ';}
+                                {$value = '0';}
 
                                 if ($i==count($sect)+count($gos)+count($reg)+2) 
                                 {

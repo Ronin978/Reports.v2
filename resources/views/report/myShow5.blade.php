@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')
 	<section id="pagePrint">	
-		<h2 align="center">
+		<h4 align="center">
 				@if($table == 'fatal') 
 					Смертність в присутності бригади (успішна реанімація)
 				@elseif($table == 'dtp+ns')
@@ -26,7 +26,7 @@
 					Сторінки не знайдено
 				@endif
 
-			за {{$date}}</h2>
+			за {{$date}}</h4>
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>

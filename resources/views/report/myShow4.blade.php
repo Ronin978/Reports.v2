@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')
 	<section id="pagePrint">	
-		<h3 align="center" >ГКС за {{$date}}</h3>
+		<h4 align="center" >ГКС за {{$date}}</h4>
 		<table id="table4">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>

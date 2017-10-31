@@ -9,7 +9,7 @@
 <div class="12u">	
 @include('flash::message')
 	<section id="pagePrint">	
-		<h2 align="center" >Зауваження по роботі, скарги, подяки за {{$date}}</h2>
+		<h4 align="center" >Зауваження по роботі, скарги, подяки за {{$date}}</h4>
 		 <table id="twoTable" border="1">
             <tr class="firstTr">
                 <td class="firstColumn">№<br>п/п</td>

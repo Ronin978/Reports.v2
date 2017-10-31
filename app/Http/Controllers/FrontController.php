@@ -482,22 +482,28 @@ class FrontController extends Controller
                     $allReport['day'][$type] = $allDay;
                     $allReport['night'][$type] = $allNight;
                 }
-                //dd($day);
+
                 foreach ($repDate as $key => $rd)
-                {
-                    
+                {                    
                     for ($i=1; $i <= 4; $i++)
-                    {
-                        $info[$i] = Info::where('id_group', $i)->where('date', $rd->date)->get();
-                        foreach ($info[$i] as $key => $inf1) 
+                    {  
+                        $info = Info::where('id_group', $i)->where('date', $rd->date)->first()->value;
+                        $var1 = explode(";", $info);
+                        foreach ($var1 as $key1 => $val) 
                         {
-                            $inf[$i] = explode(";", $inf1->value);
-                        }
+                            if (!empty($array[$i][$key1])) 
+                            {
+                                $array[$i][$key1] += intval($val);
+                            }
+                            else
+                            {
+                                $array[$i][$key1] = intval($val);
+                            }
+                        } 
                     }
-                    $allInfo[] = $inf;
                 }
-                dd($allInfo);
-                return view('report.arrayReport.showAll1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'allReport'=>$allReport]);
+                //dd($array);
+                return view('report.arrayReport.showAll1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$array, 'allReport'=>$allReport]);
                 break;
             case 'Report2':
                 $reports = Report2::where('date', $date)->get();

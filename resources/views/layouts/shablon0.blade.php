@@ -25,7 +25,7 @@
     function CallPrint(strid) 
     { 
         var prtContent = document.getElementById(strid); 
-        var WinPrint = window.open('', '',  'left=50,top=50,width=screen.availWidth, height=screen.availHeight,toolbar=0,scrollbars=1,status=0, onload=1'); 
+        var WinPrint = window.open('', '', 'left=50,top=50,width=screen.availWidth, height=screen.availHeight,toolbar=0,scrollbars=1,status=0, onload=1'); 
         
         WinPrint.document.write('<html><head><title></title><link rel="stylesheet" type="text/css" href="{{asset("css/admin.css")}}"><link rel="stylesheet" type="text/css" href="{{asset("css/main.css")}}"><link rel="stylesheet" type="text/css" href="{{asset("css/app.css")}}"><script src="{{asset("js/jquery.min.js")}}"><\/script></head><body>'); 
         WinPrint.document.write(prtContent.innerHTML); 
@@ -50,24 +50,16 @@
 
                         <!-- Logo -->
                         <div id="logo">
-                            <h1><a href="{{action('FrontController@index')}}">На головну</a></h1>
+                            <h3><a href="{{action('FrontController@index')}}" onmouseover="myHover('home', 'ov');" onmouseout="myHover('home', 'out');"> <img id="home" class="ico" src="{{asset('css/ico/home.png')}}"> На головну</a></h3>
                         </div>
-                            
-                        
                         <!-- Nav -->
-                            
                     <nav id="nav">
-                                
-                        
                         <div class="nav navbar-nav navbar-right"> 
-                           
-
                            <!-- 
                            <a href="{{action('GroupController@index')}}">Керування групами</a>
                            -->
-                            
                             @if (Auth::guest())
-                                <a href="{{ route('login') }}">Вхід</a>
+                                <a href="{{ route('login') }}" onmouseover="myHover('login', 'ov');" onmouseout="myHover('login', 'out');"><img id="login" class="ico" src="{{asset('css/ico/login.png')}}">&nbsp Вхід</a>
                             @else
                                 <a href="{{action('ReportController@create', ['table'=>'Report1', 'date'=>date('Y-m-d')])}}" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити щоденний звіт</a>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onmouseover="myHover('user', 'ov');" onmouseout="myHover('user', 'out');">
@@ -76,8 +68,8 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Вийти
+                                                     document.getElementById('logout-form').submit();" onmouseover="myHover('logout', 'ov');" onmouseout="myHover('logout', 'out');">
+                                            <img id="logout" class="ico" src="{{asset('css/ico/logout.png')}}"> &nbsp&nbsp Вийти
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
