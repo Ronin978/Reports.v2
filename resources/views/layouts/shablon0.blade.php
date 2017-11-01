@@ -10,11 +10,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="{{asset('css/main.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/main.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 
     <!-- Scripts -->
     <script src="{{asset('js/app.js')}}"></script>

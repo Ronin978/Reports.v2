@@ -506,24 +506,24 @@ class FrontController extends Controller
                 return view('report.arrayReport.showAll1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$array, 'allReport'=>$allReport]);
                 break;
             case 'Report2':
-                $reports = Report2::where('date', $date)->get();
-                return view('report.myShow2', ['reports'=>$reports, 'title'=>$title]);
+                $reports = Report2::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'Report3':
-                $reports = Report3::where('date', $date)->get();
-                return view('report.myShow3', ['reports'=>$reports, 'title'=>$title]);
+                $reports = Report3::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                return view('report.myShow3', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'Report4':
-                $reports = Report4::where('date', $date)->get();
-                return view('report.myShow4', ['reports'=>$reports, 'title'=>$title]);
+                $reports = Report4::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'Report6':
-                $reports = Report6::where('date', $date)->get();
-                return view('report.myShow6', ['reports'=>$reports, 'title'=>$title]);
+                $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                return view('report.myShow6', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
-            default:
-                $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
-                return view('report.myShow5', ['reports'=>$reports, 'title'=>$title]);
+            case 'fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
+                $reports = Report5::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->where('pidtype', $table)->get();
+                return view('report.myShow5', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1', 'table'=>$table]);
                 break;
         }
     }

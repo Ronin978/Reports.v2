@@ -26,7 +26,14 @@
                 <td>Примітки</td>
             </tr> 
 			@foreach ($reports as $key=>$report)
-			
+				@if (!empty($indicator)) 
+				@if (($indicator == '1') && (empty($reports[$key-1]->date)))
+					
+						<tr>
+							<td colspan="9">{{$reports[$key]->date}}</td>
+						</tr>
+				@endif	
+				@endif
 			<tr>
 				<td>
 					{{$key+1}}
@@ -62,7 +69,11 @@
 					{{$report->other}}
 				</td>
 			</tr>
-			
+				@if ((!empty($reports[$key+1]->date)) && ($reports[$key]->date != $reports[$key+1]->date))
+					<tr>
+						<td colspan="9">{{$reports[$key+1]->date}}</td>
+					</tr>
+				@endif
 			@endforeach
 		</table>
 	</section>

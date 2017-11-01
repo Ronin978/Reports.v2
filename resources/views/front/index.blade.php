@@ -196,7 +196,7 @@
 @if (empty($table0))
     <p>Поки, що немає доданих звітів</p>
 @else    
-        <h5 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h5>
+        <h4 align="center">РАПОРТ старших лікарів змін {{$table0->first()->chergovy}} <br>за чергування {{$date}}.</h4>
 
         Екстр. - {{$table4[0]}}
         <br>

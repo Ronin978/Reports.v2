@@ -18,6 +18,11 @@ table
 {
 	border-collapse: collapse;
 	width: 100%;
+	font-size: 14px;
+	line-height: 1.5em;
+	font-weight: 200;
+	margin: 0;
+	padding: 0;
 }
 
 textarea
@@ -97,6 +102,12 @@ p
 
 .ico
 {
-	width: 2em;
-	height: 2em;
+	width: 1.5em;
+	height: 1.5em;
+}
+
+#logo
+{
+	height: 100%;
+	vertical-align: middle;
 }

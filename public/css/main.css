@@ -6,47 +6,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Reset */
-
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
-
-	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-		display: block;
-	}
-
-	body {
-		line-height: 1;
-	}
-
-	ol, ul {
-		list-style: none;
-	}
-
-	blockquote, q {
-		quotes: none;
-	}
-
-	blockquote:before, blockquote:after, q:before, q:after {
-		content: '';
-		content: none;
-	}
-
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-
-	body {
-		-webkit-text-size-adjust: none;
-	}
-
 /* Box Model */
 
 	*, *:before, *:after {
@@ -1070,16 +1029,14 @@
 	body {
 		background: #D4D9DD url("images/bg03.jpg");
 		color: #474f51;
-		font-size: 13.5pt;
-		font-family: 'Yanone Kaffeesatz';
+		font-family: 'sans-serif';
 		line-height: 1.85em;
 		font-weight: 300;
 	}
 
 	input, textarea, select {
 		color: #474f51;
-		font-size: 13.5pt;
-		font-family: 'Yanone Kaffeesatz';
+		font-family: 'sans-serif';
 		line-height: 1.85em;
 		font-weight: 300;
 	}
@@ -1138,7 +1095,6 @@
 
 		.quote-list li p {
 			margin: 0 0 0 90px;
-			font-size: 1.2em;
 			font-style: italic;
 		}
 
@@ -1151,7 +1107,6 @@
 
 	.check-list li {
 		padding: 0.7em 0 0.7em 45px;
-		font-size: 1.2em;
 		background: url("images/icon-checkmark.png") 0px 1.05em no-repeat;
 	}
 
@@ -1335,7 +1290,6 @@
 					#header nav a {
 						color: #c6c8c8;
 						text-decoration: none;
-						font-size: 1.4em;
 						outline: 0;
 						margin: 15px;
 					}
@@ -1359,7 +1313,6 @@
 				}
 
 				#banner p {
-					font-size: 2em;
 					font-weight: 200;
 					line-height: 1.25em;
 					padding-right: 1em;
@@ -1373,7 +1326,6 @@
 			}
 
 				#features h2 {
-					font-size: 1.25em;
 					color: #fff;
 					margin: 0 0 0.25em 0;
 				}
@@ -1396,13 +1348,8 @@
 			}
 
 			#content h2 {
-				font-size: 1.8em;
 				color: #373f42;
 				margin: 0 0 0.25em 0;
-			}
-
-			#content h3 {
-				font-size: 1.25em;
 			}
 
 			#content a {
@@ -1421,7 +1368,6 @@
 			}
 
 				#footer h2 {
-					font-size: 1.25em;
 					color: #212f35;
 					margin: 0 0 1em 0;
 				}
@@ -1460,7 +1406,6 @@
 		/* Multi-use */
 
 			.check-list li {
-				font-size: 1em;
 				line-height: 2em;
 			}
 
@@ -1474,7 +1419,6 @@
 
 				.quote-list li p {
 					margin: 0 0 0 80px;
-					font-size: 1em;
 					font-style: italic;
 					line-height: 1.8em;
 				}
@@ -1494,32 +1438,6 @@
 			.button-big {
 				font-size: 1.5em;
 				padding: 10px 35px 10px 35px;
-			}
-
-		/* Banner */
-
-			#banner p {
-				font-size: 1.75em;
-			}
-
-		/* Header */
-
-			#header h1 {
-				font-size: 2.25em;
-			}
-
-			#header nav a {
-				font-size: 1.1em;
-			}
-
-		/* Content */
-
-			#content h2 {
-				font-size: 1.4em;
-			}
-
-			#content h3 {
-				font-size: 1.1em;
 			}
 
 			#content header {
@@ -1543,7 +1461,6 @@
 			}
 
 			body, input, textarea, select {
-				font-size: 13pt;
 				line-height: 1.4em;
 			}
 
@@ -1555,10 +1472,6 @@
 
 			.quote-list li p {
 				margin-bottom: 0.5em;
-			}
-
-			.check-list li {
-				font-size: 1em;
 			}
 
 			.button-big {
@@ -1640,7 +1553,6 @@
 				}
 
 				#features h2 {
-					font-size: 1.25em;
 					color: #fff;
 					margin: 0 0 0.25em 0;
 				}
@@ -1663,14 +1575,12 @@
 			}
 
 			#content h2 {
-				font-size: 1.25em;
 				color: #373f42;
 				margin: 0 0 0.1em 0;
 			}
 
 			#content h3 {
 				color: #96a9b5;
-				font-size: 1em;
 			}
 
 			#content a {
@@ -1693,7 +1603,6 @@
 				}
 
 				#footer h2 {
-					font-size: 1.25em;
 					color: #212f35;
 					margin: 0 0 0.75em 0;
 				}
@@ -1760,7 +1669,6 @@
 				#titleBar .title {
 					display: block;
 					text-align: center;
-					font-size: 1em;
 					font-weight: 400;
 					line-height: 44px;
 				}
@@ -1835,7 +1743,6 @@
 					display: block;
 					color: #fff;
 					text-decoration: none;
-					font-size: 1.25em;
 					line-height: 2em;
 					padding: 0.5em 1.5em 0.5em 1.5em;
 					border-top: solid 1px #373d40;
