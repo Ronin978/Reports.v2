@@ -943,16 +943,17 @@ class ReportController extends Controller
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
-                        $report['timer'] = $post["date$i"];  
-                        $report['no_card'] = $post["no_card$i"];  
-                        $report['pib'] = $post["pib$i"];  
-                        $report['at'] = $post["at$i"];  
-                        $report['from'] = $post["from$i"];
-                        $report['direct'] = $post["direct$i"];
-                        $report['who_direct'] = $post["who_direct$i"];
+                        $report['timer'] = $post["date$i"];
+                        $report['no_card'] = $post["no_card$i"];
+                        $report['adress'] = $post["adress$i"];
+                        $report['pib'] = $post["pib$i"];
+                        $report['age'] = $post["age$i"];
                         $report['diagnoz'] = $post["diagnoz$i"];
                         $report['brig'] = $post["brig$i"];
-                        $report['other'] = $post["other$i"];
+                        $report['tromb'] = $post["tromb$i"];
+                        $report['stent'] = $post["stent$i"];
+                        $report['gospital'] = $post["gospital$i"];
+                        $report['support'] = $post["support$i"];
 
                         $limit=0;
                         foreach ($report as $rep) 
@@ -1200,7 +1201,12 @@ class ReportController extends Controller
                 flash('Дані внесені.6');
                 break;
 
-            case ('fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat'):
+            case 'fatal':
+            case 'dtp+ns':
+            case 'high_travmy':
+            case 'tr_kytyzi':
+            case 'opic':
+            case 'travmat':
                 //if (count($treport)+3 == count($post))
                 $treport = Report5::where('date', $newDate)->where('pidtype', $table)->get();
                 $report['date'] = $date;

@@ -13,7 +13,6 @@
    
         <p align="center">ГКС {{$date}}</p>
         <input id="date" type="hidden" name="date" value="{{$date}}">
-       
         <table id="table4">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -29,7 +28,6 @@
                 <td id="maxLenght" class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
                 <td class="rotate">Зв’язок з лікарем консультантом
                 </td>
-                
             </tr> 
             @foreach ($reports as $key=>$report)
             <tr>
@@ -69,16 +67,25 @@
                 <td>
                     <textarea name="support{{$key}}" rows="1" data="elastic">{{$report->support}}</textarea>
                 </td>
-
             </tr>                           
             @endforeach                      
         </table>
-
-        <button type="button" onclick="AddLine4()" >Додати стрічку</button>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
         <input type="hidden" name="_method" value="put"/>
-        <br>
-        <input type="submit" value="Зберегти">    
+        
+        <div class="btn-group small-btn-group" onclick="AddLine4()" align="center">
+            <span>
+                <img src="{{asset('css/ico/add.png')}}">
+                Додати рядок   
+            </span>
+        </div><br>
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>    
     </form>
 </section>
 

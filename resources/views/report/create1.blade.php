@@ -11,18 +11,14 @@
  <section >  
     <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
    
-        <p align="center">РАПОРТ старших лікарів змін 
-           
-           
-                 <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>       
-
-        за чергування <input id="firstdate" type="date" name="date" value="{{$date}}"> .</p>      
-    
-
+        <p align="center">
+            РАПОРТ старших лікарів змін <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>
+            за чергування <input id="firstdate" type="date" name="date" value="{{$date}}"> .
+        </p>  
         Екстр. - <input type="text" id="extr" name="valuei">
         <br>
-        Неекстр. - <input type="text" id="noext" name="valuei1">
-       
+        Неекстр. - <input type="text" id="noext" name="valuei1">       
+        
         <table id="table1-1">
             <tr>
                 <td class="firstColumn1"></td>
@@ -43,8 +39,7 @@
                     </td>
                     <td id="res{{$key}}"></td>
                 </tr>
-            @endforeach
-           
+            @endforeach           
         </table>
     
         <table id="table1-2">
@@ -79,7 +74,6 @@
                 @endfor
             </tr>
         </table>
-
        
         <table id="table1-4">
             <tr><td colspan="10">Невідкладна допомога (ПМСД)   <span id="pmcd0">0</span> + <span id="pmcd1">0</span></td> </tr>
@@ -96,12 +90,17 @@
                 
                 @endforeach
             </tr>                         
-        </table>
-    
+        </table>    
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-
         <br>
-        <input type="submit" value="Зберегти та перейти до слідуючої таблиці">
+        
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>
         <script type="text/javascript">
             $( document ).ready(function() {
                 document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};
@@ -110,15 +109,23 @@
         </script>
     </form>
 </section>                
-<section>  
-    <div class="btn-group">              
-        <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report2'])}}">
-            <input id="toDate" type="hidden" name="date" value="">
-           
 
-            <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
-        </form>
-    </div>
+<section align = "center">                
+    <div class="btn-group" onclick="window.history.go(-1); return false;">
+        <span>
+            Назад
+            <img src="{{asset('css/ico/back.png')}}">   
+        </span>                  
+    </div>    
+    <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report2'])}}">
+        <input id="toDate" type="hidden" name="date" value="">  
+        <div class="btn-group" onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">            
+            <span>
+                <img src="{{asset('css/ico/next.png')}}">
+                Далі
+            </span>
+        </div>
+    </form> 
 </section>
 </div>
 </div>

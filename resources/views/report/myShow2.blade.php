@@ -68,7 +68,19 @@
 		</table>
 	</section>
 	<section align="center">  
-	    <div class="btn-group" onclick="window.history.go(-1); return false;">
+	    <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
+        <div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'Report2', 'date' => $reports[0]->date])}}'">
+            <span>
+                <img src="{{asset('css/ico/edit.png')}}">
+                Редагувати
+            </span>
+        </div><br>
+        <div class="btn-group" onclick="window.history.go(-1); return false;">
             <span>
                 Назад
                 <img src="{{asset('css/ico/back.png')}}">   
@@ -82,12 +94,6 @@
 	            </span>
 	        </div><br>
 	    @endif
-	    <div class="btn-group" onClick="CallPrint('pagePrint');">   
-            <span>
-                <img src="{{asset('css/ico/print.png')}}">
-                Роздрукувати
-            </span>
-        </div>
 	</section>
 </div>
 </div>

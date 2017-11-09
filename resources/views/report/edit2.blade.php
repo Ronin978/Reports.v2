@@ -57,14 +57,22 @@
             </tr>                           
             @endforeach                    
         </table>
-
-        <button type="button" onclick="AddLine2()" >Додати стрічку</button>
-    
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-        <input type="hidden" name="_method" value="put"/>
-        <br>
-        <input type="submit" value="Зберегти">
+        <input type="hidden" name="_method" value="put"/> 
         
+        <div class="btn-group small-btn-group" onclick="AddLine2()" align="center">
+            <span>
+                <img src="{{asset('css/ico/add.png')}}">
+                Додати рядок   
+            </span>
+        </div><br>
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>
     </form> 
 </section>           
     

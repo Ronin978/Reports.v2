@@ -102,7 +102,14 @@
 
         <br>
 
-        <input type="submit" value="Зберегти">
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>
+        
         <script type="text/javascript">
             $( document ).ready(function() {
                 document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};

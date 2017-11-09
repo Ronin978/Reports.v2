@@ -49,19 +49,34 @@
                 <td>
                     <textarea name="other0" rows="1" data="elastic"></textarea>
                 </td>
-                
-            </tr>                           
-                                
+            </tr>               
         </table>
-
-        <button type="button" onclick="AddLine5()" >Додати стрічку</button>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+        
+        <div class="btn-group small-btn-group" onclick="AddLine5()" align="center">
+            <span>
+                <img src="{{asset('css/ico/add.png')}}">
+                Додати рядок   
+            </span>
+        </div>
         <br>
-        <input type="submit" value="Зберегти та продовжити">
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>
     </form>        
 </section>
 
-<section>            
+<section align = "center">            
+    <div class="btn-group" onclick="window.history.go(-1); return false;">
+        <span>
+            Назад
+            <img src="{{asset('css/ico/back.png')}}">   
+        </span>                  
+    </div> 
     @if ($pidtype=='fatal')
         <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'dtp+ns'])}}">
     @elseif($pidtype=='dtp+ns')
@@ -76,14 +91,14 @@
         <form id="twoform" method="GET" action="{{action('ReportController@create', ['table'=>'Report6'])}}">
     @endif
     <input id="toDate" type="hidden" name="date" value="">
-        <div onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">Слідуюча таблиця</div>
+        <div class="btn-group" onclick="document.getElementById('toDate').value = document.getElementById('firstdate').value; document.getElementById('twoform').submit();" class="gotonext">            
+            <span>
+                <img src="{{asset('css/ico/next.png')}}">
+                Далі
+            </span>
+        </div>
     </form>
-
-    <div class="gotoback" onclick="window.history.go(-1); return false;">
-        <p>Назад</p>                        
-    </div>
 </section>
-
 </div>
 </div> 
 </div>

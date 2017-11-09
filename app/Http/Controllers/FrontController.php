@@ -446,9 +446,8 @@ class FrontController extends Controller
                 return view('report.myShow5', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1', 'table'=>$table]);
                 break;
         }
-
-        
     }
+    
     public function edit($table, $date)
     {
     switch ($table) 

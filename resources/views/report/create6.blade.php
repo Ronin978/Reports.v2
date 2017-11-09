@@ -37,25 +37,40 @@
                 <td>
                     <textarea name="other0" rows="1" data="elastic"></textarea>
                 </td>
-                
-            </tr>                           
-                                
+            </tr>               
         </table>
-
-        <button type="button" onclick="AddLine6()" >Додати стрічку</button>    
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+        
+        <div class="btn-group small-btn-group" onclick="AddLine6()" align="center">
+            <span>
+                <img src="{{asset('css/ico/add.png')}}">
+                Додати рядок   
+            </span>
+        </div>
         <br>
-        <input type="submit" value="Зберегти та продовжити">
-    </form>        
+        <div class="panel" align="center">   
+            <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
+                <span>
+                    <img src="{{asset('css/ico/save.png')}}">Зберегти
+                </span>
+            </div>
+        </div>
+    </form>
 </section>
-<section>                
-     <a href="{{action('FrontController@index', ['date'=>$date])}}">Завершити</a>
-
-     <div class="gotoback" onclick="window.history.go(-1); return false;">
-        <p>Назад</p>                        
+<section align = "center">                
+    <div class="btn-group" onclick="window.history.go(-1); return false;">
+        <span>
+            Назад
+            <img src="{{asset('css/ico/back.png')}}">   
+        </span>                  
     </div>
+    <form id="twoform" method="GET" action="{{action('FrontController@index')}}">
+        <div class="btn-group" onclick="document.getElementById('twoform').submit();">
+            <span>
+                <img src="{{asset('css/ico/down.png')}}">Завершити
+            </span>
+        </div>
 </section>
-
 </div>
 </div> 
 </div>

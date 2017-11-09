@@ -83,6 +83,32 @@
 		</table>
 	</section>
 	<section align="center">  
+	    <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
+        @if (!empty($reports->first()))
+	        @if($table == 'fatal') 
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'fatal', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'dtp+ns')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'dtp+ns', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'high_travmy')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'high_travmy', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'tr_kytyzi')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'tr_kytyzi', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'opic')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'opic', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'travmat')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'travmat', 'date' => $reports[0]->date])}}'">
+			@endif		
+		@endif
+            <span>
+                <img src="{{asset('css/ico/edit.png')}}">
+                Редагувати
+            </span>
+        </div><br>
 	    <div class="btn-group" onclick="window.history.go(-1); return false;">
             <span>
                 Назад
@@ -102,20 +128,13 @@
 				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'travmat'])}}'">
 			@elseif($table == 'travmat')
 				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report6'])}}'">
-			@endif
-		
+			@endif		
 		@endif
 			<span>
                 <img src="{{asset('css/ico/next.png')}}">
                 Далі
             </span>
         </div><br>
-        <div class="btn-group" onClick="CallPrint('pagePrint');">   
-            <span>
-                <img src="{{asset('css/ico/print.png')}}">
-                Роздрукувати
-            </span>
-        </div>
 	</section>
 </div>
 </div>

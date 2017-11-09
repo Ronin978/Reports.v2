@@ -10,6 +10,12 @@
 <div class="row">
 <div class="12u">
 	<section align="center"><h2>{{$title}}</h2></section>
+	<div class="btn-group" onclick="location.href='{{action('ReportController@create', ['table'=>$table, 'date'=>date('Y-m-d')])}}'">
+		<span>
+			<img src="{{asset('css/ico/add.png')}}">
+			Додати новий
+		</span>
+	</div>
 	@if (!empty($ojects))
 		<section>	
 			@foreach ($ojects as $key => $obj)		
@@ -20,9 +26,8 @@
 				</div>		
 				<hr>		
 			@endforeach
-			<a href="{{action('ReportController@create', ['table'=>$table, 'date'=>date('Y-m-d')])}}">Додати новий звіт</a>
 		</section>
-			<div class="myPaginate">
+			<div class="myPaginate" align="center">
 				{{$ojects->links()}}
 			</div>
 	@endif
