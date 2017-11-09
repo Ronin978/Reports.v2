@@ -91,6 +91,23 @@ class ReportController extends Controller
         $region = Group::where('group', 'region')->get()->first();
         $reg = explode(";", $region->title);
 
+        for ($i=0; $i < 5 ; $i++)
+        {
+            $report['day'] = $post["day$i"];  
+            $report['night'] = $post["night$i"];
+            $report['type'] = $i;
+            $report['users'] = Auth::user()->name;
+           
+            $report['date'] = $post["date"];
+            $report['chergovy'] = $post["chergovy"];
+           
+            if ($report['day'] == '')
+                { $report['day'] = '0'; }
+            if ($report['night'] == '')
+                { $report['night'] = '0'; }
+            Report1::create($report); 
+        }
+
         for ($i=0; $i < 4; $i++) 
         { 
             switch ($i) 
@@ -121,10 +138,9 @@ class ReportController extends Controller
                     $info['value'] = '';
                     for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
                     { 
-                        $value = $post["value$i"];                        
+                        $value = $post["value$i"];                      
                         if ($value == '') 
                         {$value = '0';}
-
                         if ($i==count($sect)+count($gos)) 
                         {
                             $info['value'] .= $value;
@@ -161,7 +177,7 @@ class ReportController extends Controller
                 case 3:
                     $info['id_group'] = 1;
                     $info['value'] = '';
-                    for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++) 
+                    for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++)
                     { 
                         $value = $post["value$i"];                        
                         if ($value == '') 
@@ -180,24 +196,10 @@ class ReportController extends Controller
                     $info['users'] = Auth::user()->name;
                     Info::create($info);
             }
-        }
-        for ($i=0; $i < 5 ; $i++)
-        {
-            $report['day'] = $post["day$i"];  
-            $report['night'] = $post["night$i"];
-            $report['type'] = $i;
-            $report['users'] = Auth::user()->name;
-           
-            $report['date'] = $post["date"];
-            $report['chergovy'] = $post["chergovy"];
-           
-            if ($report['day'] == '')
-                { $report['day'] = '0'; }
-            Report1::create($report); 
-        }
+        }        
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report1', 'title'=>'Статистика']);
+            ['date'=>$post['date'], 'table'=>'Report1']);
     }
 
     public function store2(Request $request)
@@ -235,7 +237,7 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report2', 'title'=>'Інформація по запізненнях бригад на виклики']);
+            ['date'=>$post['date'], 'table'=>'Report2']);
     }
 	
 	public function store3(Request $request)
@@ -275,7 +277,7 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
        return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report3', 'title'=>'Транспортування на Луцьк (Київ)']);
+            ['date'=>$post['date'], 'table'=>'Report3']);
     }
 	
 	public function store4(Request $request)
@@ -296,7 +298,7 @@ class ReportController extends Controller
                 $report['stent'] = $post["stent$i"];
                 $report['gospital'] = $post["gospital$i"];
                 $report['support'] = $post["support$i"];
-                                     
+
                 $limit=0;
                 foreach ($report as $rep) 
                 {
@@ -309,14 +311,23 @@ class ReportController extends Controller
                     foreach ($report as $key => $rep)
                     {
                         if ($rep == '')
-                            { $report[$key] = ' '; }
+                        { 
+                            if( $key == 'age' )
+                            {
+                                $report[$key] = 0;
+                            }
+                            else
+                            {
+                                $report[$key] = ' ';
+                            } 
+                        }
                     }
                     Report4::create($report);
                 }
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report4', 'title'=>'ГКС']);
+            ['date'=>$post['date'], 'table'=>'Report4']);
     }
 
     public function store5(Request $request)
@@ -358,27 +369,27 @@ class ReportController extends Controller
         { 
             case 'fatal':
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'fatal', 'title'=>'Смертність в присутності бригади (успішна реанімація)']);
+                ['date'=>$post['date'], 'table'=>'fatal']);
                 break;            
             case 'dtp+ns': 
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'dtp+ns', 'title'=>'ДТП і «НС» (надзвичайні стани)']);
+                ['date'=>$post['date'], 'table'=>'dtp+ns']);
                 break;
             case 'high_travmy':
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'high_travmy', 'title'=>'Складні травми']);
+                ['date'=>$post['date'], 'table'=>'high_travmy']);
                 break;
             case 'tr_kytyzi': 
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'tr_kytyzi', 'title'=>'Травми китиці']);
+                ['date'=>$post['date'], 'table'=>'tr_kytyzi']);
                 break;
             case 'opic':
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'opic', 'title'=>'Опіки/ Переохолодження']);
+                ['date'=>$post['date'], 'table'=>'opic']);
                 break;
             case 'travmat':
                 return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'travmat', 'title'=>'Травматизм (кримінальний, виробничий)']);
+                ['date'=>$post['date'], 'table'=>'travmat']);
                 break;
         }
     }
@@ -414,7 +425,7 @@ class ReportController extends Controller
             }
         flash('Дані внесені.');
         return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report6', 'title'=>'Зауваження по роботі, скарги, подяки']);
+            ['date'=>$post['date'], 'table'=>'Report6']);
     }
 
     public function update(Request $request, $table, $newDate)

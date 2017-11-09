@@ -27,10 +27,9 @@
             </tr> 
 			@foreach ($reports as $key=>$report)
 				@if (!empty($indicator)) 
-				@if (($indicator == '1') && (empty($reports[$key-1]->date)))
-					
+				@if (($indicator == '1') && (empty($reports[$key-1]->date)))					
 						<tr>
-							<td colspan="9">{{$reports[$key]->date}}</td>
+							<td colspan="11">{{$reports[$key]->date}}</td>
 						</tr>
 				@endif	
 				@endif
@@ -77,20 +76,27 @@
 			@endforeach
 		</table>
 	</section>
-	<section>  
-	    <div class="btn-group"> 
-	    @if (!empty($reports->first()))
-	        <a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report4'])}}">
-	            Слідуюча таблиця
-	        </a>
+	<section align="center">  
+	    <div class="btn-group" onclick="window.history.go(-1); return false;">
+            <span>
+                Назад
+                <img src="{{asset('css/ico/back.png')}}">   
+            </span>                  
+        </div>
+	    @if (!empty($reports->first()))    
+	         <div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report4'])}}'">
+	            <span>
+	                <img src="{{asset('css/ico/next.png')}}">
+	                Далі
+	            </span>
+	        </div><br>
 	    @endif
-	        <div class="gotoback" onclick="window.history.go(-1); return false;">
-	            <p>Назад</p>                        
-	        </div>
-	        <a onClick="CallPrint('pagePrint');">   
-	            Роздрукувати
-	        </a>
-	    </div>
+	    <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
 	</section>
 </div>
 </div>

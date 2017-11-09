@@ -77,18 +77,27 @@
             </tr>                         
         </table>
     </section>
-    <section>  
-        <div class="btn-group"> 
-            <a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report2'])}}">
-                Слідуюча таблиця
-            </a>
-            <div class="gotoback" onclick="window.history.go(-1); return false;">
-                <p>Назад</p>                        
-            </div>
-            <a onClick="CallPrint('pagePrint');">   
-                Роздрукувати
-            </a>
+    <section align="center">  
+        
+        <div class="btn-group" onclick="window.history.go(-1); return false;">
+            <span>
+                Назад
+                <img src="{{asset('css/ico/back.png')}}">   
+            </span>                  
         </div>
+        <div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report2'])}}'">
+            <span>
+                <img src="{{asset('css/ico/next.png')}}">
+                Далі
+            </span>
+        </div><br>
+        <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
+   
     </section>
 </div>
 </div>

@@ -20,10 +20,9 @@
             </tr> 
 			@foreach ($reports as $key=>$report)
 				@if (!empty($indicator)) 
-				@if (($indicator == '1') && (empty($reports[$key-1]->date)))
-					
+				@if (($indicator == '1') && (empty($reports[$key-1]->date)))					
 						<tr>
-							<td colspan="9">{{$reports[$key]->date}}</td>
+							<td colspan="5">{{$reports[$key]->date}}</td>
 						</tr>
 				@endif	
 				@endif
@@ -52,13 +51,27 @@
 			@endforeach
 		</table>
 	</section>
-	<section>                
+	<section align="center">                
+		<div class="btn-group" onclick="window.history.go(-1); return false;">
+            <span>
+                Назад
+                <img src="{{asset('css/ico/back.png')}}">   
+            </span>                  
+        </div>
 	@if (!empty($reports->first()))
-	    <a href="{{action('FrontController@index', ['date'=>$date])}}">Завершити</a>
+	    <div class="btn-group" onclick="location.href='{{action('FrontController@index', ['date'=>$date])}}'">
+            <span>
+                <img src="{{asset('css/ico/down.png')}}">
+                Завершити
+            </span>
+        </div><br>
 	@endif
-	    <div class="gotoback" onclick="window.history.go(-1); return false;">
-	    	<p>Назад</p>                        
-	    </div>
+	    <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
 	</section>
 </div>
 </div>

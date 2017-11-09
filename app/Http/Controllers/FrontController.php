@@ -100,129 +100,35 @@ class FrontController extends Controller
                 $title = 'Зауваження по роботі, скарги, подяки';
                 break;
             case 'allReports': 
-                $title = 'РАПОРТ старших лікарів';
-/*                $sort_flags = SORT_REGULAR;
-                
-                $obj1 = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $obj2 = Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $obj3 = Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $obj4 = Report4::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $obj5 = Report5::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $obj6 = Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-//dd($obj6);
-                
-                foreach ($obj1 as $key => $val1) 
-                {   
-                    $obj11['date'][$key] = $val1->date;
-                    $obj11['updated_at'][$key] = $val1->updated_at;
-                    $obj11['created_at'][$key] = $val1->created_at; 
-                }
-                foreach ($obj2 as $key => $val2) 
-                {   
-                    $obj22['date'][$key] = $val2->date;
-                    $obj22['updated_at'][$key] = $val2->updated_at;
-                    $obj22['created_at'][$key] = $val2->created_at; 
-                }
-                foreach ($obj3 as $key => $val3) 
-                {   
-                    $obj33['date'][$key] = $val3->date;
-                    $obj33['updated_at'][$key] = $val3->updated_at;
-                    $obj33['created_at'][$key] = $val3->created_at; 
-                }
-                foreach ($obj4 as $key => $val4) 
-                {   
-                    $obj44['date'][$key] = $val4->date; 
-                    $obj44['updated_at'][$key] = $val4->updated_at;
-                    $obj44['created_at'][$key] = $val4->created_at; 
-                }
-                foreach ($obj5 as $key => $val5) 
-                {   
-                    $obj55['date'][$key] = $val5->date;
-                    $obj55['updated_at'][$key] = $val5->updated_at;
-                    $obj55['created_at'][$key] = $val5->created_at; 
-                }
-                foreach ($obj6 as $key => $val6) 
-                {   
-                    $obj66['date'][$key] = $val6->date;
-                    $obj66['updated_at'][$key] = $val6->updated_at;
-                    $obj66['created_at'][$key] = $val6->created_at;
-                }
-               
-               // $array = rsort($arr);
-               // dd($obj33['date']);
-
-                $arr1 = array_merge($obj11['date'], $obj22['date'], $obj33['date'], $obj44['date'], $obj55['date'], $obj66['date']);
-
-                $arr2 = array_merge($obj11['updated_at'], $obj22['updated_at'], $obj33['updated_at'], $obj44['updated_at'], $obj55['updated_at'], $obj66['updated_at']);
-
-                $arr3 = array_merge($obj11['created_at'], $obj22['created_at'], $obj33['created_at'], $obj44['created_at'], $obj55['created_at'], $obj66['created_at']);
-
-                $array1 = array_unique($arr1);
-
-                $clon2 = clone $obj6;
-                $paginator = clone $obj1;
-
-                $paginator->getCollection()->transform(function ($value) 
-                {
-                        // Your code here    
-                });
-
-
-
-               // 
-//dd($obj6);
-                //Формуємо кінцевий масив
-
-                for ($key = 0; $key < count($array1); $key++) 
-                {
-                    $i = key($array1);
-                    //print($i);
-                    $clon1 = $clon2->items();//і-тий запис. В obj6 тільки 2 - '0' та '1'
-
-                    $clon['date'][$key] = $array1[$i];
-                    $clon['updated_at'][$key] = $arr2[$i];
-                    $clon['created_at'][$key] = $arr3[$i];
-
-//                    $clon1->date = $clon['date'][$key];
-//                    $clon1->updated_at = $clon['updated_at'][$key];
-//                    $clon1->created_at = $clon['created_at'][$key];
-                
-                    next($array1);
-                }
-                
-                //dd(get_class_methods($));
-              //dd($clon);
-    */
                 $obj = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                
-                //this->список всіх можливих дат з різних моделей
+                $title = 'Рапорт старших лікарів';
                 break;
     //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
-            default:
+            case 'fatal':
+            case 'dtp+ns':
+            case 'high_travmy':
+            case 'tr_kytyzi':
+            case 'opic':
+            case 'travmat':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 switch ($id)
                 {
                     case 'fatal':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'Смертність в присутності бригади (успішна реанімація)';
                         break;
                     case 'dtp+ns':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'ДТП і «НС» (надзвичайні стани)';
                         break;
                     case 'high_travmy':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'Складні травми';
                         break;
                     case 'tr_kytyzi':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'Травми китиці';
                         break;
                     case 'opic':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'Опіки/ Переохолодження';
                         break;
                     case 'travmat':
-                        $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $id)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                         $title = 'Травматизм (кримінальний, виробничий)';
                         break;
                     default:
@@ -230,6 +136,7 @@ class FrontController extends Controller
                         $title = 'ERROR 404/ NOT FOUND';
                         break;
                 }
+                break;
         }
         return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$id]);
     }
@@ -238,6 +145,7 @@ class FrontController extends Controller
     {
         $datell = explode('-', $date);
         $dateD = "$datell[2]-$datell[1]-$datell[0]";
+        $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
         switch ($table) 
         {
             case 'Report1':
@@ -258,7 +166,7 @@ class FrontController extends Controller
                 $reports = Report1::where('date', $date)->get();
                 if (empty($reports->first())) 
                 {
-                    flash('Звіту з такою датою не існує.');
+                    flash('Це остання таблиця звіту з вказаною датою.1');
                     return back();
                 }
                 else
@@ -274,116 +182,128 @@ class FrontController extends Controller
                 break;
             case 'Report2':
                 $reports = Report2::where('date', $date)->get();
-                if (empty($reports->first())) 
+                if (!empty($reports->first()))
                 {
-                    flash('Звіту з такою датою не існує.');
-                    return back();
+                    return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
+                    break;
                 }
                 else
-                {    
-                    return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
+                {
+                    return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>'Report3']);        
                 }
                 break;
             case 'Report3':
                 $reports = Report3::where('date', $date)->get();
-                if (empty($reports->first())) 
+                if (!empty($reports->first())) 
                 {
-                    flash('Звіту з такою датою не існує.');
-                    return back();
+                    return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
                 }
                 else
-                {    
-                    return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
+                {
+                    return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>'Report4']);
                 }
                 break;
             case 'Report4':
                 $reports = Report4::where('date', $date)->get();
-                if (empty($reports->first())) 
+                if (!empty($reports->first()))  
                 {
-                    flash('Звіту з такою датою не існує.');
-                    return back();
-                }
-                else
-                {    
                     return view('report.myShow4', ['reports'=>$reports, 'date'=>$dateD]);
                 }
+                else
+                {                          
+                    return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>'fatal']);
+                }
+                break;
+            case 'fatal':
+            case 'dtp+ns':
+            case 'high_travmy':
+            case 'tr_kytyzi':
+            case 'opic':
+            case 'travmat':
+                foreach ($tables as $j => $tab) 
+                {
+                    if ($table == $tab) 
+                        { $exp = $j; }
+                }
+                for ($i=$exp; $i < count($tables); $i++) 
+                {
+                    $reports = Report5::where('date', $date)->where('pidtype', $tables[$i])->get();
+                    if (!empty($reports->first()))
+                    {
+                        return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$tables[$i]]);
+                        break;
+                    } 
+                    elseif ((empty($reports->first()))&&($i == count($tables)-1)) //якщо елемент останній та порожній
+                    {
+                        return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>$tables[$i+1]]);
+                        break;
+                    } 
+                    else
+                    {
+                        return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>'Report6']);
+                        break;
+                    }                   
+                }                    
                 break;
             case 'Report6':
                 $reports = Report6::where('date', $date)->get();
-                if (empty($reports->first())) 
+                if (!empty($reports->first())) 
                 {
-                    flash('Звіту з такою датою не існує.');
-                    return back();
-                }
-                else
-                {    
                     return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
+                } 
+                else
+                {
+                    flash('Це остання таблиця звіту з заданою датою.');
+                    return back();
                 }
                 break;
             case 'allReports':
-        //and fullReport
         //Report1
-               
-                $types = Group::where('group', 'call')->get()->first();
-                $typ = explode(";", $types->title);
-
-                $sections = Group::where('group', 'sections')->get()->first();
-                $sect = explode(";", $sections->title);
-
-                $gospit = Group::where('group', 'gosp')->get()->first();
-                $gosp = explode(";", $gospit->title);
-
-                $region = Group::where('group', 'region')->get()->first();
-                $reg = explode(";", $region->title);
-               
+                
                 $reports1 = Report1::where('date', $date)->get();
-                for ($i=1; $i <= 4; $i++)
+                
+                if (!empty($reports1->first())) 
                 {
-                    $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();                    
-                    $inf[$i] = explode(";", $info[$i]->value);
-                    //dd(($inf[$i]));
-                }
-               
-            //end Report1
-                $reports2 = Report2::where('date', $date)->get();//Report2
-                $reports3 = Report3::where('date', $date)->get();//Report3
-                $reports4 = Report4::where('date', $date)->get();//Report4
-            //Report5
-                
-                $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
-                foreach ($tables as $key => $table) 
+                    $types = Group::where('group', 'call')->get()->first();
+                    $typ = explode(";", $types->title);
+
+                    $sections = Group::where('group', 'sections')->get()->first();
+                    $sect = explode(";", $sections->title);
+
+                    $gospit = Group::where('group', 'gosp')->get()->first();
+                    $gosp = explode(";", $gospit->title);
+
+                    $region = Group::where('group', 'region')->get()->first();
+                    $reg = explode(";", $region->title);
+                   
+                    for ($i=1; $i <= 4; $i++)
+                    {
+                        $info[$i] = Info::where('id_group', $i)->where('date', $date)->first();                    
+                        $inf[$i] = explode(";", $info[$i]->value);
+                    }
+                }                
+        //end Report1
+        //Report2
+                $reports2 = Report2::where('date', $date)->get();
+        //Report3
+                $reports3 = Report3::where('date', $date)->get();
+        //Report4
+                $reports4 = Report4::where('date', $date)->get();
+        //Report5
+                foreach ($tables as $key => $tab) 
                 {
-                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
-                }
-                
-            //end Report5
-                $reports6 = Report6::where('date', $date)->get();//Report11
-                
+                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $tab)->get();
+                }                
+        //end Report5
+        //Report6
+                $reports6 = Report6::where('date', $date)->get();
                 return view('report.reportsForm', ['date'=>$dateD, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
                 break;
-        //end Full Report
-            case 'fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
-                
-                    $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
-                if (empty($reports->first())) 
-                {
-                    flash('Звіту з такою датою не існує.');
-                    return back();
-                }
-                else
-                {               
-                    return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$table]);
-                }
-                break;
-            
-            default:
-                $table = 'ERROR';
         }
     }
 
     public function DateFind(Request $request)
     {
-
         $date = ($request->all())['date'];
 
         if ((Report1::where('date', $date)->first()) !== null) 
@@ -526,6 +446,8 @@ class FrontController extends Controller
                 return view('report.myShow5', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1', 'table'=>$table]);
                 break;
         }
+
+        
     }
     public function edit($table, $date)
     {

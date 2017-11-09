@@ -101,7 +101,7 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
         <br>
-        <input type="submit" value="Зберегти та продовжити">
+        <input type="submit" value="Зберегти та перейти до слідуючої таблиці">
         <script type="text/javascript">
             $( document ).ready(function() {
                 document.getElementById('extr').name = 'value' + {{count($sections)+count($gospit)+count($region)+1}};

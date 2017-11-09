@@ -18,7 +18,7 @@
 					<p>Створено: {{$obj->created_at}} <br>Оновлено: {{$obj->updated_at}}</p>
 					<small><a href="{{action('FrontController@edit', ['table'=>$table, 'date'=>$obj->date])}}">Редагувати</a></small>
 				</div>		
-			<hr>		
+				<hr>		
 			@endforeach
 			<a href="{{action('ReportController@create', ['table'=>$table, 'date'=>date('Y-m-d')])}}">Додати новий звіт</a>
 		</section>

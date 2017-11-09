@@ -41,10 +41,9 @@
             @if(!empty($reports->first()))
 				@foreach ($reports as $key=>$report)
 					@if (!empty($indicator)) 
-					@if (($indicator == '1') && (empty($reports[$key-1]->date)))
-						
+					@if (($indicator == '1') && (empty($reports[$key-1]->date)))						
 							<tr>
-								<td colspan="9">{{$reports[$key]->date}}</td>
+								<td colspan="8">{{$reports[$key]->date}}</td>
 							</tr>
 					@endif	
 					@endif
@@ -83,35 +82,40 @@
 			@endif
 		</table>
 	</section>
-	<section>  
-	    <div class="btn-group"> 
+	<section align="center">  
+	    <div class="btn-group" onclick="window.history.go(-1); return false;">
+            <span>
+                Назад
+                <img src="{{asset('css/ico/back.png')}}">   
+            </span>                  
+        </div>
 	    @if (!empty($reports->first()))
 	        @if($table == 'fatal') 
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'dtp+ns'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'dtp+ns'])}}'">
 			@elseif($table == 'dtp+ns')
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'high_travmy'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'high_travmy'])}}'">
 			@elseif($table == 'high_travmy')
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'tr_kytyzi'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'tr_kytyzi'])}}'">
 			@elseif($table == 'tr_kytyzi')
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'opic'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'opic'])}}'">
 			@elseif($table == 'opic')
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'travmat'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'travmat'])}}'">
 			@elseif($table == 'travmat')
-				<a href="{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report6'])}}">
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'Report6'])}}'">
 			@endif
-		@else
-			<a href="{{action('FrontController@myShow', ['date' => date('Y-m-d'), 'table'=>'dtp+ns'])}}">
+		
 		@endif
-
-	            Слідуюча таблиця
-	        </a>
-	        <div class="gotoback" onclick="window.history.go(-1); return false;">
-	            <p>Назад</p>                        
-	        </div>
-	        <a onClick="CallPrint('pagePrint');">   
-	            Роздрукувати
-	        </a>
-	    </div>
+			<span>
+                <img src="{{asset('css/ico/next.png')}}">
+                Далі
+            </span>
+        </div><br>
+        <div class="btn-group" onClick="CallPrint('pagePrint');">   
+            <span>
+                <img src="{{asset('css/ico/print.png')}}">
+                Роздрукувати
+            </span>
+        </div>
 	</section>
 </div>
 </div>

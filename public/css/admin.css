@@ -111,3 +111,24 @@ p
 	height: 100%;
 	vertical-align: middle;
 }
+
+.btn-group
+{
+	cursor: pointer;
+	background: #CDC9C9;
+	padding: 10px;	
+	margin: 0 0 10px 10px;
+	width: 150px;
+}
+
+.btn-group :hover
+{
+	background: #98FB98;
+	padding: 10px;	
+}
+
+
+.btn-group img
+{
+	height: 1.5em;
+}
