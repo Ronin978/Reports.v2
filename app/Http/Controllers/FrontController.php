@@ -33,7 +33,6 @@ class FrontController extends Controller
             $types = Group::where('group', 'call')->get()->first();
             $typ = explode(";", $types->title);
             $table0 = Report1::where('date', $maxDate)->get();
-
             
             $table1 = Info::where('id_group', '4')->where('date', $maxDate)->get()->first();
             $tabl1 = explode(";", $table1->value);
@@ -258,8 +257,7 @@ class FrontController extends Controller
                 }
                 break;
             case 'allReports':
-        //Report1
-                
+        //Report1                
                 $reports1 = Report1::where('date', $date)->get();
                 
                 if (!empty($reports1->first())) 
@@ -339,7 +337,8 @@ class FrontController extends Controller
             $reports4 = Report4::where('date', $date)->get();//Report4
     //Report5
             $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
-            foreach ($tables as $key => $table) {
+            foreach ($tables as $key => $table) 
+            {
                 $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
             }
     //end Report5
@@ -365,9 +364,7 @@ class FrontController extends Controller
 
         $date1 = date_create($dateEnd);
         $date2 = date_create($dateStart);
-        $dateCount = date_diff($date1, $date2)->days;
-
-        
+        $dateCount = date_diff($date1, $date2)->days;        
 
         switch ($table) 
         {
@@ -402,7 +399,6 @@ class FrontController extends Controller
                     $allReport['day'][$type] = $allDay;
                     $allReport['night'][$type] = $allNight;
                 }
-
                 foreach ($repDate as $key => $rd)
                 {                    
                     for ($i=1; $i <= 4; $i++)
@@ -528,6 +524,140 @@ class FrontController extends Controller
                         break;
                 }
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
+                break;
+        }
+    }
+
+    public function sort($table)
+    {
+        switch ($table) 
+        {/*
+            case 'Report1':
+                $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Статистика';
+                break;
+            case 'Report2':
+                $obj=Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Інформація по запізненнях бригад на виклики';
+                break;
+            case 'Report3':
+                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Транспортування на Луцьк (Київ)';
+                break;*/
+            case 'Report4':
+                $obj=Report4::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
+                
+                foreach ($obj as $key => $val) 
+                {     
+                    $maxDate=Report4::select('date')->where('viddil', $val->viddil)->max('date');
+                    $minDate=Report4::select('date')->where('viddil', $val->viddil)->min('date');
+
+                    $val->date = "$minDate---$maxDate";
+                }
+                
+                $title = 'ГКС';
+                break;
+            case 'Report6':
+                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Зауваження по роботі, скарги, подяки';
+                break;
+            case 'allReports': 
+                $obj = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $title = 'Рапорт старших лікарів';
+                break;
+    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+            case 'fatal':
+            case 'dtp+ns':
+            case 'high_travmy':
+            case 'tr_kytyzi':
+            case 'opic':
+            case 'travmat':
+                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $table)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                switch ($table)
+                {
+                    case 'fatal':
+                        $title = 'Смертність в присутності бригади (успішна реанімація)';
+                        break;
+                    case 'dtp+ns':
+                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        break;
+                    case 'high_travmy':
+                        $title = 'Складні травми';
+                        break;
+                    case 'tr_kytyzi':
+                        $title = 'Травми китиці';
+                        break;
+                    case 'opic':
+                        $title = 'Опіки/ Переохолодження';
+                        break;
+                    case 'travmat':
+                        $title = 'Травматизм (кримінальний, виробничий)';
+                        break;
+                    default:
+                        $obj=array();
+                        $title = 'ERROR 404/ NOT FOUND';
+                        break;
+                }
+                break;
+        }
+        return view('front.show', ['ojects'=>$obj, 'title'=>$title, 'table'=>$table]);
+    }
+
+    public function sortShow($viddil, $table, $date)
+    {
+        //dd($date);
+        $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+        switch ($table) 
+        {
+            case 'Report2':
+                $reports = Report2::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
+                return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
+                break;
+            case 'Report3':
+                $reports = Report3::where('date', $date)->get();
+                return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
+                break;
+            case 'Report4':
+                $reports = Report4::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
+                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
+                break;
+            case 'fatal':
+            case 'dtp+ns':
+            case 'high_travmy':
+            case 'tr_kytyzi':
+            case 'opic':
+            case 'travmat':
+                foreach ($tables as $j => $tab) 
+                {
+                    if ($table == $tab) 
+                        { $exp = $j; }
+                }
+                for ($i=$exp; $i < count($tables); $i++) 
+                {
+                    $reports = Report5::where('date', $date)->where('pidtype', $tables[$i])->get();
+                    if (!empty($reports->first()))
+                    {
+                        return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$tables[$i]]);
+                        break;
+                    } 
+                    elseif ((empty($reports->first()))&&($i == count($tables)-1)) //якщо елемент останній та порожній
+                    {
+                        return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>$tables[$i+1]]);
+                        break;
+                    } 
+                    else
+                    {
+                        return redirect()->action('FrontController@myShow', ['date'=>$date, 'table'=>'Report6']);
+                        break;
+                    }                   
+                }                    
+                break;
+            case 'Report6':
+                $reports = Report6::where('date', $date)->get();
+                
+                    return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
+                 
+                
                 break;
         }
     }

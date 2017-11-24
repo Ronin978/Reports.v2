@@ -19,7 +19,11 @@
     <!-- Scripts -->
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
-    
+     <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     
     <script language="javascript">
     function CallPrint(strid) 

@@ -10,14 +10,14 @@
 @include('flash::message')     
 <section>  
     <form id="firstForm" method="POST" action="{{action('ReportController@store4')}}">   
-        <p align="center">ГКС за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>
-       
+        <p align="center">ГКС за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>       
         <table id="table4">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
+                <td>Відділення</td>
                 <td>ПІП хворого</td>
                 <td>Вік</td>
                 <td>Діагноз</td>
@@ -40,6 +40,13 @@
                 </td>
                 <td>
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <select name="viddil0">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
                 </td>
                 <td>
                     <textarea name="pib0" rows="1" data="elastic"></textarea>

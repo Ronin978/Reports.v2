@@ -20,9 +20,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'FrontController@index');
 
 Route::get('/show/{id}', 'FrontController@show');
+Route::get('/show/{table}/sort', 'FrontController@sort');
 Route::get('/QuickFind', 'FrontController@QuickFind');
 Route::get('/DateFind', 'FrontController@DateFind');
 Route::get('/myShow/{date}/{table}', 'FrontController@myShow');
+Route::get('/sortShow/{viddil}/{table}/{date}', 'FrontController@sortShow');
 
 Route::group(['prefix'=>'report','middleware'=>'auth'], function()
 { 

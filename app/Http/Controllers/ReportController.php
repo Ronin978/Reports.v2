@@ -224,7 +224,6 @@ class ReportController extends Controller
                     if ($rep == '') 
                         { $limit++; }
                 }
-
                 if ($limit < (count($report)-3))
                 {
                     foreach ($report as $key => $rep)
@@ -264,7 +263,6 @@ class ReportController extends Controller
                     if ($rep == '') 
                         { $limit++; }
                 }
-
                 if ($limit < (count($report)-3))
                 {
                     foreach ($report as $key => $rep)
@@ -285,11 +283,12 @@ class ReportController extends Controller
     	$post = $request->all();
         $report['date'] = $post['date']; 
         $report['users'] = Auth::user()->name; 
-        for ($i=0; $i < (count($post)-2)/11 ; $i++) 
+        for ($i=0; $i < (count($post)-2)/12 ; $i++) 
             {                
-                $report['timer'] = $post["date$i"];   
-                $report['no_card'] = $post["no_card$i"];  
-                $report['adress'] = $post["adress$i"];  
+                $report['timer'] = $post["date$i"];
+                $report['no_card'] = $post["no_card$i"];
+                $report['adress'] = $post["adress$i"];
+                $report['viddil'] = $post["viddil$i"];  
                 $report['pib'] = $post["pib$i"];  
                 $report['age'] = $post["age$i"];  
                 $report['diagnoz'] = $post["diagnoz$i"];
@@ -305,7 +304,6 @@ class ReportController extends Controller
                     if ($rep == '') 
                         { $limit++; }
                 }
-
                 if ($limit < (count($report)-3))
                 {
                     foreach ($report as $key => $rep)
@@ -352,7 +350,6 @@ class ReportController extends Controller
                     if ($rep == '') 
                         { $limit++; }
                 }
-
                 if ($limit < (count($report)-3))
                 {
                     foreach ($report as $key => $rep)
@@ -363,8 +360,7 @@ class ReportController extends Controller
                     Report5::create($report);
                 }
             }
-        flash('Дані внесені.');
-        
+        flash('Дані внесені.');        
         switch ($report['pidtype'])
         { 
             case 'fatal':
@@ -412,7 +408,6 @@ class ReportController extends Controller
                     if ($rep == '') 
                         { $limit++; }
                 }
-
                 if ($limit < (count($report)-3))
                 {
                     foreach ($report as $key => $rep)
@@ -550,25 +545,20 @@ class ReportController extends Controller
                             $infoTable->update($info);
                             $infoTable->save();
                     }    
-                }                
-
+                }   
                 $report['users'] = Auth::user()->name;
                 $report['date'] = $date;
                 $report['chergovy'] = $post["chergovy"];
                 $report['updated_at'] = $updt;
-
                 for ($i=0; $i < 5 ; $i++)
                 {
                     $report['day'] = $post["day$i"];  
                     $report['night'] = $post["night$i"];
-                    $report['type'] = $i;
-                   
+                    $report['type'] = $i;                   
                     if ($report['day'] == '')
                         { $report['day'] = ' '; }
-
                     if ($report['night'] == '')
                         { $report['night'] = ' '; }
-
                     $myReport = Report1::where('date', $report['date'])->where('type', $i)->first();  
                     $myReport->update($report);
                     $myReport->save();
@@ -600,7 +590,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -637,7 +626,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -673,7 +661,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -705,7 +692,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -721,7 +707,6 @@ class ReportController extends Controller
                             $treport[$i]->delete();
                         }
                     }
-
                     //Та видаляємо всі решту
                     for ($i = (count($post)-3)/8 ; $i < count($treport); $i++) 
                     { 
@@ -757,7 +742,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -796,7 +780,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -834,7 +817,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -868,7 +850,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -899,13 +880,14 @@ class ReportController extends Controller
                 $report['updated_at'] = $updt;
                 $report['users'] = Auth::user()->name;
 
-                if (count($treport) == (count($post)-3)/11)
+                if (count($treport) == (count($post)-3)/12)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
                     for ($i=0; $i < count($treport) ; $i++) 
                     {  
                         $report['timer'] = $post["date$i"];
                         $report['no_card'] = $post["no_card$i"];
                         $report['adress'] = $post["adress$i"];
+                        $report['viddil'] = $post["viddil$i"];
                         $report['pib'] = $post["pib$i"];
                         $report['age'] = $post["age$i"];
                         $report['diagnoz'] = $post["diagnoz$i"];
@@ -921,7 +903,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -938,7 +919,7 @@ class ReportController extends Controller
                         }
                     }
                 }
-                elseif (count($treport) < (count($post)-3)/11)
+                elseif (count($treport) < (count($post)-3)/12)
                 {   //якщо додані додаткові рядки
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
@@ -946,6 +927,7 @@ class ReportController extends Controller
                         $report['timer'] = $post["date$i"];
                         $report['no_card'] = $post["no_card$i"];
                         $report['adress'] = $post["adress$i"];
+                        $report['viddil'] = $post["viddil$i"];
                         $report['pib'] = $post["pib$i"];
                         $report['age'] = $post["age$i"];
                         $report['diagnoz'] = $post["diagnoz$i"];
@@ -961,7 +943,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -980,11 +961,12 @@ class ReportController extends Controller
                     //Та додаємо нові
                     $report['created_at'] = Report4::where('date', $newDate)->first()->created_at;
 
-                    for ($i = count($treport); $i < (count($post)-3)/11; $i++) 
+                    for ($i = count($treport); $i < (count($post)-3)/12; $i++) 
                     { 
                         $report['timer'] = $post["date$i"];   
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"];
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['age'] = $post["age$i"];  
                         $report['diagnoz'] = $post["diagnoz$i"];
@@ -1000,7 +982,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -1015,11 +996,12 @@ class ReportController extends Controller
                 else
                 {   //якщо видалені рядки
                     //поновлюємо ті що прийшли з форми
-                    for ($i=0; $i < (count($post)-3)/11 ; $i++) 
+                    for ($i=0; $i < (count($post)-3)/12 ; $i++) 
                     {   
                         $report['timer'] = $post["date$i"];   
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"];
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['age'] = $post["age$i"];  
                         $report['diagnoz'] = $post["diagnoz$i"];
@@ -1035,7 +1017,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -1053,14 +1034,13 @@ class ReportController extends Controller
                     }
 
                     //Та видаляємо всі решту
-                    for ($i = (count($post)-3)/11 ; $i < count($treport); $i++)
+                    for ($i = (count($post)-3)/12 ; $i < count($treport); $i++)
                     { 
                         $treport[$i]->delete();
                     }
                 }
                 flash('Дані внесені.4');
-                break;
-            
+                break;            
             case 'Report6':
                 $treport = Report6::where('date', $newDate)->get();
                 $report['date'] = $date;
@@ -1082,7 +1062,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -1115,7 +1094,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -1147,7 +1125,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -1175,7 +1152,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-3))
                         {
                             foreach ($report as $key => $rep)
@@ -1191,7 +1167,6 @@ class ReportController extends Controller
                             $treport[$i]->delete();
                         }
                     }
-
                     //Та видаляємо всі решту
                     for ($i = (count($post)-3)/4 ; $i < count($treport); $i++)
                     { 
@@ -1200,7 +1175,6 @@ class ReportController extends Controller
                 }
                 flash('Дані внесені.6');
                 break;
-
             case 'fatal':
             case 'dtp+ns':
             case 'high_travmy':
@@ -1232,7 +1206,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -1264,7 +1237,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -1299,7 +1271,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-5))
                         {
                             foreach ($report as $key => $rep)
@@ -1330,7 +1301,6 @@ class ReportController extends Controller
                             if ($rep == '') 
                                 { $limit++; }
                         }
-
                         if ($limit < (count($report)-4))
                         {
                             foreach ($report as $key => $rep)
@@ -1346,7 +1316,6 @@ class ReportController extends Controller
                             $treport[$i]->delete();
                         }
                     }
-
                     //Та видаляємо всі решту
                     for ($i = (count($post)-3)/7 ; $i < count($treport); $i++)
                     { 

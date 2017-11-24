@@ -20,6 +20,7 @@ class Gks extends Migration
          $table->string('timer', 20);
          $table->string('no_card', 10); 
          $table->string('adress');
+         $table->string('viddil');
          $table->string('pib');
          $table->integer('age');
          $table->string('diagnoz');
@@ -29,8 +30,7 @@ class Gks extends Migration
          $table->string('gospital');
          $table->string('support');
          $table->timestamps();
-         $table->string('users');
-         
+         $table->string('users');         
         });
     }
 

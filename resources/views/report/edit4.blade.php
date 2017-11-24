@@ -19,6 +19,7 @@
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
+                <td>Відділення</td>
                 <td>ПІП хворого</td>
                 <td>Вік</td>
                 <td>Діагноз</td>
@@ -42,6 +43,16 @@
                 </td>
                 <td>
                     <textarea name="adress{{$key}}" rows="1" data="elastic">{{$report->adress}}</textarea>
+                </td>
+                <td>
+                    <select name="viddil{{$key}}">
+                        
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <!--active {{$report->viddil}}-->
+                        
+                    </select>
                 </td>
                 <td>
                     <textarea name="pib{{$key}}" rows="1" data="elastic">{{$report->pib}}</textarea>

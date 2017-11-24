@@ -16,6 +16,7 @@
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
+                <td>Відділення</td>
                 <td>ПІП хворого</td>
                 <td>Вік</td>
                 <td>Діагноз</td>
@@ -30,7 +31,7 @@
 				@if (!empty($indicator)) 
 				@if (($indicator == '1') && (empty($reports[$key-1]->date)))					
 						<tr>
-							<td colspan="12">{{$reports[$key]->date}}</td>
+							<td colspan="13">{{$reports[$key]->date}}</td>
 						</tr>
 				@endif	
 				@endif
@@ -46,6 +47,9 @@
 				</td>
 				<td>
 					{{$report->adress}}
+				</td>
+				<td>
+					{{$report->viddil}}
 				</td>
 				<td>
 					{{$report->pib}}
@@ -74,7 +78,7 @@
 			</tr>
 				@if ((!empty($reports[$key+1]->date)) && ($reports[$key]->date != $reports[$key+1]->date))
 					<tr>
-						<td colspan="9">{{$reports[$key+1]->date}}</td>
+						<td colspan="13">{{$reports[$key+1]->date}}</td>
 					</tr>
 				@endif
 			@endforeach

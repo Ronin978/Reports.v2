@@ -138,15 +138,27 @@ function AddLine4()
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
-    var arr = ["date", "no_card", "adress", "pib", "age", 
+    var arr = ["date", "no_card", "adress", "viddil", "pib", "age", 
     "diagnoz", "brig", "tromb", "stent", "gospital", "support"]
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("textarea"); // Ввод text2
-        text.setAttribute("rows", "1");
-        text.setAttribute("name", arr[i]+index);
-        cell.appendChild(text);
+        if (arr[i] == "viddil") {
+            var text = document.createElement("select"); // Ввод text2
+            text.setAttribute("name", arr[i]+index);
+            for (var j = 1; j <= 10; j++) {
+                var option= document.createElement("option"); 
+                option.innerHTML = j;
+                text.appendChild(option);
+            }
+            cell.appendChild(text);
+        }
+        else {
+            var text = document.createElement("textarea"); // Ввод text2
+            text.setAttribute("rows", "1");
+            text.setAttribute("name", arr[i]+index);
+            cell.appendChild(text);
+        }
     }
 }
 

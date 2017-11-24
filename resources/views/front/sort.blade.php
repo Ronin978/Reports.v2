@@ -28,7 +28,8 @@
 		<section>
 			@foreach ($ojects as $key => $obj)
 				@if(!empty($obj->viddil))
-					<div onclick="window.location='{{action('FrontController@sortShow', ['viddil' => $obj->viddil, 'table'=>$table, 'date' => $obj->date])}}'">				
+					<div onclick="window.location='{{action('FrontController@sortShow', ['viddil' => $obj->viddil, 'table'=>$table])}}'">
+				
 					<p> Відділ - {{$obj->viddil}}</p>
 				@else
 					<div onclick="window.location='{{action('FrontController@myShow', ['date' => $obj->date, 'table'=>$table])}}'">

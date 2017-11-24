@@ -9,8 +9,7 @@
 <div class="12u">   
 @include('flash::message')
  <section >  
-    <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">
-   
+    <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">   
         <p align="center">
             РАПОРТ старших лікарів змін <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>
             за чергування <input id="firstdate" type="date" name="date" value="{{$date}}"> .

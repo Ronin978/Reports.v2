@@ -1,0 +1,109 @@
+#tableShow
+{
+	border-collapse: collapse;
+	line-height: 1.5em;	
+	text-align: center;
+	width: 100%;
+	word-break: break-all;
+}
+
+#tableEdit
+{
+	border-collapse: collapse;
+	line-height: 1.5em;
+	text-align: center;
+	width: 100%;
+	word-break: break-all;
+}
+
+td
+{
+	border:1px black solid;
+	margin: 0;
+	padding:5px 0 5px 0;
+}
+
+textarea
+{
+	overflow: hidden;
+	resize: vertical;	
+	width: 95%;
+	margin: 5px 0 5px 0;
+	padding: 5px 0 5px 0;
+} 
+
+.pointer
+{
+	cursor: pointer;
+	border: 1px solid green;
+	width: 60px;
+}
+
+.table-inline
+{
+	display: table-cell;
+	width: 30%;
+	padding: 10px 10px 0 10px;
+}
+
+.title
+{
+	text-align: center;
+	width: 100%;
+}
+
+#main
+{
+	margin: auto;
+	padding: auto;
+	width: 877px;
+	font-size: 11px;
+}
+
+#mainE
+{
+	margin: auto;
+	padding: auto;
+	width: 877px;
+	font-size: 14px;
+}
+
+#pagePrint
+{
+	margin: auto;
+	padding: auto;
+	width: 877px;
+	height: 620px;
+	background: #F0FFF0;
+	border: 1px solid black;
+}
+
+.col1
+{
+	width: 10%;
+}
+
+.col2
+{
+	width: 45%;
+}
+
+.col3
+{
+	width: 15%;
+}
+
+.col4
+{
+	width: 15%;
+}
+
+.col5
+{
+	width: 15%;
+}
+
+button
+{
+	height: 30px;
+}
