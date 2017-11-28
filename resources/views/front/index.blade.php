@@ -160,30 +160,13 @@
             <header>
             <blockquote>
                 <h4>Вивести звіт</h4>
+                <input type="radio" onchange="myVisible()">
+                <input type="radio" onchange="myVisible()">
             </blockquote>
             </header>
-                    <form method="GET" action="{{action('FrontController@QuickFind')}}">    
-                        Тип звіту   
-                        <select id="mySelect" name="table">
-                            <option selected value="Report1">РАПОРТ старших лікарів змін</option>
-                            <option value="Report2">Інформація по запізненнях бригад на виклики</option>
-                            <option value="Report3">Транспортування на Луцьк</option>
-                            <option value="Report4">ГКС</option>
-                            <option value="fatal">Смертність в присутності бригади (успішна реанімація)</option>
-                            <option value="dtp+ns">ДТП і «НС» (надзвичайні стани)</option>
-                            <option value="high_travmy">Складні травми</option>
-                            <option value="tr_kytyzi">Травми китиці</option>
-                            <option value="opic">Опіки/ Переохолодження</option>
-                            <option value="travmat">Травматизм (кримінальний, виробничий)</option>
-                            <option value="Report6">Зауваження по роботі, скарги, подяки</option>
-                        </select>
+                    <div id="visibleForm">
                         
-                        <input type="date" name="dateStart" value="{{date('Y-m-d')}}" >
-                        <input type="date" name="dateEnd" value="{{date('Y-m-d')}}" >
-
-                        <input type="submit" value="Вивести">
-                    </form>
-               
+                    </div>
         </section>
 
     </div>

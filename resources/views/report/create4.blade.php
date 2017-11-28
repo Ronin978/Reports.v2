@@ -42,11 +42,10 @@
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <select name="viddil0">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    <input list="myList" name="viddil0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="pib0" rows="1" data="elastic"></textarea>

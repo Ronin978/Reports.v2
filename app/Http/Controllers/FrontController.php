@@ -619,7 +619,7 @@ class FrontController extends Controller
                 break;
             case 'Report4':
                 $reports = Report4::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
-                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
+                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
             case 'fatal':
             case 'dtp+ns':
@@ -654,10 +654,7 @@ class FrontController extends Controller
                 break;
             case 'Report6':
                 $reports = Report6::where('date', $date)->get();
-                
                     return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
-                 
-                
                 break;
         }
     }

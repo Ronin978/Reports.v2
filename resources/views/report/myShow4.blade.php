@@ -9,14 +9,16 @@
 <div class="12u">	
 @include('flash::message')
 	<section id="pagePrint">	
-		<h4 align="center" >ГКС за {{$date}}</h4>
+		<h4 align="center">ГКС за {{$date}}</h4>
+		@if(!empty($viddil))
+		<h4 align="center">Відділення: {{$viddil}}</h4>
+		@endif
 		<table id="table4">
 			<tr id="firstTr">
 				<td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>№ карти виїзду</td>
                 <td>Адреса виклику</td>
-                <td>Відділення</td>
                 <td>ПІП хворого</td>
                 <td>Вік</td>
                 <td>Діагноз</td>
@@ -47,9 +49,6 @@
 				</td>
 				<td>
 					{{$report->adress}}
-				</td>
-				<td>
-					{{$report->viddil}}
 				</td>
 				<td>
 					{{$report->pib}}

@@ -144,8 +144,9 @@ function AddLine4()
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
         if (arr[i] == "viddil") {
-            var text = document.createElement("select"); // Ввод text2
+            var text = document.createElement("input"); // Ввод text2
             text.setAttribute("name", arr[i]+index);
+            text.setAttribute("list", 'myList');
             for (var j = 1; j <= 10; j++) {
                 var option= document.createElement("option"); 
                 option.innerHTML = j;

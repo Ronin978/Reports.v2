@@ -18,7 +18,7 @@ class Reports extends Migration
          $table->increments('id');
          $table->string('pidtype');
          $table->date('date'); 
-         $table->string('timer', 20);                 
+         $table->string('timer', 30);                 
          $table->string('title');         
          $table->string('adress');
          $table->string('pib');
