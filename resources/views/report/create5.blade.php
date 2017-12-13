@@ -18,7 +18,8 @@
                 <td>№<br>п/п</td>
                 <td>Дата,час</td>
                 <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
-                <td>Адреса НС</td>
+                <td>Адреса НС</td>                
+                <td>Відділення</td>
                 <td>П.І.П потерпілого, вік</td>
                 <td>№ карти виїзду</td>
                 <td>№ бригади, прізвище керівника</td>
@@ -36,6 +37,12 @@
                 </td>
                 <td>
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <input list="myList" name="viddil0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="pib0" rows="1" data="elastic"></textarea>

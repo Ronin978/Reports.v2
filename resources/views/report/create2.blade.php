@@ -18,6 +18,7 @@
                 <td>Відділення / пункт що має обслуговувати</td>
                 <td>№ виїзної карти /е(н)</td>
                 <td>Адреса виклику (район)</td>
+                <td>Відділення</td>
                 <td>№ Бригада що обслуговувала</td>
                 <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
                 <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
@@ -36,6 +37,12 @@
                 </td>
                 <td>
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <input list="myList" name="viddil0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="brig0" rows="1" data="elastic"></textarea>

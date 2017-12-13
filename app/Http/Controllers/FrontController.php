@@ -21,7 +21,7 @@ class FrontController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'QuickFind', 'myShow']]);
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     public function index()
@@ -352,7 +352,6 @@ class FrontController extends Controller
         }
     }
 
-    
     public function QuickFind(Request $request)
     {
         $post = $request->all();
@@ -360,6 +359,7 @@ class FrontController extends Controller
         $dateStart = $post['dateStart'];
         $dateEnd = $post['dateEnd'];
         $table = $post['table'];
+        $viddil = $post['viddil'];
         $date = "$dateStart --- $dateEnd";
 
         $date1 = date_create($dateEnd);
@@ -426,12 +426,38 @@ class FrontController extends Controller
                 return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'Report3':
-                $reports = Report3::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
-                return view('report.myShow3', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
+                if (empty($viddil)||$viddil=='Всі відділення') 
+                {
+                    $reports = Report3::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                }
+                else
+                {
+                    $reports = Report3::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                } 
+                if (empty($reports->first()))
+                {
+                    $title = 'Звіту з вказаними параметрами не існує.';
+                    return view('front.error', ['title'=>$title]);
+                    break;
+                }
+                return view('report.myShow3', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);  
                 break;
             case 'Report4':
-                $reports = Report4::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
-                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
+                if (empty($viddil)||$viddil=='Всі відділення') 
+                {
+                    $reports = Report4::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                }
+                else
+                {
+                    $reports = Report4::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                } 
+                if (empty($reports->first()))
+                {
+                    $title = 'Звіту з вказаними параметрами не існує.';
+                    return view('front.error', ['title'=>$title]);
+                    break;
+                }
+                return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);  
                 break;
             case 'Report6':
                 $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
@@ -535,15 +561,33 @@ class FrontController extends Controller
             case 'Report1':
                 $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $title = 'Статистика';
-                break;
+                break;*/
             case 'Report2':
-                $obj=Report2::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj=Report2::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
+                
+                foreach ($obj as $key => $val) 
+                {     
+                    $maxDate=Report2::select('date')->where('viddil', $val->viddil)->max('date');
+                    $minDate=Report2::select('date')->where('viddil', $val->viddil)->min('date');
+
+                    $val->date = "$minDate---$maxDate";
+                }
+
                 $title = 'Інформація по запізненнях бригад на виклики';
                 break;
             case 'Report3':
-                $obj=Report3::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Транспортування на Луцьк (Київ)';
-                break;*/
+               $obj=Report3::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
+                
+                foreach ($obj as $key => $val) 
+                {     
+                    $maxDate=Report3::select('date')->where('viddil', $val->viddil)->max('date');
+                    $minDate=Report3::select('date')->where('viddil', $val->viddil)->min('date');
+
+                    $val->date = "$minDate---$maxDate";
+                }
+                
+                $title = 'Транспортування';
+                break;
             case 'Report4':
                 $obj=Report4::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
                 
@@ -558,13 +602,18 @@ class FrontController extends Controller
                 $title = 'ГКС';
                 break;
             case 'Report6':
-                $obj=Report6::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj=Report6::select('subdiv')->orderBy('subdiv')->distinct('subdiv')->paginate(10);//список всіх відділів
+                
+                foreach ($obj as $key => $val) 
+                {     
+                    $maxDate=Report6::select('date')->where('subdiv', $val->subdiv)->max('date');
+                    $minDate=Report6::select('date')->where('subdiv', $val->subdiv)->min('date');
+
+                    $val->date = "$minDate---$maxDate";
+                }
                 $title = 'Зауваження по роботі, скарги, подяки';
                 break;
-            case 'allReports': 
-                $obj = Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
-                $title = 'Рапорт старших лікарів';
-                break;
+
     //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
             case 'fatal':
             case 'dtp+ns':
@@ -572,7 +621,16 @@ class FrontController extends Controller
             case 'tr_kytyzi':
             case 'opic':
             case 'travmat':
-                $obj=Report5::select('date', 'created_at', 'updated_at')->where('pidtype', $table)->orderBy('date', 'DESC')->distinct('date')->paginate(10);
+                $obj=Report5::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
+                
+                foreach ($obj as $key => $val) 
+                {     
+                    $maxDate=Report5::select('date')->where('viddil', $val->viddil)->max('date');
+                    $minDate=Report5::select('date')->where('viddil', $val->viddil)->min('date');
+
+                    $val->date = "$minDate---$maxDate";
+                }
+
                 switch ($table)
                 {
                     case 'fatal':
@@ -611,11 +669,11 @@ class FrontController extends Controller
         {
             case 'Report2':
                 $reports = Report2::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
-                return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
+                return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
             case 'Report3':
-                $reports = Report3::where('date', $date)->get();
-                return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
+                $reports = Report3::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
+                return view('report.myShow3', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
             case 'Report4':
                 $reports = Report4::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
@@ -634,10 +692,10 @@ class FrontController extends Controller
                 }
                 for ($i=$exp; $i < count($tables); $i++) 
                 {
-                    $reports = Report5::where('date', $date)->where('pidtype', $tables[$i])->get();
+                    $reports = Report5::where('viddil', $viddil)->where('pidtype', $tables[$i])->orderBy('date', 'DESC')->get();
                     if (!empty($reports->first()))
                     {
-                        return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$tables[$i]]);
+                        return view('report.myShow5', ['date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1', 'reports'=>$reports, 'table'=>$tables[$i]]);
                         break;
                     } 
                     elseif ((empty($reports->first()))&&($i == count($tables)-1)) //якщо елемент останній та порожній
@@ -653,8 +711,8 @@ class FrontController extends Controller
                 }                    
                 break;
             case 'Report6':
-                $reports = Report6::where('date', $date)->get();
-                    return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
+                $reports = Report6::where('subdiv', $viddil)->orderBy('date', 'DESC')->get();
+                    return view('report.myShow6', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
         }
     }

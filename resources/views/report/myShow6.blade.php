@@ -10,6 +10,9 @@
 @include('flash::message')
 	<section id="pagePrint">	
 		<h4 align="center" >Зауваження по роботі, скарги, подяки за {{$date}}</h4>
+		@if(!empty($viddil))
+		<h4 align="center">Відділення: {{$viddil}}</h4>
+		@endif
 		 <table id="twoTable" border="1">
             <tr class="firstTr">
                 <td class="firstColumn">№<br>п/п</td>
@@ -45,7 +48,7 @@
 			</tr>
 				@if ((!empty($reports[$key+1]->date)) && ($reports[$key]->date != $reports[$key+1]->date))
 					<tr>
-						<td colspan="9">{{$reports[$key+1]->date}}</td>
+						<td colspan="5">{{$reports[$key+1]->date}}</td>
 					</tr>
 				@endif		
 			@endforeach

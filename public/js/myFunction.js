@@ -90,15 +90,30 @@ function AddLine2()
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
-    var arr = ["punkt", "no_card", "adress", "brig", 
+    var arr = ["punkt", "no_card", "adress", "viddil", "brig", 
     "time", "support", "cause", "call"]
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("textarea"); // Ввод text2
-        text.setAttribute("rows", "1");
-        text.setAttribute("name", arr[i]+index);
-        cell.appendChild(text);
+        if (arr[i] == "viddil") 
+        {
+            var text = document.createElement("input"); // Ввод text2
+            text.setAttribute("name", arr[i]+index);
+            text.setAttribute("list", 'myList');
+            for (var j = 1; j <= 10; j++) {
+                var option= document.createElement("option"); 
+                option.innerHTML = j;
+                text.appendChild(option);
+            }
+            cell.appendChild(text);
+        }
+        else
+        {
+            var text = document.createElement("textarea"); // Ввод text2
+            text.setAttribute("rows", "1");
+            text.setAttribute("name", arr[i]+index);
+            cell.appendChild(text);
+        }
     }
 }
 
@@ -114,15 +129,30 @@ function AddLine3()
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
-    var arr = ["date", "no_card", "pib", "at", 
+    var arr = ["date", "viddil", "no_card", "pib", "at", 
     "from", "direct", "who_direct", "diagnoz", "brig", "other"]
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("textarea"); // Ввод text2
-        text.setAttribute("rows", "1");
-        text.setAttribute("name", arr[i]+index);
-        cell.appendChild(text);
+        if (arr[i] == "viddil") 
+        {
+            var text = document.createElement("input"); // Ввод text2
+            text.setAttribute("name", arr[i]+index);
+            text.setAttribute("list", 'myList');
+            for (var j = 1; j <= 10; j++) {
+                var option= document.createElement("option"); 
+                option.innerHTML = j;
+                text.appendChild(option);
+            }
+            cell.appendChild(text);
+        }
+        else
+        {
+            var text = document.createElement("textarea"); // Ввод text2
+            text.setAttribute("rows", "1");
+            text.setAttribute("name", arr[i]+index);
+            cell.appendChild(text);
+        }
     }
 }
 
@@ -175,15 +205,30 @@ function AddLine5()
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
-    var arr = ["date", "title", "adress", "pib", "no_card",
+    var arr = ["date", "title", "adress", "viddil", "pib", "no_card",
     "brig", "other"]
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("textarea"); // Ввод text2
-        text.setAttribute("rows", "1");
-        text.setAttribute("name", arr[i]+index);
-        cell.appendChild(text);
+        if (arr[i] == "viddil") 
+        {
+            var text = document.createElement("input"); // Ввод text2
+            text.setAttribute("name", arr[i]+index);
+            text.setAttribute("list", 'myList');
+            for (var j = 1; j <= 10; j++) {
+                var option= document.createElement("option"); 
+                option.innerHTML = j;
+                text.appendChild(option);
+            }
+            cell.appendChild(text);
+        }
+        else
+        {
+            var text = document.createElement("textarea"); // Ввод text2
+            text.setAttribute("rows", "1");
+            text.setAttribute("name", arr[i]+index);
+            cell.appendChild(text);
+        }
     }
 }
 
@@ -203,10 +248,25 @@ function AddLine6()
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        var text = document.createElement("textarea"); // Ввод text2
-        text.setAttribute("rows", "1");
-        text.setAttribute("name", arr[i]+index);
-        cell.appendChild(text);
+        if (arr[i] == "subdiv") 
+        {
+            var text = document.createElement("input"); // Ввод text2
+            text.setAttribute("name", arr[i]+index);
+            text.setAttribute("list", 'myList');
+            for (var j = 1; j <= 10; j++) {
+                var option= document.createElement("option"); 
+                option.innerHTML = j;
+                text.appendChild(option);
+            }
+            cell.appendChild(text);
+        }
+        else
+        {
+            var text = document.createElement("textarea"); // Ввод text2
+            text.setAttribute("rows", "1");
+            text.setAttribute("name", arr[i]+index);
+            cell.appendChild(text);
+        }
     }
 }
 

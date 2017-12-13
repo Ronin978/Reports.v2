@@ -33,7 +33,7 @@
 				@if (!empty($indicator)) 
 				@if (($indicator == '1') && (empty($reports[$key-1]->date)))					
 						<tr>
-							<td colspan="13">{{$reports[$key]->date}}</td>
+							<td colspan="12">{{$reports[$key]->date}}</td>
 						</tr>
 				@endif	
 				@endif
@@ -77,7 +77,7 @@
 			</tr>
 				@if ((!empty($reports[$key+1]->date)) && ($reports[$key]->date != $reports[$key+1]->date))
 					<tr>
-						<td colspan="13">{{$reports[$key+1]->date}}</td>
+						<td colspan="12">{{$reports[$key+1]->date}}</td>
 					</tr>
 				@endif
 			@endforeach

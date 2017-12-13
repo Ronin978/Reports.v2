@@ -27,6 +27,9 @@
 				@endif
 
 			за {{$date}}</h4>
+			@if(!empty($viddil))
+			<h4 align="center">Відділення: {{$viddil}}</h4>
+			@endif
 		<table id="table5">
             <tr id="firstTr">
                 <td>№<br>п/п</td>
@@ -75,7 +78,7 @@
 				</tr>
 					@if ((!empty($reports[$key+1]->date)) && ($reports[$key]->date != $reports[$key+1]->date))
 						<tr>
-							<td colspan="9">{{$reports[$key+1]->date}}</td>
+							<td colspan="8">{{$reports[$key+1]->date}}</td>
 						</tr>
 					@endif		
 				@endforeach

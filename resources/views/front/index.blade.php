@@ -145,9 +145,9 @@
         <!-- Sidebar -->
         <section>
             <header>
-            <blockquote>
-                <h4>Сформувати повний звіт</h4>
-            </blockquote>
+                <blockquote>
+                    <h4>Сформувати повний звіт</h4>
+                </blockquote>
             </header>   
                     <form method="GET" action="{{action('FrontController@DateFind')}}">
                         <input type="date" name="date" value="{{date('Y-m-d')}}" >
@@ -158,20 +158,30 @@
 
         <section>
             <header>
-            <blockquote>
-                <h4>Вивести звіт</h4>
-                <input type="radio" onchange="myVisible()">
-                <input type="radio" onchange="myVisible()">
-            </blockquote>
+                <blockquote>
+                    <h4>Вивести звіт</h4>
+                </blockquote>
             </header>
-                    <div id="visibleForm">
+                <div id="visibleForm">    
+                    <form id="dateForm" method="GET" action="{{action('FrontController@QuickFind')}}">    
+                        Тип звіту   
+                        <select id="mySelect" name="table">
+                            <?php include 'table.php' ?>
+                        </select>
+                        Дата<br>
+                        <input type="date" name="dateStart" value="{{date('Y-m-d')}}" >
+                        <input type="date" name="dateEnd" value="{{date('Y-m-d')}}" >
+                        Відділення
+                        <select name="viddil" id="viddil">
+                            <option>Всі відділення</option>
+                            <?php include 'viddil.php' ?>
+                        </select>
                         
-                    </div>
+                        <input type="submit" value="Вивести">
+                    </form> 
+                </div>
         </section>
-
     </div>
-
-
     
     <div class="9u 12u(mobile) important(mobile)">
     <section>

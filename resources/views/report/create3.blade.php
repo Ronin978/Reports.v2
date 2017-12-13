@@ -15,6 +15,7 @@
             <tr id="firstTr">
                 <td>№<br>п/п</td>
                 <td>Дата/час</td>
+                <td>Відділення</td>
                 <td>№ карти виїзду</td>
                 <td>ПІП хворого</td>
                 <td>Звідки забрано</td>
@@ -31,6 +32,12 @@
                 </td>
                 <td>
                     <textarea name="date0" rows="1" data="elastic"></textarea>
+                </td>
+                <td>
+                    <input list="myList" name="viddil0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="no_card0" rows="1" data="elastic"></textarea>

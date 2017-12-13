@@ -32,7 +32,10 @@
                     <textarea name="no_card0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <textarea name="subdiv0" rows="1" data="elastic"></textarea>
+                    <input list="myList" name="subdiv0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="other0" rows="1" data="elastic"></textarea>

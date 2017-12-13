@@ -15,6 +15,11 @@ use App\Report6;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create($table, Request $request)
     {
         $date = ($request->all())['date'];
@@ -207,11 +212,12 @@ class ReportController extends Controller
         $post = $request->all();
         $report['date'] = $post['date'];
         $report['users'] = Auth::user()->name;  
-        for ($i=0; $i < (count($post)-2)/8 ; $i++) 
+        for ($i=0; $i < (count($post)-2)/9 ; $i++) 
             {   
                 $report['punkt'] = $post["punkt$i"];  
                 $report['no_card'] = $post["no_card$i"];  
                 $report['adress'] = $post["adress$i"];  
+                $report['viddil'] = $post["viddil$i"];  
                 $report['brig'] = $post["brig$i"];
                 $report['time'] = $post["time$i"];
                 $report['support'] = $post["support$i"];
@@ -244,9 +250,10 @@ class ReportController extends Controller
     	$post = $request->all();
         $report['date'] = $post['date'];  
         $report['users'] = Auth::user()->name;
-        for ($i=0; $i < (count($post)-2)/10 ; $i++) 
+        for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];  
+                $report['viddil'] = $post["viddil$i"];    
                 $report['no_card'] = $post["no_card$i"];  
                 $report['pib'] = $post["pib$i"];  
                 $report['at'] = $post["at$i"];  
@@ -334,11 +341,12 @@ class ReportController extends Controller
         $report['date'] = $post['date'];  
         $report['pidtype'] = $post["pidtype"];
         $report['users'] = Auth::user()->name;
-        for ($i=0; $i < (count($post)-3)/8 ; $i++) 
+        for ($i=0; $i < (count($post)-3)/9 ; $i++) 
             {      
                 $report['timer'] = $post["date$i"];  
                 $report['title'] = $post["title$i"];  
-                $report['adress'] = $post["adress$i"];  
+                $report['adress'] = $post["adress$i"];     
+                $report['viddil'] = $post["viddil$i"];
                 $report['pib'] = $post["pib$i"];  
                 $report['no_card'] = $post["no_card$i"]; 
                 $report['brig'] = $post["brig$i"];
@@ -361,33 +369,8 @@ class ReportController extends Controller
                 }
             }
         flash('Дані внесені.');        
-        switch ($report['pidtype'])
-        { 
-            case 'fatal':
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'fatal']);
-                break;            
-            case 'dtp+ns': 
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'dtp+ns']);
-                break;
-            case 'high_travmy':
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'high_travmy']);
-                break;
-            case 'tr_kytyzi': 
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'tr_kytyzi']);
-                break;
-            case 'opic':
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'opic']);
-                break;
-            case 'travmat':
-                return redirect()->action('FrontController@myShow', 
-                ['date'=>$post['date'], 'table'=>'travmat']);
-                break;
-        }
+        return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>$report['pidtype']]);
     }
 
     public function store6(Request $request)
@@ -571,13 +554,14 @@ class ReportController extends Controller
                 $report['updated_at'] = $updt;
                 $report['users'] = Auth::user()->name;
 
-                if (count($treport) == (count($post)-3)/8)
+                if (count($treport) == (count($post)-3)/9)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"];  
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -606,14 +590,15 @@ class ReportController extends Controller
                         }
                     }
                 }
-                elseif (count($treport) < (count($post)-3)/8)
+                elseif (count($treport) < (count($post)-3)/9)
                 {   //якщо додані додаткові рядки
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"]; 
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -644,11 +629,12 @@ class ReportController extends Controller
                     //Та додаємо нові
                     $report['created_at'] = Report2::where('date', $newDate)->first()->created_at; 
 
-                    for ($i = count($treport); $i < (count($post)-3)/8; $i++) 
+                    for ($i = count($treport); $i < (count($post)-3)/9; $i++) 
                     { 
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"];
+                        $report['viddil'] = $post["viddil$i"];   
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -675,11 +661,12 @@ class ReportController extends Controller
                 else
                 {   //якщо видалені рядки
                     //поновлюємо ті що прийшли з форми
-                    for ($i=0; $i < (count($post)-3)/8 ; $i++) 
+                    for ($i=0; $i < (count($post)-3)/9 ; $i++) 
                     {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"]; 
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -708,7 +695,7 @@ class ReportController extends Controller
                         }
                     }
                     //Та видаляємо всі решту
-                    for ($i = (count($post)-3)/8 ; $i < count($treport); $i++) 
+                    for ($i = (count($post)-3)/9 ; $i < count($treport); $i++) 
                     { 
                         $treport[$i]->delete();
                     }
@@ -721,11 +708,12 @@ class ReportController extends Controller
                 $report['updated_at'] = $updt;
                 $report['users'] = Auth::user()->name;
 
-                if (count($treport) == (count($post)-3)/10)
+                if (count($treport) == (count($post)-3)/11)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
                     for ($i=0; $i < count($treport) ; $i++) 
                     {  
-                        $report['timer'] = $post["date$i"];  
+                        $report['timer'] = $post["date$i"];    
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['at'] = $post["at$i"];  
@@ -758,12 +746,13 @@ class ReportController extends Controller
                         }
                     }
                 }
-                elseif (count($treport) < (count($post)-3)/10)
+                elseif (count($treport) < (count($post)-3)/11)
                 {   //якщо додані додаткові рядки
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
-                        $report['timer'] = $post["date$i"];  
+                        $report['timer'] = $post["date$i"];     
+                        $report['viddil'] = $post["viddil$i"];
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['at'] = $post["at$i"];  
@@ -798,9 +787,10 @@ class ReportController extends Controller
                     //Та додаємо нові
                     $report['created_at'] = Report3::where('date', $newDate)->first()->created_at;
 
-                    for ($i = count($treport); $i < (count($post)-3)/10; $i++) 
+                    for ($i = count($treport); $i < (count($post)-3)/11; $i++) 
                     { 
-                        $report['timer'] = $post["date$i"];  
+                        $report['timer'] = $post["date$i"];     
+                        $report['viddil'] = $post["viddil$i"];
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['at'] = $post["at$i"];  
@@ -831,9 +821,10 @@ class ReportController extends Controller
                 else
                 {   //якщо видалені рядки
                     //поновлюємо ті що прийшли з форми
-                    for ($i=0; $i < (count($post)-3)/10 ; $i++) 
+                    for ($i=0; $i < (count($post)-3)/11 ; $i++) 
                     {   
-                        $report['timer'] = $post["date$i"];  
+                        $report['timer'] = $post["date$i"];    
+                        $report['viddil'] = $post["viddil$i"]; 
                         $report['no_card'] = $post["no_card$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['at'] = $post["at$i"];  
@@ -867,7 +858,7 @@ class ReportController extends Controller
                     }
 
                     //Та видаляємо всі решту
-                    for ($i = (count($post)-3)/10 ; $i < count($treport); $i++) 
+                    for ($i = (count($post)-3)/11 ; $i < count($treport); $i++) 
                     { 
                         $treport[$i]->delete();
                     }
@@ -1188,13 +1179,14 @@ class ReportController extends Controller
                 $report['updated_at'] = $updt;
                 $report['users'] = Auth::user()->name;
         
-                if (count($treport) == (count($post)-3)/7)
+                if (count($treport) == (count($post)-3)/8)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД       
                     for ($i=0; $i < count($treport) ; $i++)
                     {       
                         $report['timer'] = $post["date$i"];  
                         $report['title'] = $post["title$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"];     
+                        $report['viddil'] = $post["viddil$i"]; 
                         $report['pib'] = $post["pib$i"];  
                         $report['no_card'] = $post["no_card$i"]; 
                         $report['brig'] = $post["brig$i"];
@@ -1218,14 +1210,15 @@ class ReportController extends Controller
                         }
                     }
                 }
-                elseif (count($treport) < (count($post)-3)/7)
+                elseif (count($treport) < (count($post)-3)/8)
                 {   //якщо додані додаткові рядки
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
                         $report['timer'] = $post["date$i"];  
                         $report['title'] = $post["title$i"];  
-                        $report['adress'] = $post["adress$i"];  
+                        $report['adress'] = $post["adress$i"]; 
+                        $report['viddil'] = $post["viddil$i"];  
                         $report['pib'] = $post["pib$i"];  
                         $report['no_card'] = $post["no_card$i"]; 
                         $report['brig'] = $post["brig$i"];
@@ -1255,11 +1248,12 @@ class ReportController extends Controller
                     //Та додаємо нові 
                      $report['created_at'] = Report5::where('date', $newDate)->where('pidtype', $table)->first()->created_at;
 
-                    for ($i = count($treport); $i < (count($post)-3)/7; $i++) 
+                    for ($i = count($treport); $i < (count($post)-3)/8; $i++) 
                     {   
                         $report['timer'] = $post["date$i"];  
                         $report['title'] = $post["title$i"];  
                         $report['adress'] = $post["adress$i"];  
+                        $report['viddil'] = $post["viddil$i"]; 
                         $report['pib'] = $post["pib$i"];  
                         $report['no_card'] = $post["no_card$i"]; 
                         $report['brig'] = $post["brig$i"];
@@ -1285,11 +1279,12 @@ class ReportController extends Controller
                 else
                 {   //якщо видалені рядки
                     //поновлюємо ті що прийшли з форми
-                    for ($i=0; $i < (count($post)-3)/7 ; $i++) 
+                    for ($i=0; $i < (count($post)-3)/8 ; $i++) 
                     {   
                         $report['timer'] = $post["date$i"];  
                         $report['title'] = $post["title$i"];  
                         $report['adress'] = $post["adress$i"];  
+                        $report['viddil'] = $post["viddil$i"]; 
                         $report['pib'] = $post["pib$i"];  
                         $report['no_card'] = $post["no_card$i"]; 
                         $report['brig'] = $post["brig$i"];
@@ -1317,7 +1312,7 @@ class ReportController extends Controller
                         }
                     }
                     //Та видаляємо всі решту
-                    for ($i = (count($post)-3)/7 ; $i < count($treport); $i++)
+                    for ($i = (count($post)-3)/8 ; $i < count($treport); $i++)
                     { 
                         $treport[$i]->delete();
                     }

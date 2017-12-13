@@ -10,6 +10,9 @@
 @include('flash::message')
 	<section id="pagePrint">	
 		<h4 align="center">Інформація по запізненнях бригад на виклики за {{$date}}</h4>
+		@if(!empty($viddil))
+		<h4 align="center">Відділення: {{$viddil}}</h4>
+		@endif
 		<table id="table2">
 			<tr id="firstTr">
 				<td >№<br>п/п</td>
