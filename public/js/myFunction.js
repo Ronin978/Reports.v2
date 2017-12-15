@@ -1,39 +1,3 @@
-window.onload=function()
-{
-    if (document.getElementById('maxLenght') !== null) 
-    {        
-        var maxLenght = document.getElementById('maxLenght').offsetWidth;
-        document.getElementById('firstTr').style.height = (maxLenght  + 10) + 'px';
-        var rotate = document.getElementsByClassName('rotate');
-        for (var i = rotate.length - 1; i >= 0; i--) 
-        {
-            rotate[i].width = '30px';
-        }
-    }
- 
-    if (document.getElementById('maxLenght3') !== null) 
-    {
-        var maxLenght = document.getElementById('maxLenght3').offsetWidth;
-        document.getElementById('firstTr3').style.height = (maxLenght  + 10) + 'px';
-        var rotate = document.getElementsByClassName('rotate');
-        for (var i = rotate.length - 1; i >= 0; i--) 
-        {
-            rotate[i].width = '30px';
-        }
-    }
-
-    if (document.getElementById('maxLenght4') !== null) 
-    {
-        var maxLenght = document.getElementById('maxLenght4').offsetWidth;
-        document.getElementById('firstTr4').style.height = (maxLenght  + 10) + 'px';
-        var rotate = document.getElementsByClassName('rotate');
-        for (var i = rotate.length - 1; i >= 0; i--) 
-        {
-            rotate[i].width = '30px';
-        }
-    }
-}
-
 function oninput1(key)
 {
     var a = parseInt(document.getElementById('day'+key).value);
@@ -90,16 +54,17 @@ function AddLine2()
     text1.innerHTML= index+1;
     cell1.appendChild(text1);
 
-    var arr = ["punkt", "no_card", "adress", "viddil", "brig", 
+    var arr = ["punkt", "no_card", "adress", "brig", 
     "time", "support", "cause", "call"]
 
     for (var i = 0; i <= arr.length - 1;  i++) {
         var cell = row.insertCell(i+1);
-        if (arr[i] == "viddil") 
+        if (arr[i] == "punkt") 
         {
             var text = document.createElement("input"); // Ввод text2
             text.setAttribute("name", arr[i]+index);
             text.setAttribute("list", 'myList');
+            text.setAttribute("size", '14');
             for (var j = 1; j <= 10; j++) {
                 var option= document.createElement("option"); 
                 option.innerHTML = j;
@@ -139,6 +104,7 @@ function AddLine3()
             var text = document.createElement("input"); // Ввод text2
             text.setAttribute("name", arr[i]+index);
             text.setAttribute("list", 'myList');
+            text.setAttribute("size", '12');
             for (var j = 1; j <= 10; j++) {
                 var option= document.createElement("option"); 
                 option.innerHTML = j;
@@ -177,6 +143,7 @@ function AddLine4()
             var text = document.createElement("input"); // Ввод text2
             text.setAttribute("name", arr[i]+index);
             text.setAttribute("list", 'myList');
+            text.setAttribute("size", '10');
             for (var j = 1; j <= 10; j++) {
                 var option= document.createElement("option"); 
                 option.innerHTML = j;
@@ -214,7 +181,8 @@ function AddLine5()
         {
             var text = document.createElement("input"); // Ввод text2
             text.setAttribute("name", arr[i]+index);
-            text.setAttribute("list", 'myList');
+            text.setAttribute("list", 'myList');            
+            text.setAttribute("size", '12');
             for (var j = 1; j <= 10; j++) {
                 var option= document.createElement("option"); 
                 option.innerHTML = j;

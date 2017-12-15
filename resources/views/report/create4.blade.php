@@ -12,22 +12,22 @@
     <form id="firstForm" method="POST" action="{{action('ReportController@store4')}}">   
         <p align="center">ГКС за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>       
         <table id="table4">
-            <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>№ карти виїзду</td>
-                <td>Адреса виклику</td>
+            <tr id="firstTr" style="height: 200px;">
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_8">Дата,час</td>
+                <td class="col_8">№ карти виїзду</td>
+                <td class="col_8">Адреса виклику</td>
                 <td>Відділення</td>
-                <td>ПІП хворого</td>
-                <td>Вік</td>
-                <td>Діагноз</td>
-                <td>№ бр.,<br> керівник</td>
-                <td class="rotate">Тромболізис</td>
-                <td class="rotate">Стентування</td>
-                <td id="maxLenght" class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
-                <td class="rotate">Зв’язок з лікарем консультантом
+                <td class="col_8">ПІП хворого</td>
+                <td class="col_5">Вік</td>
+                <td >Діагноз</td>
+                <td class="col_15">№ бр.,<br> керівник</td>
+                <td class="col_3 rotate">Тромболізис</td>
+                <td class="col_3 rotate">Стентування</td>
+                <td class="col_10 maxLenght"><small>Госпіталізація(лікувальний заклад)/година</small></td>
+                <td class="col_5 rotate_two"><small>Зв’язок&nbspз&nbspлікарем<br> консультантом</small>
                 </td>
-            </tr> 
+            </tr>
             <tr>
                 <td>
                     <div>1</div>
@@ -42,7 +42,7 @@
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <input list="myList" name="viddil0">
+                    <input size="10" list="myList" name="viddil0">
                         <datalist id="myList">
                             <?php include 'viddil.php' ?>
                         </datalist>

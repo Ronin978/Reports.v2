@@ -164,12 +164,17 @@
 			@foreach ($ojects as $key => $obj)
 				@if(!empty($obj->viddil))
 					<div onclick="window.location='{{action('FrontController@sortShow', ['viddil' => $obj->viddil, 'table'=>$table, 'date' => $obj->date])}}'">				
-					<p> Відділ - {{$obj->viddil}}</p>
-                    <p>Звіт за дату - {{$obj->date}}</p>
-				@else
+					<p> Відділ - {{$obj->viddil}} </p>
+                @elseif(!empty($obj->punkt))
+                    <div onclick="window.location='{{action('FrontController@sortShow', ['viddil' => $obj->punkt, 'table'=>$table, 'date' => $obj->date])}}'">             
+                    <p> Відділ - {{$obj->punkt}} </p>
+				@elseif(!empty($obj->subdiv))
+                    <div onclick="window.location='{{action('FrontController@sortShow', ['viddil' => $obj->subdiv, 'table'=>$table, 'date' => $obj->date])}}'">             
+                    <p> Відділ - {{$obj->subdiv}} </p>
+                @else
 					<div onclick="window.location='{{action('FrontController@myShow', ['date' => $obj->date, 'table'=>$table])}}'">
-					<p>Звіт за дату - {{$obj->date}}</p>
 				@endif	
+                    <p>Звіт за дату - {{$obj->date}}</p>
 					<p>Створено: {{$obj->created_at}} <br>Оновлено: {{$obj->updated_at}}</p>
 					<small><a href="{{action('FrontController@edit', ['table'=>$table, 'date'=>$obj->date])}}">Редагувати</a></small>
 				</div>

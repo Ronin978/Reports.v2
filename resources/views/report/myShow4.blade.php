@@ -14,19 +14,19 @@
 		<h4 align="center">Відділення: {{$viddil}}</h4>
 		@endif
 		<table id="table4">
-			<tr id="firstTr">
-				<td>№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>№ карти виїзду</td>
-                <td>Адреса виклику</td>
-                <td>ПІП хворого</td>
-                <td>Вік</td>
-                <td>Діагноз</td>
-                <td>№ бр.,<br> керівник</td>
-                <td class="rotate">Тромболізис</td>
-                <td class="rotate">Стентування</td>
-                <td id="maxLenght"  class="rotate">Госпіталізація<br>(лікувальний заклад)/година</td>
-                <td class="rotate">Зв’язок з лікарем консультантом
+			<tr id="firstTr" style="height: 200px;">
+				<td class="col_3">№<br>п/п</td>
+                <td class="col_8">Дата,час</td>
+                <td class="col_8">№ карти виїзду</td>
+                <td class="col_10">Адреса виклику</td>
+                <td class="col_12">ПІП хворого</td>
+                <td class="col_5">Вік</td>
+                <td >Діагноз</td>
+                <td class="col_15">№ бр.,<br> керівник</td>
+                <td class="col_3 rotate">Тромболізис</td>
+                <td class="col_3 rotate">Стентування</td>
+                <td class="col_15 maxLenght"><small>Госпіталізація(лікувальний заклад)/година</small></td>
+                <td class="col_5 rotate_two"><small>Зв’язок&nbspз&nbspлікарем<br> консультантом</small>
                 </td>
 			</tr>
 			@foreach ($reports as $key=>$report)
@@ -37,7 +37,7 @@
 						</tr>
 				@endif	
 				@endif
-			<tr>
+			<tr class="words">
 				<td>
 					{{$key+1}}
 				</td>

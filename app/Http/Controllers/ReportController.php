@@ -212,12 +212,11 @@ class ReportController extends Controller
         $post = $request->all();
         $report['date'] = $post['date'];
         $report['users'] = Auth::user()->name;  
-        for ($i=0; $i < (count($post)-2)/9 ; $i++) 
+        for ($i=0; $i < (count($post)-2)/8 ; $i++) 
             {   
                 $report['punkt'] = $post["punkt$i"];  
                 $report['no_card'] = $post["no_card$i"];  
                 $report['adress'] = $post["adress$i"];  
-                $report['viddil'] = $post["viddil$i"];  
                 $report['brig'] = $post["brig$i"];
                 $report['time'] = $post["time$i"];
                 $report['support'] = $post["support$i"];
@@ -554,14 +553,13 @@ class ReportController extends Controller
                 $report['updated_at'] = $updt;
                 $report['users'] = Auth::user()->name;
 
-                if (count($treport) == (count($post)-3)/9)
+                if (count($treport) == (count($post)-3)/8)
                 {   //якщо к-сть в запиті дорівнює к-сті в БД
                     for ($i=0; $i < count($treport) ; $i++) 
                     {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];  
-                        $report['viddil'] = $post["viddil$i"];  
+                        $report['adress'] = $post["adress$i"]; 
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -590,7 +588,7 @@ class ReportController extends Controller
                         }
                     }
                 }
-                elseif (count($treport) < (count($post)-3)/9)
+                elseif (count($treport) < (count($post)-3)/8)
                 {   //якщо додані додаткові рядки
                     //поновлюємо існуючі
                     for ($i=0; $i < count($treport) ; $i++) 
@@ -598,7 +596,6 @@ class ReportController extends Controller
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"]; 
-                        $report['viddil'] = $post["viddil$i"];  
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -629,12 +626,11 @@ class ReportController extends Controller
                     //Та додаємо нові
                     $report['created_at'] = Report2::where('date', $newDate)->first()->created_at; 
 
-                    for ($i = count($treport); $i < (count($post)-3)/9; $i++) 
+                    for ($i = count($treport); $i < (count($post)-3)/8; $i++) 
                     { 
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
-                        $report['adress'] = $post["adress$i"];
-                        $report['viddil'] = $post["viddil$i"];   
+                        $report['adress'] = $post["adress$i"];   
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -661,12 +657,11 @@ class ReportController extends Controller
                 else
                 {   //якщо видалені рядки
                     //поновлюємо ті що прийшли з форми
-                    for ($i=0; $i < (count($post)-3)/9 ; $i++) 
+                    for ($i=0; $i < (count($post)-3)/8 ; $i++) 
                     {   
                         $report['punkt'] = $post["punkt$i"];  
                         $report['no_card'] = $post["no_card$i"];  
                         $report['adress'] = $post["adress$i"]; 
-                        $report['viddil'] = $post["viddil$i"];  
                         $report['brig'] = $post["brig$i"];
                         $report['time'] = $post["time$i"];
                         $report['support'] = $post["support$i"];
@@ -695,12 +690,15 @@ class ReportController extends Controller
                         }
                     }
                     //Та видаляємо всі решту
-                    for ($i = (count($post)-3)/9 ; $i < count($treport); $i++) 
+                    for ($i = (count($post)-3)/8 ; $i < count($treport); $i++) 
                     { 
                         $treport[$i]->delete();
                     }
                 }
                 flash('Зміни внесені.');
+
+                $reports = Report2::where('date', $newDate)->get();
+                return view('report.myShow2', ['reports'=>$reports, 'date'=>$newDate]);
                 break;
             case 'Report3':
                 $treport = Report3::where('date', $newDate)->get();
@@ -864,6 +862,9 @@ class ReportController extends Controller
                     }
                 }
                 flash('Зміни внесені.3');
+
+                $reports = Report3::where('date', $newDate)->get();
+                return view('report.myShow3', ['reports'=>$reports, 'date'=>$newDate]);
                 break;
             case 'Report4':
                 $treport = Report4::where('date', $newDate)->get();
@@ -1031,6 +1032,9 @@ class ReportController extends Controller
                     }
                 }
                 flash('Дані внесені.4');
+
+                $reports = Report4::where('date', $newDate)->get();
+                return view('report.myShow4', ['reports'=>$reports, 'date'=>$newDate]);
                 break;            
             case 'Report6':
                 $treport = Report6::where('date', $newDate)->get();
@@ -1165,6 +1169,9 @@ class ReportController extends Controller
                     }
                 }
                 flash('Дані внесені.6');
+                
+                $reports = Report6::where('date', $newDate)->get();
+                return view('report.myShow6', ['reports'=>$reports, 'date'=>$newDate]);
                 break;
             case 'fatal':
             case 'dtp+ns':
@@ -1317,9 +1324,11 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Дані внесені.5');
+                flash('Зміни внесені.');
+                
+                $reports = Report5::where('date', $newDate)->where('pidtype', $table)->get();
+                return view('report.myShow5', ['reports'=>$reports, 'date'=>$newDate, 'table'=>$table]);
                 break;   
         }   
-        return back();
     }  
 }

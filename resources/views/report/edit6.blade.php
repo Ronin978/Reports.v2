@@ -16,10 +16,10 @@
     
         <table id="table6">
             <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>№ картки</td>
-                <td>Відділення</td>
+                <td class="col_5">№<br>п/п</td>
+                <td class="col_12">Дата,час</td>
+                <td class="col_12">№ картки</td>
+                <td class="col_20">Відділення</td>
                 <td>Примітки</td>
             </tr> 
             @foreach ($reports as $key=>$report)
@@ -34,7 +34,10 @@
                     <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
-                    <textarea name="subdiv{{$key}}" rows="1" data="elastic">{{$report->subdiv}}</textarea>
+                    <input list="myList" name="subdiv{{$key}}" value="{{$report->subdiv}}">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="other{{$key}}" rows="1" data="elastic">{{$report->other}}</textarea>

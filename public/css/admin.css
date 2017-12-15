@@ -1,4 +1,4 @@
-table th 
+table td
 {
 	margin: 0;
 	padding: 0;
@@ -6,12 +6,9 @@ table th
 	text-align: center;
 }
 
-table td
+.words td
 {
-	margin: 0;
-	padding: 0;
-	border: 1px solid black;
-	text-align: center;
+	word-break: break-all; 
 }
 
 table
@@ -75,14 +72,6 @@ textarea
 {
 	margin: 0;
 	cursor: pointer;
-}
-
-.rotate
-{
-	-webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
 }
 
 td
@@ -153,4 +142,69 @@ p
 .panel
 {
 	width: 100%;
+}
+
+.col_3
+{
+	width: 3%;
+	max-width: 25px;
+}
+
+.col_5
+{
+	width: 5%;
+	max-width: 15px;
+}
+
+.col_8
+{
+	width: 8%;
+	max-width: 25px;
+}
+
+.col_10
+{
+	width: 10%;
+}
+
+.col_12
+{
+	width: 12%;
+	max-width: 30px;
+}
+
+.col_15
+{
+	width: 15%;
+}
+
+.col_20
+{
+	width: 20%;
+}
+
+.rotate
+{
+	-webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg) translate(-150%,0px);
+}
+
+.rotate_two
+{
+	-webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg) translate(-80%,0px);
+}
+
+.maxLenght
+{
+	 transform: rotate(-90deg);
+}
+
+.rotate45
+{
+	transform: rotate(-90deg) translate(-40%,0px);
 }

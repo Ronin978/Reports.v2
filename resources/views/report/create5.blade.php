@@ -15,14 +15,14 @@
         <input type="hidden" name="pidtype" value="{{$pidtype}}">
         <table id="table5">
             <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>Назва «НС» (раптова смерть/ успішна реанімація)</td>
-                <td>Адреса НС</td>                
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_10">Дата,час</td>
+                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Адреса НС</td>
                 <td>Відділення</td>
-                <td>П.І.П потерпілого, вік</td>
-                <td>№ карти виїзду</td>
-                <td>№ бригади, прізвище керівника</td>
+                <td class="col_15">П.І.П потерпілого, вік</td>
+                <td class="col_10">№ карти виїзду</td>
+                <td class="col_10">№ бригади, прізвище керівника</td>
                 <td>Результат (Діагноз, куди доставлено, кількість смертей на місці, л.маска/ дефібрилятор/ моніторування)</td>      
             </tr> 
             <tr>
@@ -39,7 +39,7 @@
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <input list="myList" name="viddil0">
+                    <input size="12" list="myList" name="viddil0">
                         <datalist id="myList">
                             <?php include 'viddil.php' ?>
                         </datalist>

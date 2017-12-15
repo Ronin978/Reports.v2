@@ -15,10 +15,10 @@
 		@endif
 		 <table id="twoTable" border="1">
             <tr class="firstTr">
-                <td class="firstColumn">№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>№ картки</td>
-                <td>Відділення</td>
+                <td class="col_5">№<br>п/п</td>
+                <td class="col_12">Дата,час</td>
+                <td class="col_12">№ картки</td>
+                <td class="col_20">Відділення</td>
                 <td>Примітки</td>
             </tr> 
 			@foreach ($reports as $key=>$report)
@@ -29,7 +29,7 @@
 						</tr>
 				@endif	
 				@endif
-			<tr>
+			<tr class="words">
 				<td>
 					{{$key+1}}
 				</td>

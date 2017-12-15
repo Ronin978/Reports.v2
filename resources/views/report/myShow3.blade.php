@@ -15,18 +15,18 @@
 	<h4 align="center">Відділення: {{$viddil}}</h4>
 	@endif
 		<table id="table3">
-			 <tr id="firstTr">
-                <td >№<br>п/п</td>
-                <td>Дата/час</td>
-                <td>№ карти виїзду</td>
-                <td>ПІП хворого</td>
-                <td>Звідки забрано</td>
-                <td ><div id="maxLenght" class="rotate">Куди доставлено</div></td>
-                <td ><div class="rotate">направлення</div></td>
-                <td>Хто направляє</td>
-                <td>Діагноз</td>
-                <td>№ бр., керівник</td>
-                <td>Примітки</td>
+			<tr style="height: 130px;">
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_8">Дата/час</td>
+                <td class="col_8">№ карти виїзду</td>
+                <td class="col_12">ПІП хворого</td>
+                <td class="col_15">Звідки забрано</td>
+                <td class="col_8 maxLenght">Куди доставлено</td>
+                <td class="col_3 rotate_two">направлення</td>
+                <td class="col_10">Хто направляє</td>
+                <td >Діагноз</td>
+                <td class="col_10">№ бр., керівник</td>
+                <td class="col_8">Примітки</td>
             </tr> 
 			@foreach ($reports as $key=>$report)
 				@if (!empty($indicator)) 
@@ -36,7 +36,7 @@
 						</tr>
 				@endif	
 				@endif
-			<tr>
+			<tr class="words">
 				<td>
 					{{$key+1}}
 				</td>

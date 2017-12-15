@@ -12,19 +12,19 @@
     <form id="firstForm" method="POST" action="{{action('ReportController@store3')}}">
         <p align="center">Транспортування на Луцьк (Київ) <input id="firstdate" type="date" name="date" value="{{$date}}"></p>    
         <table id="table3">
-            <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Дата/час</td>
+            <tr style="height: 130px;">
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_8">Дата/час</td>
                 <td>Відділення</td>
-                <td>№ карти виїзду</td>
-                <td>ПІП хворого</td>
-                <td>Звідки забрано</td>
-                <td id="maxLenght" class="rotate">Куди доставлено</td>
-                <td class="rotate">направлення</td>
-                <td>Хто направляє</td>
-                <td>Діагноз</td>
-                <td>№ бр., керівник</td>
-                <td>Примітки</td>
+                <td class="col_8">№ карти виїзду</td>
+                <td class="col_12">ПІП хворого</td>
+                <td class="col_15">Звідки забрано</td>
+                <td class="col_5 maxLenght">Куди доставлено</td>
+                <td class="col_3 rotate_two">направлення</td>
+                <td class="col_10">Хто направляє</td>
+                <td >Діагноз</td>
+                <td class="col_10">№ бр., керівник</td>
+                <td class="col_8">Примітки</td>
             </tr> 
             <tr>
                 <td>
@@ -34,7 +34,7 @@
                     <textarea name="date0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
-                    <input list="myList" name="viddil0">
+                    <input size="12" list="myList" name="viddil0">
                         <datalist id="myList">
                             <?php include 'viddil.php' ?>
                         </datalist>

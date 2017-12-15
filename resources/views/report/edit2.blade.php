@@ -14,39 +14,33 @@
         <p align="center">Інформація по запізненнях бригад на виклики за {{$date}}</p>
         <input id="date" type="hidden" name="date" value="{{$date}}">
         <table id="table2">
-            <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Відділення / пункт що має обслуговувати</td>
-                <td>№ виїзної карти /е(н)</td>
-                <td>Адреса виклику (район)</td>
-                <td>Відділення</td>
-                <td>№ Бригада що обслуговувала</td>
-                <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
-                <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
-                <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
+            <tr>
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_15">Відділення / пункт що має обслуговувати</td>
+                <td class="col_8">№ виїзної карти /е(н)</td>
+                <td class="col_15">Адреса виклику (район)</td>
+                <td class="col_10">№ Бригада що обслуговувала</td>
+                <td class="col_15">Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
+                <td class="col_5 rotate45">постдиспетч<br> підтримка</td>
+                <td class="col_10">Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
                 <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
-            </tr> 
+            </tr>
             @foreach ($reports as $key=>$report)
             <tr>
                 <td>
                     <DIV>{{$key+1}}</DIV>
                 </td>
                 <td>
-                    <textarea name="punkt{{$key}}" rows="1" data="elastic">{{$report->punkt}}</textarea>
+                    <input size="14" list="myList" name="punkt{{$key}}" value="{{$report->punkt}}">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
                 </td>
                 <td>
                     <textarea name="adress{{$key}}" rows="1" data="elastic">{{$report->adress}}</textarea>
-                </td>
-                <td>
-                    <input list="myList" name="viddil{{$key}}" value="{{$report->viddil}}">
-                        <datalist id="myList">
-                            <?php include 'viddil.php' ?>
-                        </datalist>
-                       
-                        <!--active {{$report->viddil}}-->
                 </td>
                 <td>
                     <textarea name="brig{{$key}}" rows="1" data="elastic">{{$report->brig}}</textarea>

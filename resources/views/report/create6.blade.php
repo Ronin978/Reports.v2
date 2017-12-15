@@ -15,10 +15,10 @@
     
         <table id="table6">
             <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Дата,час</td>
-                <td>№ картки</td>
-                <td>Відділення</td>
+                <td class="col_5">№<br>п/п</td>
+                <td class="col_12">Дата,час</td>
+                <td class="col_12">№ картки</td>
+                <td class="col_20">Відділення</td>
                 <td>Примітки</td>
             </tr> 
             <tr>

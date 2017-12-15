@@ -14,15 +14,14 @@
         <p align="center">Інформація по запізненнях бригад на виклики за <input id="firstdate" type="date" name="date" value="{{$date}}"></p>        
         <table id="table2">
             <tr id="firstTr">
-                <td>№<br>п/п</td>
-                <td>Відділення / пункт що має обслуговувати</td>
-                <td>№ виїзної карти /е(н)</td>
-                <td>Адреса виклику (район)</td>
-                <td>Відділення</td>
-                <td>№ Бригада що обслуговувала</td>
-                <td>Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
-                <td id="maxLenght" class="rotate">постдиспетч підтримка</td>
-                <td>Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
+                <td class="col_3">№<br>п/п</td>
+                <td class="col_15">Відділення / пункт що має обслуговувати</td>
+                <td class="col_8">№ виїзної карти /е(н)</td>
+                <td class="col_15">Адреса виклику (район)</td>
+                <td class="col_10">№ Бригада що обслуговувала</td>
+                <td class="col_15">Час поступлення /Час виїзду/Час прибуття/ Тривалість запізнення (хв.)</td>
+                <td class="col_5 rotate45">постдиспетч<br> підтримка</td>
+                <td class="col_10">Причина запізнення Відсутність вільної бр./ Відстань більше 30км/ Незадовільний стан доріг</td>
                 <td>Привід до виклику /Діагноз /Госпіталізація (відмова)</td>
             </tr> 
             <tr>
@@ -30,19 +29,16 @@
                     <DIV>1</DIV>
                 </td>
                 <td>
-                    <textarea name="punkt0" rows="1" data = "elastic"></textarea>
+                    <input size="14" list="myList" name="punkt0">
+                        <datalist id="myList">
+                            <?php include 'viddil.php' ?>
+                        </datalist>
                 </td>
                 <td>
                     <textarea name="no_card0" rows="1" data="elastic"></textarea>
                 </td>
                 <td>
                     <textarea name="adress0" rows="1" data="elastic"></textarea>
-                </td>
-                <td>
-                    <input list="myList" name="viddil0">
-                        <datalist id="myList">
-                            <?php include 'viddil.php' ?>
-                        </datalist>
                 </td>
                 <td>
                     <textarea name="brig0" rows="1" data="elastic"></textarea>

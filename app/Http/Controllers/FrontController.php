@@ -422,8 +422,21 @@ class FrontController extends Controller
                 return view('report.arrayReport.showAll1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$array, 'allReport'=>$allReport]);
                 break;
             case 'Report2':
-                $reports = Report2::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
-                return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
+                if (empty($viddil)||$viddil=='Всі відділення') 
+                {
+                    $reports = Report2::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                }
+                else
+                {
+                    $reports = Report2::where('punkt', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                } 
+                if (empty($reports->first()))
+                {
+                    $title = 'Звіту з вказаними параметрами не існує.';
+                    return view('front.error', ['title'=>$title]);
+                    break;
+                }
+                return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
             case 'Report3':
                 if (empty($viddil)||$viddil=='Всі відділення') 
@@ -460,7 +473,20 @@ class FrontController extends Controller
                 return view('report.myShow4', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);  
                 break;
             case 'Report6':
-                $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                if (empty($viddil)||$viddil=='Всі відділення') 
+                {
+                    $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                }
+                else
+                {
+                    $reports = Report6::where('subdiv', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                } 
+                if (empty($reports->first()))
+                {
+                    $title = 'Звіту з вказаними параметрами не існує.';
+                    return view('front.error', ['title'=>$title]);
+                    break;
+                }
                 return view('report.myShow6', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
@@ -557,19 +583,18 @@ class FrontController extends Controller
     public function sort($table)
     {
         switch ($table) 
-        {/*
+        {
             case 'Report1':
                 $obj=Report1::select('date', 'created_at', 'updated_at')->orderBy('date', 'DESC')->distinct('date')->paginate(10);
                 $title = 'Статистика';
-                break;*/
+                break;
             case 'Report2':
-                $obj=Report2::select('viddil')->orderBy('viddil')->distinct('viddil')->paginate(10);//список всіх відділів
+                $obj=Report2::select('punkt')->orderBy('punkt')->distinct('punkt')->paginate(10);//список всіх відділів
                 
                 foreach ($obj as $key => $val) 
                 {     
-                    $maxDate=Report2::select('date')->where('viddil', $val->viddil)->max('date');
-                    $minDate=Report2::select('date')->where('viddil', $val->viddil)->min('date');
-
+                    $maxDate=Report2::select('date')->where('punkt', $val->punkt)->max('date');
+                    $minDate=Report2::select('date')->where('punkt', $val->punkt)->min('date');
                     $val->date = "$minDate---$maxDate";
                 }
 
@@ -668,7 +693,7 @@ class FrontController extends Controller
         switch ($table) 
         {
             case 'Report2':
-                $reports = Report2::where('viddil', $viddil)->orderBy('date', 'DESC')->get();
+                $reports = Report2::where('punkt', $viddil)->orderBy('date', 'DESC')->get();
                 return view('report.myShow2', ['reports'=>$reports, 'date'=>$date, 'viddil'=>$viddil, 'indicator'=>'1']);
                 break;
             case 'Report3':
