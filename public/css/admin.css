@@ -208,3 +208,32 @@ p
 {
 	transform: rotate(-90deg) translate(-40%,0px);
 }
+
+.dropdown-menu1 div div {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
+}
+
+.dropdown-menu1 .title {
+    display: inline-block;
+    width: 80px;
+    height: 20px;
+    padding: 5px 0  5px 35px;
+    font-size: 15px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.dropdown-menu1 .title::after {
+  content: "";
+  float: right;
+  display: block;
+}
+
+.dropdown-menu1.open div div {
+  display: block;
+  margin-left: 0;
+  padding: 20px 0 0 20px;
+}

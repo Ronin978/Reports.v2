@@ -1,3 +1,13 @@
+$(document).ready(function() {
+    var a=0;
+    $('#mypanel').click(function() {
+        a+=1;
+        if (a&1) 
+            {myHover('panel', 'ov');} 
+        else {myHover('panel', 'out');}
+    });
+});
+
 function oninput1(key)
 {
     var a = parseInt(document.getElementById('day'+key).value);

@@ -19,7 +19,7 @@
     <!-- Scripts -->
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
-     <script>
+    <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
@@ -43,6 +43,27 @@
     }
     </script>
 
+    <script>
+    window.onload=function(){
+    var menuElem = document.getElementById('dropdown-menu1'),
+        titleElem = menuElem.querySelector('.title');
+        document.onclick = function(event) {
+        var target = elem = event.target;
+        while (target != this) {
+              if (target == menuElem) {
+              if(elem.tagName == 'DIV') {
+                titleElem.innerHTML = elem.textContent;
+                titleElem.style.backgroundImage =  getComputedStyle(elem, null)['backgroundImage']
+              }
+              menuElem.classList.toggle('open')
+                  return;
+              }
+              target = target.parentNode;
+          }
+        menuElem.classList.remove('open');
+    }
+    }
+    </script>
 </head>
 <body>
     <div id="page-wrapper">
@@ -92,6 +113,7 @@
                 </div>
             </header>
         </div>
+        
 
             
 

@@ -1243,7 +1243,7 @@
 			#features-wrapper {
 				background: #353D40 url("images/bg02.jpg");
 				border-bottom: solid 1px #272e31;
-				padding: 45px 0 45px 0;
+				padding: 10px 0 5px 0;
 				text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.75);
 			}
 
@@ -1291,7 +1291,6 @@
 						color: #c6c8c8;
 						text-decoration: none;
 						outline: 0;
-						margin: 15px;
 					}
 
 						#header nav a:hover {

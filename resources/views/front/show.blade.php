@@ -7,8 +7,13 @@
 <div id="features-wrapper">
 <div id="features">
 <div class="container">
-<div class="row">
+<div id="dropdown-menu1" class="dropdown-menu1">
 
+<div class="row">
+            <a id="mypanel" href="#"><img id="panel" class="ico" src="{{asset('css/ico/panel.png')}}">&nbsp Панель
+            </a>
+</div>
+<div class="row">
     <div class="2u 12u(mobile)">
 
         <!-- Feature #1 -->
@@ -131,6 +136,8 @@
             </p>
         </section>
     </div>    
+</div>
+
 </div>
 </div>
 </div>
