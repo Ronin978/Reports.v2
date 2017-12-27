@@ -158,9 +158,6 @@
                 @endfor
             </tr>                         
         </table>
-
-
-
 @endif
     </section>
     </div>

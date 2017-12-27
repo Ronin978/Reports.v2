@@ -65,6 +65,7 @@
     }
     </script>
 </head>
+
 <body>
     <div id="page-wrapper">
     <!-- Header -->
@@ -72,7 +73,6 @@
             <header id="header" class="container">
                 <div class="row">
                     <div class="row 12u">
-
                         <!-- Logo -->
                         <div id="logo">
                             <h3><a href="{{action('FrontController@index')}}" onmouseover="myHover('home', 'ov');" onmouseout="myHover('home', 'out');"> <img id="home" class="ico" src="{{asset('css/ico/home.png')}}"> На головну</a></h3>
@@ -86,7 +86,9 @@
                             @if (Auth::guest())
                                 <a href="{{ route('login') }}" onmouseover="myHover('login', 'ov');" onmouseout="myHover('login', 'out');"><img id="login" class="ico" src="{{asset('css/ico/login.png')}}">&nbsp Вхід</a>
                             @else
-                                <a href="{{action('ReportController@create', ['table'=>'Report1', 'date'=>date('Y-m-d')])}}" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити щоденний звіт</a>
+                                <a onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити звіт <select id="mySelect1" 
+onchange="location.href = window.location.protocol+'//'+window.location.host+'/report/create/'+this.options[this.selectedIndex].value+'?date={{date('Y-m-d')}}';"<?php include "table.php" ?></select></a>
+
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onmouseover="myHover('user', 'ov');" onmouseout="myHover('user', 'out');">
                                 <img id="user" src="{{asset('css/ico/user.png')}}" class="ico"> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a> 
@@ -103,17 +105,14 @@
                                     </li>
                                 </ul>
                             @endif
-                            
                         </div>
-                        
-                            
                     </nav>
-
                     </div>
                 </div>
             </header>
         </div>
-    <div id="features-wrapper">
+
+<div id="features-wrapper">
 <div id="features">
 <div class="container">
 <div id="dropdown-menu1" class="dropdown-menu1">
@@ -250,8 +249,7 @@
 </div>
 </div>
 </div>
-</div>       
-
+</div>
             
 
 <!-- Content -->

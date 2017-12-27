@@ -21,8 +21,9 @@ class ReportController extends Controller
     }
 
     public function create($table, Request $request)
-    {
+    {        
         $date = ($request->all())['date'];
+        
         switch ($table) {
             case 'Report1':
                 $types = Group::where('group', 'call')->get()->first();
