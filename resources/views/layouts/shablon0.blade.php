@@ -86,8 +86,10 @@
                             @if (Auth::guest())
                                 <a href="{{ route('login') }}" onmouseover="myHover('login', 'ov');" onmouseout="myHover('login', 'out');"><img id="login" class="ico" src="{{asset('css/ico/login.png')}}">&nbsp Вхід</a>
                             @else
-                                <a onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити звіт <select id="mySelect1" 
-onchange="location.href = window.location.protocol+'//'+window.location.host+'/report/create/'+this.options[this.selectedIndex].value+'?date={{date('Y-m-d')}}';"<?php include "table.php" ?></select></a>
+                                <a id="createForm" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити звіт <select id="mySelect1" 
+onchange="location.href = window.location.protocol+'//'+window.location.host+'/report/create/'+this.options[this.selectedIndex].value+'?date={{date('Y-m-d')}}';">
+                                    <option selected>Виберіть тип звіту</option>
+<?php include "table.php" ?></select></a>
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onmouseover="myHover('user', 'ov');" onmouseout="myHover('user', 'out');">
                                 <img id="user" src="{{asset('css/ico/user.png')}}" class="ico"> {{ Auth::user()->name }} <span class="caret"></span>
@@ -265,20 +267,19 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
 
                     <!-- Links -->
                         <section>
-                            <h2>Інші проекти компанії</h2>
+                            <h2>Інші сайти компанії</h2>
                             <div>
                                 <div class="row">
                                     <div class="5u 12u(mobile)">
                                         <ul class="link-list last-child">
                                             <li><a href="http://103.volyn.ua/">Офіційний сайт КЗ "ВОЦЕМДМК"</a></li>
-                                            <li><a href="#">Sed mattis quis rutrum</a></li>
+                                            
                                         </ul>
                                     </div>
                                     
                                     <div class="3u 12u(mobile)">
                                         <ul class="link-list last-child">
-                                            <li><a href="#">Neque amet dapibus</a></li>
-                                            <li><a href="#">Sed mattis quis rutrum</a></li>
+                                            <li><a href="https://www.facebook.com/emdvolyn/">Facebook</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -290,10 +291,9 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
 
                     <!-- Blurb -->
                         <section>
-                            <h2>An Informative Text Blurb</h2>
+                            <h2>Сайт знаходиться в тестовому режимі.</h2>
                             <p>
-                                Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. Suspendisse eu
-                                varius nibh. Suspendisse vitae magna eget odio amet mollis. 
+                                Про всі помилки повідомляти розробника. Для ефективного усунення несправностей зробити скріншот та описати які дії призвели до несправності.
                             </p>
                         </section>
 
@@ -304,7 +304,7 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
 
 <!-- Copyright -->
     <div id="copyright">
-        &copy;Власник КЗ"ВОЦЕМДМК". Всі права захищені. | Шаблон: <a href="http://html5up.net">HTML5 UP</a>
+        &copy;Власник КЗ"ВОЦЕМДМК". Всі права захищені. | Шаблон сайту: <a href="http://html5up.net">html5up</a>
     </div>
 
 </div>

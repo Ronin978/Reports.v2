@@ -73,9 +73,8 @@ class ReportController extends Controller
                     case 'travmat':
                         $title = 'Травматизм (кримінальний, виробничий)';
                         break;
-                    
                     default:
-                        $title = 'ERROR 404/ NOT FOUND';
+                        $title = 'Спробуйте створити інший звіт, або зверніться до адміністратора';
                         return view('front.error', ['title'=>$title]);
                         break 2;
                 }
@@ -203,7 +202,7 @@ class ReportController extends Controller
                     Info::create($info);
             }
         }        
-        flash('Дані внесені.');
+        flash('Дані успішно збережені.');
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report1']);
     }
@@ -240,7 +239,7 @@ class ReportController extends Controller
                     Report2::create($report);
                 }
             }
-        flash('Дані внесені.');
+        flash('Дані успішно збережені.');
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report2']);
     }
@@ -280,7 +279,7 @@ class ReportController extends Controller
                     Report3::create($report);
                 }
             }
-        flash('Дані внесені.');
+        flash('Дані успішно збережені.');
        return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report3']);
     }
@@ -330,7 +329,7 @@ class ReportController extends Controller
                     Report4::create($report);
                 }
             }
-        flash('Дані внесені.');
+        flash('Дані успішно збережені.');
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report4']);
     }
@@ -368,7 +367,7 @@ class ReportController extends Controller
                     Report5::create($report);
                 }
             }
-        flash('Дані внесені.');        
+        flash('Дані успішно збережені.');        
         return redirect()->action('FrontController@myShow', 
                 ['date'=>$post['date'], 'table'=>$report['pidtype']]);
     }
@@ -401,7 +400,7 @@ class ReportController extends Controller
                     Report6::create($report);
                 }
             }
-        flash('Дані внесені.');
+        flash('Дані успішно збережені.');
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report6']);
     }
@@ -546,7 +545,7 @@ class ReportController extends Controller
                     $myReport->update($report);
                     $myReport->save();
                 }
-                flash('Зміни внесені.');
+                flash('Зміни успішно внесені.');
                 break;
             case 'Report2':
                 $treport = Report2::where('date', $newDate)->get();
@@ -696,7 +695,7 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Зміни внесені.');
+                flash('Зміни успішно внесені.');
 
                 $reports = Report2::where('date', $newDate)->get();
                 return view('report.myShow2', ['reports'=>$reports, 'date'=>$newDate]);
@@ -862,7 +861,7 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Зміни внесені.3');
+                flash('Зміни успішно внесені.');
 
                 $reports = Report3::where('date', $newDate)->get();
                 return view('report.myShow3', ['reports'=>$reports, 'date'=>$newDate]);
@@ -1032,7 +1031,7 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Дані внесені.4');
+                flash('Зміни успішно внесені.');
 
                 $reports = Report4::where('date', $newDate)->get();
                 return view('report.myShow4', ['reports'=>$reports, 'date'=>$newDate]);
@@ -1169,7 +1168,7 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Дані внесені.6');
+                flash('Зміни успішно внесені.');
                 
                 $reports = Report6::where('date', $newDate)->get();
                 return view('report.myShow6', ['reports'=>$reports, 'date'=>$newDate]);
@@ -1325,7 +1324,7 @@ class ReportController extends Controller
                         $treport[$i]->delete();
                     }
                 }
-                flash('Зміни внесені.');
+                flash('Зміни успішно внесені.');
                 
                 $reports = Report5::where('date', $newDate)->where('pidtype', $table)->get();
                 return view('report.myShow5', ['reports'=>$reports, 'date'=>$newDate, 'table'=>$table]);

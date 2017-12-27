@@ -70,6 +70,12 @@
             </span>
         </div><br>
         <div class="panel" align="center">   
+            <div class="btn-group" onclick="window.history.go(-1); return false;">
+                <span>
+                    Назад
+                    <img src="{{asset('css/ico/back.png')}}">   
+                </span>                  
+            </div> 
             <div class="btn-group" onclick="document.getElementById('firstForm').submit();">
                 <span>
                     <img src="{{asset('css/ico/save.png')}}">Зберегти

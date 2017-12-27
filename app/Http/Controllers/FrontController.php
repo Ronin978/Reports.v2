@@ -132,7 +132,7 @@ class FrontController extends Controller
                         break;
                     default:
                         $obj=array();
-                        $title = 'ERROR 404/ NOT FOUND';
+                        $title = 'Таких даних не існує';
                         break;
                 }
                 break;
@@ -362,6 +362,8 @@ class FrontController extends Controller
         $viddil = $post['viddil'];
         $date = "$dateStart --- $dateEnd";
 
+        $title = 'Звіту з вказаними параметрами не існує.';
+
         $date1 = date_create($dateEnd);
         $date2 = date_create($dateStart);
         $dateCount = date_diff($date1, $date2)->days;        
@@ -432,7 +434,6 @@ class FrontController extends Controller
                 } 
                 if (empty($reports->first()))
                 {
-                    $title = 'Звіту з вказаними параметрами не існує.';
                     return view('front.error', ['title'=>$title]);
                     break;
                 }
@@ -449,7 +450,6 @@ class FrontController extends Controller
                 } 
                 if (empty($reports->first()))
                 {
-                    $title = 'Звіту з вказаними параметрами не існує.';
                     return view('front.error', ['title'=>$title]);
                     break;
                 }
@@ -466,7 +466,6 @@ class FrontController extends Controller
                 } 
                 if (empty($reports->first()))
                 {
-                    $title = 'Звіту з вказаними параметрами не існує.';
                     return view('front.error', ['title'=>$title]);
                     break;
                 }
@@ -483,7 +482,6 @@ class FrontController extends Controller
                 } 
                 if (empty($reports->first()))
                 {
-                    $title = 'Звіту з вказаними параметрами не існує.';
                     return view('front.error', ['title'=>$title]);
                     break;
                 }
@@ -501,7 +499,7 @@ class FrontController extends Controller
     switch ($table) 
         {
             case 'allReports':
-                $title = 'Дана фукція в розробці. Редагуйте таблиці по одній, в головному меню.';
+                $title = 'Редагуйте таблиці по одній, в головному меню.';
                 return view('front.error', ['title'=>$title]);
                 break;
             case 'Report1':
@@ -572,7 +570,7 @@ class FrontController extends Controller
                         $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
                         break;                    
                     default:
-                        $title = 'ERROR 404/ NOT FOUND';
+                        $title = 'Неможливо відобразити дані для редагування. Спробуйте редагувати таблиці по одній.';
                         break;
                 }
                 return view('report.edit5', ['date'=>$date, 'table'=>$table, 'title'=>$title, 'reports'=>$reports]);
@@ -678,7 +676,7 @@ class FrontController extends Controller
                         break;
                     default:
                         $obj=array();
-                        $title = 'ERROR 404/ NOT FOUND';
+                        $title = 'Неможливо відсортувати за вказаним параметром';
                         break;
                 }
                 break;

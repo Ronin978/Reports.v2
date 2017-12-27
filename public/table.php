@@ -1,4 +1,4 @@
-<option selected value="Report1">РАПОРТ старших лікарів змін</option>
+<option value="Report1">РАПОРТ старших лікарів змін</option>
 <option value="Report2">Інформація по запізненнях бригад на виклики</option>
 <option value="Report3">Транспортування на Луцьк</option>
 <option value="Report4">ГКС</option>
