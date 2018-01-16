@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Info;
 use App\Group;
 use App\Report1;
@@ -22,6 +25,10 @@ class ReportController extends Controller
 
     public function create($table, Request $request)
     {        
+        $this->validate($request, [
+        'date' => 'required|date|unique:total_reports',
+    ]);
+
         $date = ($request->all())['date'];
         
         switch ($table) {
@@ -87,159 +94,192 @@ class ReportController extends Controller
     {
         $post = $request->all();
 
-        $sections = Group::where('group', 'sections')->get()->first();
-        $sect = explode(";", $sections->title);
+        
+            $sections = Group::where('group', 'sections')->get()->first();
+            $sect = explode(";", $sections->title);
 
-        $gospit = Group::where('group', 'gosp')->get()->first();
-        $gos = explode(";", $gospit->title);
+            $gospit = Group::where('group', 'gosp')->get()->first();
+            $gos = explode(";", $gospit->title);
 
-        $region = Group::where('group', 'region')->get()->first();
-        $reg = explode(";", $region->title);
+            $region = Group::where('group', 'region')->get()->first();
+            $reg = explode(";", $region->title);
 
-        for ($i=0; $i < 5 ; $i++)
-        {
-            $report['day'] = $post["day$i"];  
-            $report['night'] = $post["night$i"];
-            $report['type'] = $i;
-            $report['users'] = Auth::user()->name;
-           
-            $report['date'] = $post["date"];
-            $report['chergovy'] = $post["chergovy"];
-           
-            if ($report['day'] == '')
-                { $report['day'] = '0'; }
-            if ($report['night'] == '')
-                { $report['night'] = '0'; }
-            Report1::create($report); 
-        }
-
-        for ($i=0; $i < 4; $i++) 
-        { 
-            switch ($i) 
+            for ($i=0; $i < 5 ; $i++)
             {
-                case 0:
-                    $info['id_group'] = $sections->id;
-                    $info['value'] = '';
-                    for ($i=1; $i <= count($sect); $i++) 
-                    {                         
-                        $value = $post["value$i"];                        
-                        if ($value == '') 
-                        {$value = '0';}
-                        
-                        if ($i==count($sect)) 
-                        {
-                            $info['value'] .= $value;
-                        }
-                        else
-                        {
-                            $info['value'] .= $value.';';
-                        }
-                    }
-                    $info['date'] = $post["date"];
-                    $info['users'] = Auth::user()->name;
-                    Info::create($info);
-                case 1:
-                    $info['id_group'] = $gospit->id;
-                    $info['value'] = '';
-                    for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
-                    { 
-                        $value = $post["value$i"];                      
-                        if ($value == '') 
-                        {$value = '0';}
-                        if ($i==count($sect)+count($gos)) 
-                        {
-                            $info['value'] .= $value;
-                        }
-                        else
-                        {
-                            $info['value'] .= $value.';';
-                        }
-                    }
-                    $info['date'] = $post["date"];
-                    $info['users'] = Auth::user()->name;
-                    Info::create($info);
-                case 2:
-                    $info['id_group'] = $region->id;
-                    $info['value'] = '';
-                    for ($i=count($sect)+count($gos)+1; $i <= count($sect)+count($gos)+count($reg); $i++) 
-                    { 
-                        $value = $post["value$i"];                        
-                        if ($value == '') 
-                        {$value = '0';}
-
-                        if ($i==count($sect)+count($gos)+count($reg)) 
-                        {
-                            $info['value'] .= $value;
-                        }
-                        else
-                        {
-                            $info['value'] .= $value.';';
-                        }
-                    }
-                    $info['date'] = $post["date"];
-                    $info['users'] = Auth::user()->name;
-                    Info::create($info);
-                case 3:
-                    $info['id_group'] = 1;
-                    $info['value'] = '';
-                    for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++)
-                    { 
-                        $value = $post["value$i"];                        
-                        if ($value == '') 
-                        {$value = '0';}
-                    
-                        if ($i==count($sect)+count($gos)+count($reg)+2) 
-                        {
-                            $info['value'] .= $value;
-                        }
-                        else
-                        {
-                            $info['value'] .= $value.';';
-                        }
-                    }
-                    $info['date'] = $post["date"];
-                    $info['users'] = Auth::user()->name;
-                    Info::create($info);
+                $report['day'] = $post["day$i"];  
+                $report['night'] = $post["night$i"];
+                $report['type'] = $i;
+                $report['users'] = Auth::user()->name;
+               
+                $report['date'] = $post["date"];
+                $report['chergovy'] = $post["chergovy"];
+               
+                if ($report['day'] == '')
+                    { $report['day'] = '0'; }
+                if ($report['night'] == '')
+                    { $report['night'] = '0'; }
+                Report1::create($report); 
             }
-        }        
-        flash('Дані успішно збережені.');
-        return redirect()->action('FrontController@myShow', 
-            ['date'=>$post['date'], 'table'=>'Report1']);
+
+            for ($i=0; $i < 4; $i++) 
+            { 
+                switch ($i) 
+                {
+                    case 0:
+                        $info['id_group'] = $sections->id;
+                        $info['value'] = '';
+                        for ($i=1; $i <= count($sect); $i++) 
+                        {                         
+                            $value = $post["value$i"];                        
+                            if ($value == '') 
+                            {$value = '0';}
+                            
+                            if ($i==count($sect)) 
+                            {
+                                $info['value'] .= $value;
+                            }
+                            else
+                            {
+                                $info['value'] .= $value.';';
+                            }
+                        }
+                        $info['date'] = $post["date"];
+                        $info['users'] = Auth::user()->name;
+                        Info::create($info);
+                    case 1:
+                        $info['id_group'] = $gospit->id;
+                        $info['value'] = '';
+                        for ($i=count($sect)+1; $i <= count($sect)+count($gos); $i++) 
+                        { 
+                            $value = $post["value$i"];                      
+                            if ($value == '') 
+                            {$value = '0';}
+                            if ($i==count($sect)+count($gos)) 
+                            {
+                                $info['value'] .= $value;
+                            }
+                            else
+                            {
+                                $info['value'] .= $value.';';
+                            }
+                        }
+                        $info['date'] = $post["date"];
+                        $info['users'] = Auth::user()->name;
+                        Info::create($info);
+                    case 2:
+                        $info['id_group'] = $region->id;
+                        $info['value'] = '';
+                        for ($i=count($sect)+count($gos)+1; $i <= count($sect)+count($gos)+count($reg); $i++) 
+                        { 
+                            $value = $post["value$i"];                        
+                            if ($value == '') 
+                            {$value = '0';}
+
+                            if ($i==count($sect)+count($gos)+count($reg)) 
+                            {
+                                $info['value'] .= $value;
+                            }
+                            else
+                            {
+                                $info['value'] .= $value.';';
+                            }
+                        }
+                        $info['date'] = $post["date"];
+                        $info['users'] = Auth::user()->name;
+                        Info::create($info);
+                    case 3:
+                        $info['id_group'] = 1;
+                        $info['value'] = '';
+                        for ($i=count($sect)+count($gos)+count($reg)+1; $i <= count($sect)+count($gos)+count($reg)+2; $i++)
+                        { 
+                            $value = $post["value$i"];                        
+                            if ($value == '') 
+                            {$value = '0';}
+                        
+                            if ($i==count($sect)+count($gos)+count($reg)+2) 
+                            {
+                                $info['value'] .= $value;
+                            }
+                            else
+                            {
+                                $info['value'] .= $value.';';
+                            }
+                        }
+                        $info['date'] = $post["date"];
+                        $info['users'] = Auth::user()->name;
+                        Info::create($info);
+                }
+            }        
+            flash('Дані успішно збережені.');
+            return redirect()->action('FrontController@myShow', 
+                ['date'=>$post['date'], 'table'=>'Report1']);       
     }
 
     public function store2(Request $request)
     {
         $post = $request->all();
+        $valid=Report2::select('date', 'updated_at', 'created_at')->get();
+        $updt = date('Y-m-d H:i:s');
+
         $report['date'] = $post['date'];
+        
+        if (empty($valid->where('date', $report['date'])->first()))
+        {
+             $flash='Дані успішно збережені.';
+            //Якщо за число додається вперше
+        }  
+        else
+        {
+           //за число додається не вперше
+            $flash='Звіт з даною датою вже існує, тому записи додані до попереднього.';
+            //дату створення беремо з бази та теперішню дату поновлення
+            $report['created_at'] = $valid->where('date', $report['date'])->first()->created_at;
+            $report['updated_at'] = $updt;
+            
+            //потрібно оновити дату в попередніх записах за дане число
+            $treport = Report2::where('date', $report['date'])->get();
+            foreach ($treport as $reps) 
+            {
+                $reps->updated_at = $updt;
+
+               // $reps->update($report);
+                $reps->save();
+            }
+
+            
+        } 
+          
         $report['users'] = Auth::user()->name;  
         for ($i=0; $i < (count($post)-2)/8 ; $i++) 
-            {   
-                $report['punkt'] = $post["punkt$i"];  
-                $report['no_card'] = $post["no_card$i"];  
-                $report['adress'] = $post["adress$i"];  
-                $report['brig'] = $post["brig$i"];
-                $report['time'] = $post["time$i"];
-                $report['support'] = $post["support$i"];
-                $report['cause'] = $post["cause$i"];
-                $report['call'] = $post["call$i"];
+        {   
+            $report['punkt'] = $post["punkt$i"];  
+            $report['no_card'] = $post["no_card$i"];  
+            $report['adress'] = $post["adress$i"];  
+            $report['brig'] = $post["brig$i"];
+            $report['time'] = $post["time$i"];
+            $report['support'] = $post["support$i"];
+            $report['cause'] = $post["cause$i"];
+            $report['call'] = $post["call$i"];
 
-                $limit=0;
-                foreach ($report as $rep) 
-                {
-                    if ($rep == '') 
-                        { $limit++; }
-                }
-                if ($limit < (count($report)-3))
-                {
-                    foreach ($report as $key => $rep)
-                    {
-                        if ($rep == '')
-                            { $report[$key] = ' '; }
-                    }
-                    Report2::create($report);
-                }
+            $limit=0;
+            foreach ($report as $rep) 
+            {
+                if ($rep == '') 
+                    { $limit++; }
             }
-        flash('Дані успішно збережені.');
+            if ($limit < (count($report)-3))
+            {
+                foreach ($report as $key => $rep)
+                {
+                    if ($rep == '')
+                        { $report[$key] = ' '; }
+                }
+                Report2::create($report);
+            }
+        }
+            
+        
+        flash($flash);
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report2']);
     }
@@ -249,6 +289,36 @@ class ReportController extends Controller
     	$post = $request->all();
         $report['date'] = $post['date'];  
         $report['users'] = Auth::user()->name;
+
+        $valid=Report3::select('date', 'updated_at', 'created_at')->get();
+        $updt = date('Y-m-d H:i:s');
+        
+        if (empty($valid->where('date', $report['date'])->first()))
+        {
+             $flash='Дані успішно збережені.';
+            //Якщо за число додається вперше
+        }  
+        else
+        {
+           //за число додається не вперше
+            $flash='Звіт з даною датою вже існує, тому записи додані до попереднього.';
+            //дату створення беремо з бази та теперішню дату поновлення
+            $report['created_at'] = $valid->where('date', $report['date'])->first()->created_at;
+            $report['updated_at'] = $updt;
+            
+            //потрібно оновити дату в попередніх записах за дане число
+            $treport = Report3::where('date', $report['date'])->get();
+            foreach ($treport as $reps) 
+            {
+                $reps->updated_at = $updt;
+
+               // $reps->update($report);
+                $reps->save();
+            }
+
+            
+        } 
+
         for ($i=0; $i < (count($post)-2)/11 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];  
@@ -279,7 +349,7 @@ class ReportController extends Controller
                     Report3::create($report);
                 }
             }
-        flash('Дані успішно збережені.');
+        flash($flash);
        return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report3']);
     }
@@ -289,6 +359,34 @@ class ReportController extends Controller
     	$post = $request->all();
         $report['date'] = $post['date']; 
         $report['users'] = Auth::user()->name; 
+
+        $valid=Report4::select('date', 'updated_at', 'created_at')->get();
+        $updt = date('Y-m-d H:i:s');
+        
+        if (empty($valid->where('date', $report['date'])->first()))
+        {
+             $flash='Дані успішно збережені.';
+            //Якщо за число додається вперше
+        }  
+        else
+        {
+           //за число додається не вперше
+            $flash='Звіт з даною датою вже існує, тому записи додані до попереднього.';
+            //дату створення беремо з бази та теперішню дату поновлення
+            $report['created_at'] = $valid->where('date', $report['date'])->first()->created_at;
+            $report['updated_at'] = $updt;
+            
+            //потрібно оновити дату в попередніх записах за дане число
+            $treport = Report4::where('date', $report['date'])->get();
+            foreach ($treport as $reps) 
+            {
+                $reps->updated_at = $updt;
+
+               // $reps->update($report);
+                $reps->save();
+            }            
+        } 
+
         for ($i=0; $i < (count($post)-2)/12 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];
@@ -329,7 +427,7 @@ class ReportController extends Controller
                     Report4::create($report);
                 }
             }
-        flash('Дані успішно збережені.');
+        flash($flash);
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report4']);
     }
@@ -340,6 +438,36 @@ class ReportController extends Controller
         $report['date'] = $post['date'];  
         $report['pidtype'] = $post["pidtype"];
         $report['users'] = Auth::user()->name;
+
+        $valid=Report5::select('date', 'pidtype', 'updated_at', 'created_at')->where('pidtype', $report['pidtype'])->get();
+        $updt = date('Y-m-d H:i:s');
+        
+        if (empty($valid->where('date', $report['date'])->where('pidtype', $report['pidtype'])->first()))
+        {
+             $flash='Дані успішно збережені.';
+            //Якщо за число додається вперше
+        }  
+        else
+        {
+           //за число додається не вперше
+            $flash='Звіт з даною датою вже існує, тому записи додані до попереднього.';
+            //дату створення беремо з бази та теперішню дату поновлення
+            $report['created_at'] = $valid->where('date', $report['date'])->where('pidtype', $report['pidtype'])->first()->created_at;
+            $report['updated_at'] = $updt;
+            
+            //потрібно оновити дату в попередніх записах за дане число
+            $treport = Report5::where('date', $report['date'])->where('pidtype', $report['pidtype'])->get();
+            foreach ($treport as $reps) 
+            {
+                $reps->updated_at = $updt;
+
+               // $reps->update($report);
+                $reps->save();
+            }
+
+            
+        } 
+
         for ($i=0; $i < (count($post)-3)/9 ; $i++) 
             {      
                 $report['timer'] = $post["date$i"];  
@@ -367,7 +495,7 @@ class ReportController extends Controller
                     Report5::create($report);
                 }
             }
-        flash('Дані успішно збережені.');        
+        flash($flash);        
         return redirect()->action('FrontController@myShow', 
                 ['date'=>$post['date'], 'table'=>$report['pidtype']]);
     }
@@ -377,6 +505,38 @@ class ReportController extends Controller
         $post = $request->all();
         $report['date'] = $post['date']; 
         $report['users'] = Auth::user()->name; 
+
+        $post = $request->all();
+        $report['date'] = $post['date']; 
+        $report['users'] = Auth::user()->name; 
+
+        $valid=Report6::select('date', 'updated_at', 'created_at')->get();
+        $updt = date('Y-m-d H:i:s');
+        
+        if (empty($valid->where('date', $report['date'])->first()))
+        {
+             $flash='Дані успішно збережені.';
+            //Якщо за число додається вперше
+        }  
+        else
+        {
+           //за число додається не вперше
+            $flash='Звіт з даною датою вже існує, тому записи додані до попереднього.';
+            //дату створення беремо з бази та теперішню дату поновлення
+            $report['created_at'] = $valid->where('date', $report['date'])->first()->created_at;
+            $report['updated_at'] = $updt;
+            
+            //потрібно оновити дату в попередніх записах за дане число
+            $treport = Report6::where('date', $report['date'])->get();
+            foreach ($treport as $reps) 
+            {
+                $reps->updated_at = $updt;
+
+               // $reps->update($report);
+                $reps->save();
+            }            
+        } 
+
         for ($i=0; $i < (count($post)-2)/4 ; $i++) 
             {                
                 $report['timer'] = $post["date$i"];   
@@ -400,7 +560,7 @@ class ReportController extends Controller
                     Report6::create($report);
                 }
             }
-        flash('Дані успішно збережені.');
+        flash($flash);
         return redirect()->action('FrontController@myShow', 
             ['date'=>$post['date'], 'table'=>'Report6']);
     }

@@ -45,24 +45,40 @@
 
     <script>
     window.onload=function(){
-    var menuElem = document.getElementById('dropdown-menu1'),
-        titleElem = menuElem.querySelector('.title');
-        document.onclick = function(event) {
-        var target = elem = event.target;
-        while (target != this) {
-              if (target == menuElem) {
-              if(elem.tagName == 'DIV') {
-                titleElem.innerHTML = elem.textContent;
-                titleElem.style.backgroundImage =  getComputedStyle(elem, null)['backgroundImage']
+        if (document.getElementById('dropdown-menu1')) {
+            var menuElem = document.getElementById('dropdown-menu1'),
+            titleElem = menuElem.querySelector('.title');
+            document.onclick = function(event) {
+            var target = elem = event.target;
+            while (target != this) {
+                  if (target == menuElem) {
+                  if(elem.tagName == 'DIV') {
+                    titleElem.innerHTML = elem.textContent;
+                    titleElem.style.backgroundImage =  getComputedStyle(elem, null)['backgroundImage']
+                  }
+                  menuElem.classList.toggle('open')
+                      return;
+                  }
+                  target = target.parentNode;
               }
-              menuElem.classList.toggle('open')
-                  return;
-              }
-              target = target.parentNode;
-          }
-        menuElem.classList.remove('open');
+            menuElem.classList.remove('open');
+            }
+        }
     }
-    }
+    </script>
+    <script src="{{asset('js/autoresize.jquery.js')}}"></script> 
+    <script type="text/javascript">
+        jQuery(function()
+        {
+            // On resize:
+        onResize : function() {
+            jQuery(this).css({color:'#fff', backgroundColor:'#999'});
+        },
+        // After resize:
+        animateCallback : function() {
+            jQuery(this).css({color:'#000', backgroundColor:'#fff'});
+        }
+        });
     </script>
 </head>
 
@@ -86,10 +102,14 @@
                             @if (Auth::guest())
                                 <a href="{{ route('login') }}" onmouseover="myHover('login', 'ov');" onmouseout="myHover('login', 'out');"><img id="login" class="ico" src="{{asset('css/ico/login.png')}}">&nbsp Вхід</a>
                             @else
-                                <a id="createForm" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити звіт <select id="mySelect1" 
-onchange="location.href = window.location.protocol+'//'+window.location.host+'/report/create/'+this.options[this.selectedIndex].value+'?date={{date('Y-m-d')}}';">
+                                <a id="createForm" onmouseover="myHover('cardio', 'ov');" onmouseout="myHover('cardio', 'out');"><img id="cardio" class="ico" src="{{asset('css/ico/cardio.png')}}"> Створити звіт 
+
+                                <select id="mySelect1" onchange="location.href = window.location.protocol+'//'+window.location.host+'/report/create/'+this.options[this.selectedIndex].value+'?date={{date('Y-m-d')}}';">
+
                                     <option selected>Виберіть тип звіту</option>
-<?php include "table.php" ?></select></a>
+                                    <?php include "table.php" ?>
+                                </select>
+                                </a>
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onmouseover="myHover('user', 'ov');" onmouseout="myHover('user', 'out');">
                                 <img id="user" src="{{asset('css/ico/user.png')}}" class="ico"> {{ Auth::user()->name }} <span class="caret"></span>
@@ -249,6 +269,7 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
 </div>
 
 </div>
+
 </div>
 </div>
 </div>
@@ -273,13 +294,14 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
                                     <div class="5u 12u(mobile)">
                                         <ul class="link-list last-child">
                                             <li><a href="http://103.volyn.ua/">Офіційний сайт КЗ "ВОЦЕМДМК"</a></li>
-                                            
+                                             <li><a href="https://www.facebook.com/emdvolyn/">Facebook</a></li>
                                         </ul>
                                     </div>
                                     
                                     <div class="3u 12u(mobile)">
+                                        <div align="center"><img alt="" src="https://uguide.ru/js/script/elka_ot_uguide_ru_2.gif" width="118" height="173">
                                         <ul class="link-list last-child">
-                                            <li><a href="https://www.facebook.com/emdvolyn/">Facebook</a></li>
+                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -312,7 +334,7 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
     <!-- Scripts -->
     
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-     
+
     <script src="{{asset('js/skel.min.js')}}"></script>
     <script src="{{asset('js/skel-viewport.min.js')}}"></script>
     <script src="{{asset('js/util.js')}}"></script>
@@ -325,7 +347,6 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
                 if($(this).attr('data')==''+data+'')
                 {
                     $(this).attr({style:'overflow:hidden;'+$(this).attr('style')+'',data:''+$(this).attr('data')+''+idNum+''});
-
                 } 
                 var tData = $(this).attr('data'); 
                 if($('div[data="'+tData.replace(''+data+'','clone')+'"]').size()==0)
@@ -342,7 +363,8 @@ onchange="location.href = window.location.protocol+'//'+window.location.host+'/r
                 } 
             });
     </script>
-    
 
+    <script type="text/javascript">  var SNOW_Picture = "https://uguide.ru/js/script/img_sneg.png"; var SNOW_Width = "55px"; var SNOW_Height = "55px"; var SNOW_no = 5; </script><script type="text/javascript" src="https://uguide.ru/js/script/skript_sneg_webanfarwol_ru.js"></script>
+    
 </body>
 </html>

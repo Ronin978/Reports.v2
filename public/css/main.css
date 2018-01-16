@@ -1027,7 +1027,7 @@
 /* Basic */
 
 	body {
-		background: #D4D9DD url("images/bg03.jpg");
+		background: #D6EEBE url("images/bg03.jpg");
 		color: #474f51;
 		font-family: 'sans-serif';
 		line-height: 1.85em;
@@ -1248,7 +1248,7 @@
 			}
 
 			#content-wrapper {
-				background: #f7f7f7 url("images/bg04.png");
+				background: #D6EEBE url("images/bg04.png");
 				border-top: solid 1px #fff;
 				padding: 45px 0 45px 0;
 			}

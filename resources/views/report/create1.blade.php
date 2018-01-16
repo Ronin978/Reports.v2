@@ -8,11 +8,28 @@
 <div class="row">
 <div class="12u">   
 @include('flash::message')
+ 
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
  <section >  
     <form id="firstForm" method="POST" action="{{action('ReportController@store1')}}">   
         <p align="center">
             РАПОРТ старших лікарів змін <input id="chergovy" type="text" size="15"  name="chergovy" oninput="sizeAuto('chergovy')"> <br>
-            за чергування <input id="firstdate" type="date" name="date" value="{{$date}}"> .
+            за чергування <input id="firstdate" type="date" name="date" value="{{$date}}" required>
+
+                                @if ($errors->has('date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </span>
+                                @endif
         </p>  
         Екстр. - <input type="text" id="extr" name="valuei">
         <br>

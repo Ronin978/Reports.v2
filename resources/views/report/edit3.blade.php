@@ -25,7 +25,7 @@
                 <td class="col_5 maxLenght">Куди доставлено</td>
                 <td class="col_3 rotate_two">направлення</td>
                 <td class="col_10">Хто направляє</td>
-                <td >Діагноз</td>
+                <td>Діагноз</td>
                 <td class="col_10">№ бр., керівник</td>
                 <td class="col_8">Примітки</td>
             </tr> 
@@ -42,8 +42,6 @@
                         <datalist id="myList">
                             <?php include 'viddil.php' ?>
                         </datalist>
-                       
-                        <!--active {{$report->viddil}}-->
                 </td>
                 <td>
                     <textarea name="no_card{{$key}}" rows="1" data="elastic">{{$report->no_card}}</textarea>
