@@ -66,7 +66,10 @@ class ReportController extends Controller
                         $title = 'Смертність в присутності бригади (успішна реанімація)';
                         break;
                     case 'dtp+ns':
-                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        $title = 'ДТП';
+                        break;
+                    case 'ns':
+                        $title = '«НС» (надзвичайні стани)';
                         break;
                     case 'high_travmy':
                         $title = 'Складні травми';
@@ -1335,6 +1338,7 @@ class ReportController extends Controller
                 break;
             case 'fatal':
             case 'dtp+ns':
+            case 'ns':
             case 'high_travmy':
             case 'tr_kytyzi':
             case 'opic':

@@ -13,7 +13,9 @@
 				@if($table == 'fatal') 
 					Смертність в присутності бригади (успішна реанімація)
 				@elseif($table == 'dtp+ns')
-					ДТП і «НС» (надзвичайні стани)
+					ДТП
+				@elseif($table == 'ns')
+					«НС» (надзвичайні стани)
 				@elseif($table == 'high_travmy')
 					Складні травми
 				@elseif($table == 'tr_kytyzi')
@@ -34,7 +36,24 @@
             <tr id="firstTr">
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">
+                @if($table == 'fatal') 
+					Смертність в присутності бригади (успішна реанімація)
+				@elseif($table == 'dtp+ns')
+					ДТП
+				@elseif($table == 'ns')
+					«НС» (надзвичайні стани)
+				@elseif($table == 'high_travmy')
+					Складні травми
+				@elseif($table == 'tr_kytyzi')
+					Травми китиці
+				@elseif($table == 'opic')
+					Опіки/ Переохолодження
+				@elseif($table == 'travmat')
+					Травматизм (кримінальний, виробничий)
+				@elseif($table == 'ERROR')
+					Сторінки не знайдено
+				@endif</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -97,6 +116,8 @@
 				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'fatal', 'date' => $reports[0]->date])}}'">
 			@elseif($table == 'dtp+ns')
 				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'dtp+ns', 'date' => $reports[0]->date])}}'">
+			@elseif($table == 'ns')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'ns', 'date' => $reports[0]->date])}}'">
 			@elseif($table == 'high_travmy')
 				<div class="btn-group" onclick="location.href='{{action('FrontController@edit', ['table'=>'high_travmy', 'date' => $reports[0]->date])}}'">
 			@elseif($table == 'tr_kytyzi')
@@ -122,6 +143,8 @@
 	        @if($table == 'fatal') 
 				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'dtp+ns'])}}'">
 			@elseif($table == 'dtp+ns')
+				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'ns'])}}'">
+			@elseif($table == 'ns')
 				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'high_travmy'])}}'">
 			@elseif($table == 'high_travmy')
 				<div class="btn-group" onclick="location.href='{{action('FrontController@myShow', ['date' => $reports[0]->date, 'table'=>'tr_kytyzi'])}}'">

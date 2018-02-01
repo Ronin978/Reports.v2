@@ -75,10 +75,20 @@
         <section> 
             <a href="{{action('FrontController@show', ['id'=>'dtp+ns'])}}" class="bordered-feature-image"><img src="{{asset('images/dtp_ns.png')}}" alt="" /></a>
             <p>
-                ДТП і «НС» (надзвичайні стани)
+                ДТП
             </p>
         </section>
     </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #6 -->
+        <section>      
+            <a href="{{action('FrontController@show', ['id'=>'ns'])}}" class="bordered-feature-image"><img src="{{asset('images/all.png')}}" alt="" /></a>
+            <p>
+                «НС» (надзвичайні стани)
+            </p>
+        </section>
+    </div> 
     <div class="2u 12u(mobile)">
 
         <!-- Feature #2 -->
@@ -118,22 +128,9 @@
                 Травматизм (кримінальний, виробничий)
             </p>
         </section>
-    </div>    
-    <div class="2u 12u(mobile)">
-
-        <!-- Feature #6 -->
-        <section>      
-            <a href="{{action('FrontController@show', ['id'=>'allReports'])}}" class="bordered-feature-image"><img src="{{asset('images/all.png')}}" alt="" /></a>
-            <p>
-                Повний рапорт старших лікарів
-            </p>
-        </section>
-    </div>    
+    </div>       
 </div>
-
-<div style="height: 30px; background: url(https://uguide.ru/js/script/girlianda_uguide_ru_2.gif) repeat-x 100%;"></div>
 </div>
-
 </div>
 </div>
 @include('flash::message')

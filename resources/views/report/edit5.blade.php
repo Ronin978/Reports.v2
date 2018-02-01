@@ -19,7 +19,7 @@
             <tr id="firstTr">
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">{{$title}}</td>
                 <td class="col_12">Адреса НС</td>
                 <td>Відділення</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>

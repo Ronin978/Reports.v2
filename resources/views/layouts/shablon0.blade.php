@@ -212,10 +212,20 @@
         <section> 
             <a href="{{action('FrontController@show', ['id'=>'dtp+ns'])}}" class="bordered-feature-image"><img src="{{asset('images/dtp_ns.png')}}" alt="" /></a>
             <p>
-                ДТП і «НС» (надзвичайні стани)
+                ДТП
             </p>
         </section>
     </div>
+    <div class="2u 12u(mobile)">
+
+        <!-- Feature #6 -->
+        <section>      
+            <a href="{{action('FrontController@show', ['id'=>'ns'])}}" class="bordered-feature-image"><img src="{{asset('images/all.png')}}" alt="" /></a>
+            <p>
+                «НС» (надзвичайні стани)
+            </p>
+        </section>
+    </div> 
     <div class="2u 12u(mobile)">
 
         <!-- Feature #2 -->
@@ -256,16 +266,6 @@
             </p>
         </section>
     </div>    
-    <div class="2u 12u(mobile)">
-
-        <!-- Feature #6 -->
-        <section>      
-            <a href="{{action('FrontController@show', ['id'=>'allReports'])}}" class="bordered-feature-image"><img src="{{asset('images/all.png')}}" alt="" /></a>
-            <p>
-                Повний рапорт старших лікарів
-            </p>
-        </section>
-    </div>    
 </div>
 
 </div>
@@ -295,13 +295,6 @@
                                         <ul class="link-list last-child">
                                             <li><a href="http://103.volyn.ua/">Офіційний сайт КЗ "ВОЦЕМДМК"</a></li>
                                              <li><a href="https://www.facebook.com/emdvolyn/">Facebook</a></li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <div class="3u 12u(mobile)">
-                                        <div align="center"><img alt="" src="https://uguide.ru/js/script/elka_ot_uguide_ru_2.gif" width="118" height="173">
-                                        <ul class="link-list last-child">
-                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -363,8 +356,6 @@
                 } 
             });
     </script>
-
-    <script type="text/javascript">  var SNOW_Picture = "https://uguide.ru/js/script/img_sneg.png"; var SNOW_Width = "55px"; var SNOW_Height = "55px"; var SNOW_no = 5; </script><script type="text/javascript" src="https://uguide.ru/js/script/skript_sneg_webanfarwol_ru.js"></script>
     
 </body>
 </html>

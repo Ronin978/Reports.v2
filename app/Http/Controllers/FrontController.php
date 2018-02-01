@@ -105,6 +105,7 @@ class FrontController extends Controller
     //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
             case 'fatal':
             case 'dtp+ns':
+            case 'ns':
             case 'high_travmy':
             case 'tr_kytyzi':
             case 'opic':
@@ -116,7 +117,10 @@ class FrontController extends Controller
                         $title = 'Смертність в присутності бригади (успішна реанімація)';
                         break;
                     case 'dtp+ns':
-                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        $title = 'ДТП';
+                        break;
+                    case 'ns':
+                        $title = '«НС» (надзвичайні стани)';
                         break;
                     case 'high_travmy':
                         $title = 'Складні травми';
@@ -144,7 +148,7 @@ class FrontController extends Controller
     {
         $datell = explode('-', $date);
         $dateD = "$datell[2]-$datell[1]-$datell[0]";
-        $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+        $tables = ['fatal', 'dtp+ns', 'ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
         switch ($table) 
         {
             case 'Report1':
@@ -215,6 +219,7 @@ class FrontController extends Controller
                 break;
             case 'fatal':
             case 'dtp+ns':
+            case 'ns':
             case 'high_travmy':
             case 'tr_kytyzi':
             case 'opic':
@@ -336,7 +341,7 @@ class FrontController extends Controller
             $reports3 = Report3::where('date', $date)->get();//Report3
             $reports4 = Report4::where('date', $date)->get();//Report4
     //Report5
-            $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+            $tables = ['fatal', 'dtp+ns', 'ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
             foreach ($tables as $key => $table) 
             {
                 $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
@@ -487,7 +492,7 @@ class FrontController extends Controller
                 }
                 return view('report.myShow6', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
-            case 'fatal'||'dtp+ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
+            case 'fatal'||'dtp+ns'||'ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
                 $reports = Report5::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->where('pidtype', $table)->get();
                 return view('report.myShow5', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1', 'table'=>$table]);
                 break;
@@ -541,7 +546,7 @@ class FrontController extends Controller
                 $reports = Report6::where('date', $date)->get();
                 return view('report.edit6', ['date'=>$date, 'reports'=>$reports]);
                 break;
-    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+    //Report5 - fatal, dtp+ns, 'ns', high_travmy, tr_kytyzi, opic, travmat
             default:
                 switch ($table) 
                 {
@@ -550,7 +555,11 @@ class FrontController extends Controller
                         $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
                         break;
                     case 'dtp+ns':
-                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        $title = 'ДТП';
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        break;
+                    case 'ns':
+                        $title = '«НС» (надзвичайні стани)';
                         $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
                         break;
                     case 'high_travmy':
@@ -637,9 +646,10 @@ class FrontController extends Controller
                 $title = 'Зауваження по роботі, скарги, подяки';
                 break;
 
-    //Report5 - fatal, dtp+ns, high_travmy, tr_kytyzi, opic, travmat
+    //Report5 - fatal, dtp+ns, 'ns', high_travmy, tr_kytyzi, opic, travmat
             case 'fatal':
             case 'dtp+ns':
+            case 'ns':
             case 'high_travmy':
             case 'tr_kytyzi':
             case 'opic':
@@ -660,7 +670,10 @@ class FrontController extends Controller
                         $title = 'Смертність в присутності бригади (успішна реанімація)';
                         break;
                     case 'dtp+ns':
-                        $title = 'ДТП і «НС» (надзвичайні стани)';
+                        $title = 'ДТП';
+                        break;
+                    case 'ns':
+                        $title = '«НС» (надзвичайні стани)';
                         break;
                     case 'high_travmy':
                         $title = 'Складні травми';
@@ -687,7 +700,7 @@ class FrontController extends Controller
     public function sortShow($viddil, $table, $date)
     {
         //dd($date);
-        $tables = ['fatal', 'dtp+ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
+        $tables = ['fatal', 'dtp+ns', 'ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
         switch ($table) 
         {
             case 'Report2':
@@ -704,6 +717,7 @@ class FrontController extends Controller
                 break;
             case 'fatal':
             case 'dtp+ns':
+            case 'ns':
             case 'high_travmy':
             case 'tr_kytyzi':
             case 'opic':

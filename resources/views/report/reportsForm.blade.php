@@ -275,7 +275,7 @@
             <tr>
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Смертність в присутності бригади (успішна реанімація)</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -319,7 +319,7 @@
             <tr id="firstTr">
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">ДТП і «НС» (надзвичайні стани)</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -363,7 +363,7 @@
             <tr id="firstTr">
                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Складні травми</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -407,7 +407,7 @@
             <tr id="firstTr">
                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Травми китиці</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -451,7 +451,7 @@
             <tr id="firstTr">
                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Опіки/ Переохолодження</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -495,7 +495,7 @@
             <tr id="firstTr">
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Назва «НС» (раптова смерть/ успішна реанімація)</td>
+                <td class="col_12">Травматизм (кримінальний, виробничий)</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
