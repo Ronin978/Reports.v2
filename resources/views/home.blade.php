@@ -129,7 +129,7 @@
     </div>    
 </div>
 
-<div style="height: 30px; background: url(https://uguide.ru/js/script/girlianda_uguide_ru_2.gif) repeat-x 100%;"></div>
+
 </div>
 
 </div>

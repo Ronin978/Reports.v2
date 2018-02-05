@@ -25,14 +25,13 @@ class ReportController extends Controller
 
     public function create($table, Request $request)
     {        
-        $this->validate($request, [
-        'date' => 'required|date|unique:total_reports',
-    ]);
-
         $date = ($request->all())['date'];
         
         switch ($table) {
             case 'Report1':
+                $this->validate($request, [
+                    'date' => 'required|date|unique:total_reports',
+                ]);
                 $types = Group::where('group', 'call')->get()->first();
                 $typ = explode(";", $types->title);
 

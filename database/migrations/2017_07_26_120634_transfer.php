@@ -16,7 +16,7 @@ class Transfer extends Migration
         Schema::create('report_transfer', function (Blueprint $table) 
         {
          $table->increments('id');
-         $table->date('date');                  
+         $table->string('date', 20);                  
          $table->string('timer', 30);                  
          $table->string('no_card', 10);         
          $table->string('pib');
