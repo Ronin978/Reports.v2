@@ -11,6 +11,7 @@ use App\Report3;
 use App\Report4;
 use App\Report5;
 use App\Report6;
+use App\Viddil;
 
 class FrontController extends Controller
 {
@@ -29,30 +30,49 @@ class FrontController extends Controller
         if (Info::where('id_group', '1')->first())
         {
             $maxDate = Info::max('date');
+            $tables = ['fatal', 'dtp+ns', 'ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
 
-            $types = Group::where('group', 'call')->get()->first();
-            $typ = explode(";", $types->title);
-            $table0 = Report1::where('date', $maxDate)->get();
-            
-            $table1 = Info::where('id_group', '4')->where('date', $maxDate)->get()->first();
-            $tabl1 = explode(";", $table1->value);
-            $sections = Group::where('group', 'sections')->get()->first();
-            $sect = explode(";", $sections->title);
+            $datell = explode('-', $maxDate);
+            $dateD = "$datell[2]-$datell[1]-$datell[0]";
 
-            $table2 = Info::where('id_group', '2')->where('date', $maxDate)->get()->first();
-            $tabl2 = explode(";", $table2->value);
-            $gospit = Group::where('group', 'gosp')->get()->first();
-            $gosp = explode(";", $gospit->title);
+             $reports1 = Report1::where('date', $maxDate)->get();
+                
+                if (!empty($reports1->first())) 
+                {
+                    $types = Group::where('group', 'call')->get()->first();
+                    $typ = explode(";", $types->title);
 
-            $table3 = Info::where('id_group', '3')->where('date', $maxDate)->get()->first();
-            $tabl3 = explode(";", $table3->value);
-            $region = Group::where('group', 'region')->get()->first();
-            $reg = explode(";", $region->title);
+                    $sections = Group::where('group', 'sections')->get()->first();
+                    $sect = explode(";", $sections->title);
 
-            $table4 = Info::where('id_group', '1')->where('date', $maxDate)->get()->first();
-            $tabl4 = explode(";", $table4->value);
-            
-            return view('front.index', ['types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'table0'=>$table0, 'table1'=>$tabl1, 'table2'=>$tabl2, 'table3'=>$tabl3, 'table4'=>$tabl4, 'date'=>$maxDate]);
+                    $gospit = Group::where('group', 'gosp')->get()->first();
+                    $gosp = explode(";", $gospit->title);
+
+                    $region = Group::where('group', 'region')->get()->first();
+                    $reg = explode(";", $region->title);
+                   
+                    for ($i=1; $i <= 4; $i++)
+                    {
+                        $info[$i] = Info::where('id_group', $i)->where('date', $maxDate)->first();                    
+                        $inf[$i] = explode(";", $info[$i]->value);
+                    }
+                }                
+        //end Report1
+        //Report2
+                $reports2 = Report2::where('date', $maxDate)->orderBy('punkt')->get();
+        //Report3
+                $reports3 = Report3::where('date', $maxDate)->orderBy('viddil')->get();
+        //Report4
+                $reports4 = Report4::where('date', $maxDate)->orderBy('viddil')->get();
+        //Report5
+                foreach ($tables as $key => $tab) 
+                {
+                    $reports5[$key] = Report5::where('date', $maxDate)->where('pidtype', $tab)->orderBy('viddil')->get();
+                }                
+        //end Report5
+        //Report6
+                $reports6 = Report6::where('date', $maxDate)->orderBy('subdiv')->get();
+                return view('front.index', ['date'=>$dateD, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
         }
         else
         {
@@ -184,7 +204,7 @@ class FrontController extends Controller
                 }
                 break;
             case 'Report2':
-                $reports = Report2::where('date', $date)->get();
+                $reports = Report2::where('date', $date)->orderBy('punkt')->get();
                 if (!empty($reports->first()))
                 {
                     return view('report.myShow2', ['reports'=>$reports, 'date'=>$dateD]);
@@ -196,7 +216,7 @@ class FrontController extends Controller
                 }
                 break;
             case 'Report3':
-                $reports = Report3::where('date', $date)->get();
+                $reports = Report3::where('date', $date)->orderBy('viddil')->get();
                 if (!empty($reports->first())) 
                 {
                     return view('report.myShow3', ['reports'=>$reports, 'date'=>$dateD]);
@@ -207,7 +227,7 @@ class FrontController extends Controller
                 }
                 break;
             case 'Report4':
-                $reports = Report4::where('date', $date)->get();
+                $reports = Report4::where('date', $date)->orderBy('viddil')->get();
                 if (!empty($reports->first()))  
                 {
                     return view('report.myShow4', ['reports'=>$reports, 'date'=>$dateD]);
@@ -231,7 +251,7 @@ class FrontController extends Controller
                 }
                 for ($i=$exp; $i < count($tables); $i++) 
                 {
-                    $reports = Report5::where('date', $date)->where('pidtype', $tables[$i])->get();
+                    $reports = Report5::where('date', $date)->where('pidtype', $tables[$i])->orderBy('viddil')->get();
                     if (!empty($reports->first()))
                     {
                         return view('report.myShow5', ['date'=>$dateD, 'reports'=>$reports, 'table'=>$tables[$i]]);
@@ -250,7 +270,7 @@ class FrontController extends Controller
                 }                    
                 break;
             case 'Report6':
-                $reports = Report6::where('date', $date)->get();
+                $reports = Report6::where('date', $date)->orderBy('subdiv')->get();
                 if (!empty($reports->first())) 
                 {
                     return view('report.myShow6', ['reports'=>$reports, 'date'=>$dateD]);
@@ -287,19 +307,19 @@ class FrontController extends Controller
                 }                
         //end Report1
         //Report2
-                $reports2 = Report2::where('date', $date)->get();
+                $reports2 = Report2::where('date', $date)->orderBy('punkt')->get();
         //Report3
-                $reports3 = Report3::where('date', $date)->get();
+                $reports3 = Report3::where('date', $date)->orderBy('viddil')->get();
         //Report4
-                $reports4 = Report4::where('date', $date)->get();
+                $reports4 = Report4::where('date', $date)->orderBy('viddil')->get();
         //Report5
                 foreach ($tables as $key => $tab) 
                 {
-                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $tab)->get();
+                    $reports5[$key] = Report5::where('date', $date)->where('pidtype', $tab)->orderBy('viddil')->get();
                 }                
         //end Report5
         //Report6
-                $reports6 = Report6::where('date', $date)->get();
+                $reports6 = Report6::where('date', $date)->orderBy('subdiv')->get();
                 return view('report.reportsForm', ['date'=>$dateD, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
                 break;
         }
@@ -337,17 +357,17 @@ class FrontController extends Controller
                 { $inf[$i] = 0; }
             }
     //end Report1
-            $reports2 = Report2::where('date', $date)->get();//Report2
-            $reports3 = Report3::where('date', $date)->get();//Report3
-            $reports4 = Report4::where('date', $date)->get();//Report4
+            $reports2 = Report2::where('date', $date)->orderBy('punkt')->get();//Report2
+            $reports3 = Report3::where('date', $date)->orderBy('viddil')->get();//Report3
+            $reports4 = Report4::where('date', $date)->orderBy('viddil')->get();//Report4
     //Report5
             $tables = ['fatal', 'dtp+ns', 'ns', 'high_travmy', 'tr_kytyzi', 'opic', 'travmat'];
             foreach ($tables as $key => $table) 
             {
-                $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->get();
+                $reports5[$key] = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
             }
     //end Report5
-            $reports6 = Report6::where('date', $date)->get();//Report11
+            $reports6 = Report6::where('date', $date)->orderBy('subdiv')->get();//Report11
            // dd( ($inf[4]));
             return view('report.reportsForm', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'inf'=>$inf, 'reports1'=>$reports1, 'reports2'=>$reports2, 'reports3'=>$reports3, 'reports4'=>$reports4, 'reports5'=>$reports5, 'reports6'=>$reports6]);
         }
@@ -431,11 +451,11 @@ class FrontController extends Controller
             case 'Report2':
                 if (empty($viddil)||$viddil=='Всі відділення') 
                 {
-                    $reports = Report2::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report2::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('punkt')->get();
                 }
                 else
                 {
-                    $reports = Report2::where('punkt', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report2::where('punkt', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('punkt')->get();
                 } 
                 if (empty($reports->first()))
                 {
@@ -447,11 +467,11 @@ class FrontController extends Controller
             case 'Report3':
                 if (empty($viddil)||$viddil=='Всі відділення') 
                 {
-                    $reports = Report3::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report3::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('viddil')->get();
                 }
                 else
                 {
-                    $reports = Report3::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report3::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('viddil')->get();
                 } 
                 if (empty($reports->first()))
                 {
@@ -463,11 +483,11 @@ class FrontController extends Controller
             case 'Report4':
                 if (empty($viddil)||$viddil=='Всі відділення') 
                 {
-                    $reports = Report4::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report4::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('viddil')->get();
                 }
                 else
                 {
-                    $reports = Report4::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report4::where('viddil', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('viddil')->get();
                 } 
                 if (empty($reports->first()))
                 {
@@ -479,11 +499,11 @@ class FrontController extends Controller
             case 'Report6':
                 if (empty($viddil)||$viddil=='Всі відділення') 
                 {
-                    $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report6::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('subdiv')->get();
                 }
                 else
                 {
-                    $reports = Report6::where('subdiv', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+                    $reports = Report6::where('subdiv', $viddil)->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->orderBy('subdiv')->get();
                 } 
                 if (empty($reports->first()))
                 {
@@ -493,7 +513,7 @@ class FrontController extends Controller
                 return view('report.myShow6', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1']);
                 break;
             case 'fatal'||'dtp+ns'||'ns'||'high_travmy'||'tr_kytyzi'||'opic'||'travmat':
-                $reports = Report5::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->where('pidtype', $table)->get();
+                $reports = Report5::where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->where('pidtype', $table)->orderBy('viddil')->get();
                 return view('report.myShow5', ['reports'=>$reports, 'date'=>$date, 'indicator'=>'1', 'table'=>$table]);
                 break;
         }
@@ -531,19 +551,19 @@ class FrontController extends Controller
                 return view('report.edit1', ['date'=>$date, 'types'=>$typ, 'sections'=>$sect, 'gospit'=>$gosp, 'region'=>$reg, 'reports'=>$reports, 'inf'=>$inf]);
                 break;
             case 'Report2':
-                $reports = Report2::where('date', $date)->get();
+                $reports = Report2::where('date', $date)->orderBy('punkt')->get();
                 return view('report.edit2', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report3':
-                $reports = Report3::where('date', $date)->get();
+                $reports = Report3::where('date', $date)->orderBy('viddil')->get();
                 return view('report.edit3', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report4':
-                $reports = Report4::where('date', $date)->get();
+                $reports = Report4::where('date', $date)->orderBy('viddil')->get();
                 return view('report.edit4', ['date'=>$date, 'reports'=>$reports]);
                 break;
             case 'Report6':
-                $reports = Report6::where('date', $date)->get();
+                $reports = Report6::where('date', $date)->orderBy('subdiv')->get();
                 return view('report.edit6', ['date'=>$date, 'reports'=>$reports]);
                 break;
     //Report5 - fatal, dtp+ns, 'ns', high_travmy, tr_kytyzi, opic, travmat
@@ -552,31 +572,31 @@ class FrontController extends Controller
                 {
                     case 'fatal':
                         $title = 'Смертність в присутності бригади (успішна реанімація)';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'dtp+ns':
                         $title = 'ДТП';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'ns':
                         $title = '«НС» (надзвичайні стани)';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'high_travmy':
                         $title = 'Складні травми';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'tr_kytyzi':
                         $title = 'Травми китиці';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'opic':
                         $title = 'Опіки/ Переохолодження';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;
                     case 'travmat':
                         $title = 'Травматизм (кримінальний, виробничий)';
-                        $reports = Report5::where('date', $date)->where('pidtype', $table)->get();
+                        $reports = Report5::where('date', $date)->where('pidtype', $table)->orderBy('viddil')->get();
                         break;                    
                     default:
                         $title = 'Неможливо відобразити дані для редагування. Спробуйте редагувати таблиці по одній.';
