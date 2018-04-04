@@ -85,7 +85,8 @@ function AddLine2()
         else
         {
             var text = document.createElement("textarea"); // Ввод text2
-            text.setAttribute("rows", "1");
+            text.setAttribute("rows", '1');
+            text.setAttribute("data", 'elastic');
             text.setAttribute("name", arr[i]+index);
             cell.appendChild(text);
         }
@@ -126,6 +127,7 @@ function AddLine3()
         {
             var text = document.createElement("textarea"); // Ввод text2
             text.setAttribute("rows", "1");
+            text.setAttribute("data", 'elastic');
             text.setAttribute("name", arr[i]+index);
             cell.appendChild(text);
         }
@@ -164,6 +166,7 @@ function AddLine4()
         else {
             var text = document.createElement("textarea"); // Ввод text2
             text.setAttribute("rows", "1");
+            text.setAttribute("data", 'elastic');
             text.setAttribute("name", arr[i]+index);
             cell.appendChild(text);
         }
@@ -204,6 +207,7 @@ function AddLine5()
         {
             var text = document.createElement("textarea"); // Ввод text2
             text.setAttribute("rows", "1");
+            text.setAttribute("data", 'elastic');
             text.setAttribute("name", arr[i]+index);
             cell.appendChild(text);
         }
@@ -242,6 +246,7 @@ function AddLine6()
         {
             var text = document.createElement("textarea"); // Ввод text2
             text.setAttribute("rows", "1");
+            text.setAttribute("data", 'elastic');
             text.setAttribute("name", arr[i]+index);
             cell.appendChild(text);
         }

@@ -316,7 +316,7 @@ class FrontController extends Controller
                 foreach ($tables as $key => $tab) 
                 {
                     $reports5[$key] = Report5::where('date', $date)->where('pidtype', $tab)->orderBy('viddil')->get();
-                }                
+                }
         //end Report5
         //Report6
                 $reports6 = Report6::where('date', $date)->orderBy('subdiv')->get();

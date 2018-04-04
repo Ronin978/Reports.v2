@@ -188,9 +188,9 @@
 @if (empty($reports1->first()))
     <p>Поки, що немає доданих звітів</p>
 @else    
-         <a onClick="CallPrint('pagePrint');">Роздрукувати</a><br>
+        <a onClick="CallPrint('pagePrint');">Роздрукувати</a><br>
          
-       <h5>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</h5>
+        <h5>РАПОРТ старших лікарів змін {{$reports1[0]->chergovy}} за чергування {{$date}}</h5>
 
         Екстр. - {{($inf[1])[0]}}
         <br>
@@ -494,12 +494,12 @@
         <hr>
 @endif
 @if(!empty($reports5[1]->first()))
-        <h5>ДТП і «НС» (надзвичайні стани)  {{$date}}</h5>
+        <h5>ДТП  {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                 <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">ДТП і «НС» (надзвичайні стани)</td>
+                <td class="col_12">ДТП </td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -538,12 +538,12 @@
         <hr>
 @endif
 @if(!empty($reports5[2]->first()))
-        <h5>Складні травми   {{$date}}</h5>
+        <h5>«НС» (надзвичайні стани)  {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
-               <td class="col_3">№<br>п/п</td>
+                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Складні травми</td>
+                <td class="col_12">«НС» (надзвичайні стани)</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -582,12 +582,12 @@
         <hr>
 @endif
 @if(!empty($reports5[3]->first()))
-        <h5>Травми китиці   {{$date}}</h5>
+        <h5>Складні травми   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Травми китиці</td>
+                <td class="col_12">Складні травми</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -626,12 +626,12 @@
         <hr>
 @endif
 @if(!empty($reports5[4]->first()))
-        <h5>Опіки/ Переохолодження   {{$date}}</h5>
+        <h5>Травми китиці   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
                <td class="col_3">№<br>п/п</td>
                 <td class="col_10">Дата,час</td>
-                <td class="col_12">Опіки/ Переохолодження</td>
+                <td class="col_12">Травми китиці</td>
                 <td class="col_12">Адреса НС</td>
                 <td class="col_15">П.І.П потерпілого, вік</td>
                 <td class="col_10">№ карти виїзду</td>
@@ -670,6 +670,50 @@
         <hr>
 @endif
 @if(!empty($reports5[5]->first()))
+        <h5>Опіки/ Переохолодження   {{$date}}</h5>
+        <table id="table5">
+            <tr id="firstTr">
+               <td class="col_3">№<br>п/п</td>
+                <td class="col_10">Дата,час</td>
+                <td class="col_12">Опіки/ Переохолодження</td>
+                <td class="col_12">Адреса НС</td>
+                <td class="col_15">П.І.П потерпілого, вік</td>
+                <td class="col_10">№ карти виїзду</td>
+                <td class="col_10">№ бригади, прізвище керівника</td>
+                <td>Результат (Діагноз, куди доставлено, кількість смертей на місці, л.маска/ дефібрилятор/ моніторування)</td>      
+            </tr> 
+            @foreach ($reports5[5] as $key=>$report)
+            <tr class="words">
+                <td>
+                    {{$key+1}}
+                </td>
+                <td>
+                    {{$report->date}}
+                </td>
+                <td>
+                    {{$report->title}}
+                </td>
+                <td>
+                    {{$report->adress}}
+                </td>
+                <td>
+                    {{$report->pib}}
+                </td>
+                <td>
+                    {{$report->no_card}}
+                </td>
+                <td>
+                    {{$report->brig}}
+                </td>
+                <td>
+                    {{$report->other}}
+                </td>
+            </tr>
+            @endforeach
+        </table>
+        <hr>
+@endif
+@if(!empty($reports5[6]->first()))
         <h5>Травматизм (кримінальний, виробничий)   {{$date}}</h5>
         <table id="table5">
             <tr id="firstTr">
@@ -682,7 +726,7 @@
                 <td class="col_10">№ бригади, прізвище керівника</td>
                 <td>Результат (Діагноз, куди доставлено, кількість смертей на місці, л.маска/ дефібрилятор/ моніторування)</td>      
             </tr> 
-            @foreach ($reports5[5] as $key=>$report)
+            @foreach ($reports5[6] as $key=>$report)
             <tr class="words">
                 <td>
                     {{$key+1}}
